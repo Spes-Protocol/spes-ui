@@ -4,10 +4,10 @@ import DashboardLayout from "../../components/Layouts/DashboardLayout";
 const Profile = () => {
     return (
         <DashboardLayout currentPageIndex={1}>
-            <Typography variant='h2'>
+            <Typography variant='h5'>
                 My donations
             </Typography>
-            <Typography paragraph>
+            {/* <Typography paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
             enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
@@ -20,7 +20,7 @@ const Profile = () => {
             feugiat vivamus at augue. At augue eget arcu dictum varius duis at
             consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
             sapien faucibus et molestie ac.
-            </Typography>
+            </Typography> */}
         </DashboardLayout>
     );
 };

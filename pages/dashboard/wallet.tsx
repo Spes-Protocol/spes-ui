@@ -1,6 +1,6 @@
 import { Box, Toolbar, Typography } from "@mui/material";
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
-import WalletTable from "../../components/Wallet/WalletTable";
+// import WalletTable from "../../components/Wallet/WalletTable";
 
 const Wallet = () => {
     return (
@@ -15,7 +15,7 @@ const Wallet = () => {
                         You can add or remove any of your crypto wallets from your payment policy at any time. 
                     </Typography>
                 </Box>
-                <WalletTable />
+                {/* <WalletTable /> */}
             </Box>
         </DashboardLayout>
     );
