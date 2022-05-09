@@ -7,25 +7,25 @@ import { drawerWidth } from '../../utils/constants';
 import DashboardAppBar from './DashboardAppBar';
 
 const DashboardLayout: React.FC<{ children?: React.ReactNode; currentPageIndex: number }> = ({ children, currentPageIndex }) => {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    // const [mobileOpen, setMobileOpen] = React.useState(false);
  
-    const handleDrawerToggle = () => {
-      setMobileOpen(!mobileOpen);
-    };
+    // const handleDrawerToggle = () => {
+    //   setMobileOpen(!mobileOpen);
+    // };
     
     return (
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CssBaseline />
-        <DashboardAppBar />
+        <DashboardAppBar currentPageIndex={currentPageIndex} />
         <Box
             component="main"
             sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
         >
             <Toolbar />
+            {/* {children} */}
+            <Box maxWidth="1000px" mx="auto" width="100%" marginTop={8}>
             {children}
-            {/* <Box maxWidth="1000px" mx="auto" width="100%" marginTop={8}>
-            {children}
-            </Box> */}
+            </Box>
         </Box>
       </Box>
     );
