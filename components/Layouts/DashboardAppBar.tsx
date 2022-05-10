@@ -71,34 +71,104 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
     setAnchorElUser(null);
   };
 
-  const mobileMenu = () => {
+  const DashboardMenuItems = (style: { itemSelected: string; itemIdle: string; }) => {
+      return dashboardPages.map((page, index) => {
+        const selected = drawerOption === index;
+        return (
+            <Link key={index} href={page.path} passHref>
+                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none' }}>
+                    <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' columnGap={1.5} sx={{ color: selected ? style.itemSelected : style.itemIdle }}>
+                    {page.icon}
+                        <Typography variant='h6' >
+                            {page.name}
+                        </Typography>
+                    </Box>
+                </Button>
+            </Link>
+        )
+        })
+  }
+
+  const MobileMenuItems = () => {
+      const style = {
+        itemSelected: palette.primary.main,
+        itemIdle: palette.primary.dark,
+      }
       return (
-          <Box display='flex' flexDirection='column'>
-            {dashboardPages.map((page, index) => {
-                const selected = drawerOption === index;
-                return (
-                    <Link key={index} href={page.path} passHref>
-                        <Button key={index} onClick={() => {handleMenuItemClick(index)}}>
-                            <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' marginY={1.5} marginLeft={3}>
-                                <Box sx={{ color: selected ? palette.primary.main : '#000' }}>
-                                    {page.icon}
-                                </Box>
-                                <Typography variant='h6' sx={{ color: selected ? palette.primary.main : '#000' }}>
-                                    {page.name}
-                                </Typography>
-                            </Box>
-                        </Button>
-                    </Link>
-                )
-                })}
-          </Box>
+        <Box sx={{ flexGrow: 1, display: 'flex', columnGap: 5, justifyContent: 'center', flexDirection: 'column' }}>
+            {DashboardMenuItems(style)}
+        </Box>
       )
   }
 
+  const WebMenuItems = () => {
+    const style = {
+        itemSelected: '#fff',
+        itemIdle: palette.primary.dark,
+      }
+      return (
+        <Box sx={{ flexGrow: 1, display: 'flex', columnGap: 5, justifyContent: 'center', flexDirection: 'row' }}>
+            {DashboardMenuItems(style)}
+        </Box>
+      )
+  }
+
+  const MobileAppBarContents = () => {
+    return (
+        <>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
+            >
+            <MenuIcon />
+            </IconButton>
+            <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+                display: { xs: 'block', md: 'none' },
+            }}
+            >
+                    <MobileMenuItems />
+
+            </Menu>
+        </Box>
+
+      <Typography
+        variant="h6"
+        noWrap
+        component="div"
+        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+      >
+        Spes
+      </Typography>
+    </>
+
+    )
+  }
+
   return (
-    <AppBar position="fixed">
-      <Container maxWidth="xl">
+    <AppBar position="fixed" sx={{ backgroundColor: '#fff', boxShadow: 0 }}>
+                <Box borderRadius={10} sx={{ backgroundColor: palette.primary.main, marginX: 3, marginY: 3, paddingX: 3 }}>
+      {/* <Container maxWidth="xl"> */}
         <Toolbar disableGutters>
+    {MobileAppBarContents()}
           <Typography
             variant="h6"
             noWrap
@@ -108,86 +178,14 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
             Spes
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-                {mobileMenu()}
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))} */}
-            </Menu>
-          </Box>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
-            Spes
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))} */}
-            {dashboardPages.map((page, index) => {
-                const selected = drawerOption === index;
-                return (
-                    <Link key={index} href={page.path} passHref>
-                        <Button key={index} onClick={() => {handleMenuItemClick(index)}}>
-                            <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' marginY={1.5} marginLeft={3}>
-                                <Box sx={{ color: selected ? palette.primary.main : '#000' }}>
-                                    {page.icon}
-                                </Box>
-                                <Typography variant='h6' sx={{ color: selected ? palette.primary.main : '#000' }}>
-                                    {page.name}
-                                </Typography>
-                            </Box>
-                        </Button>
-                    </Link>
-                )
-                })}
-          </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, columnGap: 5, justifyContent: 'center' }}>
+                <WebMenuItems />
+            </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="S" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -213,8 +211,10 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
               ))}
             </Menu>
           </Box>
+        
         </Toolbar>
-      </Container>
+      {/* </Container> */}
+      </Box>
     </AppBar>
   );
 };
