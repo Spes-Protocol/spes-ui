@@ -24,7 +24,6 @@ interface DashboardPageSchema {
     name: string;
     path: string;
     icon: React.ReactElement;
-
 }
 
 const dashboardPages: DashboardPageSchema[] = [
@@ -151,7 +150,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
         </Box>
 
       <Typography
-        variant="h6"
+        variant="h4"
         noWrap
         component="div"
         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
@@ -170,7 +169,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
         <Toolbar disableGutters>
     {MobileAppBarContents()}
           <Typography
-            variant="h6"
+            variant="h3"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
@@ -184,8 +183,8 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="S" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, border: '2px solid lightgray' }}>
+                <Avatar alt="S" src="/joe.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
