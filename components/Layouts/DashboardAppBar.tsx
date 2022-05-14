@@ -102,7 +102,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
 
   const WebMenuItems = () => {
     const style = {
-        itemSelected: '#fff',
+        itemSelected: 'blue',
         itemIdle: palette.primary.dark,
       }
       return (
@@ -163,8 +163,8 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
   }
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#fff', boxShadow: 0 }}>
-                <Box borderRadius={10} sx={{ backgroundColor: palette.primary.main, marginX: 3, marginY: 3, paddingX: 3 }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#fff', boxShadow: 1 }}>
+                <Box sx={{ marginX: 3, marginY: 1, paddingX: 3 }}>
       {/* <Container maxWidth="xl"> */}
         <Toolbar disableGutters>
     {MobileAppBarContents()}
@@ -172,7 +172,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
             variant="h3"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ color: 'black', mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
             Spes
           </Typography>

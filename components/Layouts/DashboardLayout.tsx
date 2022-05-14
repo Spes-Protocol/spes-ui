@@ -14,7 +14,7 @@ const DashboardLayout: React.FC<{ children?: React.ReactNode; currentPageIndex: 
     // };
     
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', background: 'linear-gradient(#cbf3f0, #fff6cc, #cbf3f0)' }}>
         <CssBaseline />
         <DashboardAppBar currentPageIndex={currentPageIndex} />
         <Box
