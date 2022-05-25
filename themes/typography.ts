@@ -22,6 +22,7 @@ function pxToRem(value) {
 
   const typography: TypographyOptions = {
     fontFamily: [
+      'Lato',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',

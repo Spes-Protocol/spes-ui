@@ -16,12 +16,13 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
     <ThemeConfig>
     <ScrollToTop />
     <GlobalStyles />
-    <Box maxWidth="1000px" mx="auto" width="100%" marginTop={8}>
+    <Box maxWidth="1200px" mx="auto" width="100%" marginY={8}>
       <div>
         <Head>
           <title>{title}</title>
           <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'></link>
         </Head>
         <header>
         {/* <Navbar /> */}
