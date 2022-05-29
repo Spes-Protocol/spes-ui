@@ -3,12 +3,12 @@ import { supabase } from '../utils/supabaseClient'
 
 export default function Auth() {
   const [loading, setLoading] = useState(false)
-  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
 
   const handleLogin = async (email: string) => {
     try {
       setLoading(true)
-      const { error } = await supabase.auth.signIn({ email })
+      const { error } = await supabase.auth.signIn({ phone })
       if (error) throw error
       alert('Check your email for the login link!')
     } catch (error: any) {
@@ -26,17 +26,17 @@ export default function Auth() {
         <div>
           <input
             className="inputField"
-            type="email"
+            // type="email"
             placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
         </div>
         <div>
           <button
             onClick={(e) => {
               e.preventDefault()
-              handleLogin(email)
+              handleLogin(phone)
             }}
             className="button block"
             disabled={loading}

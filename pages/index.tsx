@@ -3,6 +3,10 @@ import { Box, Divider, Typography } from '@mui/material';
 import LandingPageCard, { LandingPageCardProps } from '../components/LandingPageCard';
 import Layout from '../components/Layouts/Layout'
 import LoginCard from '../components/LoginCard';
+import { useState, useEffect } from 'react'
+import { supabase } from '../utils/supabaseClient'
+import Account from '../components/Account'
+import { AuthSession } from '@supabase/supabase-js'
 
 const langingPageCardsCopy: LandingPageCardProps[] = [
   {
@@ -25,50 +29,48 @@ const langingPageCardsCopy: LandingPageCardProps[] = [
 
 const LoginCopy = () => {
   return (
-    <Box display='flex' flexDirection='column' rowGap={1}>
-    <Typography variant='h1'>Spes</Typography>
-    <Typography variant='h2' sx={{ color: 'rgb(105, 77, 255)'}}>Making it easier than ever to give to your favorite organizations.</Typography>
-    {_.map(langingPageCardsCopy, (card: LandingPageCardProps, index: number) => {
-      return <LandingPageCard key={index} heading={card.heading} description={card.description} image={card.image} reverse={card.reverse} />
-    })}
+    <Box display='flex' flexDirection='column' rowGap={3}>
+      <Box>
+        <Typography variant='h1'>Spes</Typography>
+        <Typography variant='h2' sx={{ color: '#f25c54' }}>Making it easier than ever to give to your favorite organizations.</Typography>
+      </Box>
+      <Typography variant='h5'>
+        Spes is an open-source platform hosted on the Celo blockchain that helps you donate to your favorite campaigns and organizations.
+      </Typography>
+      <Box>
+        {_.map(langingPageCardsCopy, (card: LandingPageCardProps, index: number) => {
+          return <LandingPageCard key={index} heading={card.heading} description={card.description} image={card.image} reverse={card.reverse} />
+        })}
+      </Box>
   </Box>
   )
 }
 
 const App = () => {
+  const [session, setSession] = useState<AuthSession | null>(null)
+
+  useEffect(() => {
+    setSession(supabase.auth.session())
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
   return (
-      <Layout title="Caper - crypto payroll in seconds">
-        <Box display='flex' flexDirection='row' alignItems='center' justifyContent='center' columnGap={4}>
+    <>
+    {!session ?
+    <Layout title="Caper - crypto payroll in seconds">
+        <Box display='flex' flexDirection='row' alignItems='center' justifyContent='center' columnGap={8}>
           <LoginCopy />
           <Divider sx={{ borderRightWidth: 5 }} orientation="vertical" variant="middle" flexItem />
           <LoginCard />
         </Box>
-      </Layout>
+      </Layout> : 
+      <Account key={session.user?.id} session={session} />
+  }
+    </>
   );
 }
 
 export default App;
-
-// import { useState, useEffect } from 'react'
-// import { supabase } from '../utils/supabaseClient'
-// import Auth from '../components/Auth'
-// import Account from '../components/Account'
-// import { AuthSession } from '@supabase/supabase-js'
-
-// export default function Home() {
-//   const [session, setSession] = useState<AuthSession | null>(null)
-
-//   useEffect(() => {
-//     setSession(supabase.auth.session())
-
-//     supabase.auth.onAuthStateChange((_event, session) => {
-//       setSession(session)
-//     })
-//   }, [])
-
-//   return (
-//     <div className="container" style={{ padding: '50px 0 100px 0' }}>
-//       {!session ? <Auth /> : <Account key={session.user?.id} session={session} />}
-//     </div>
-//   )
-// }

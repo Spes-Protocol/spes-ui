@@ -13,12 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import palette from '../../themes/palette';
 import Link from 'next/link';
-import { List, ListItem, ListItemIcon } from '@mui/material';
 import PublicIcon from '@mui/icons-material/Public';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-
-const pages = ['Products', 'Pricing', 'Blog'];
 
 interface DashboardPageSchema {
     name: string;
@@ -163,8 +160,8 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
   }
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#fff', boxShadow: 1 }}>
-                <Box sx={{ marginX: 3, marginY: 1, paddingX: 3 }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#fff', boxShadow: 1, height: '60px' }}>
+                <Box sx={{ marginX: 3, paddingX: 3 }}>
       {/* <Container maxWidth="xl"> */}
         <Toolbar disableGutters>
     {MobileAppBarContents()}

@@ -1,0 +1,21 @@
+import { Typography } from "@mui/material";
+
+<Typography variant='body2' sx={{ fontStyle: 'oblique' }}>
+In ancient Roman religion, Spes (pronounced [ˈspeːs]) was the goddess of hope.
+</Typography>
+
+background: 'linear-gradient(#ade8f4, #fff6cc)' 
+
+TODO
+add a filter by some of the fields
+add a sort by some of the fields
+remote the opacity on hover
+add organization/profile cards structure like daffy
+add campaign timeline page
+add wallet
+add a list of my pledges
+    - txn date associated etc.
+    - my actions
+
+add a toolbar address component that shows Homepage > current event
+ 

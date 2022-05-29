@@ -21,7 +21,7 @@ const DashboardLayout: React.FC<{ children?: React.ReactNode; currentPageIndex: 
       <ThemeConfig>
       <ScrollToTop />
       <GlobalStyles />
-      <Box sx={{ display: 'flex', flexDirection: 'column', background: 'linear-gradient(#ade8f4, #fff6cc)' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
