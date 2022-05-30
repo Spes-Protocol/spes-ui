@@ -70,8 +70,6 @@ const ActiveProfiles = () => {
               <Image src={image.thumbnail.uri} alt={""} width={100} height={100} />
                   {image.thumbnail.name}
               </Card>
-            {/* <Image src={image.thumbnail.uri} alt={""} width={100} height={100} /> */}
-            {/* <ImageListItemBar title={image.thumbnail.name} /> */}
           </ImageListItem>
         ))}
       </ImageList>)
@@ -98,7 +96,7 @@ const Portfolio = () => {
                     </Typography>
 
                     {_.map(campaignList, campaign => {
-                        return (<CampaignCard name={campaign.name} endDate={campaign.endDate} lookingToRaiseDollars={campaign.lookingToRaiseDollars} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
+                        return (<CampaignCard name={campaign.name} endDate={campaign.endDate} alreadyRaised={campaign.alreadyRaised} lookingToRaise={campaign.lookingToRaise} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
                     })}
                 </Box>
             </Box>

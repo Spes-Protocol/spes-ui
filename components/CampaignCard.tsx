@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScheduleRounded } from "@mui/icons-material";
-import { Box, Button, ButtonBase, Card, CardActionArea, Fade, IconButton, Typography } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import { Box, Button, ButtonBase, Card, CardActionArea, Fade, IconButton, LinearProgress, linearProgressClasses, Typography } from "@mui/material";
 import moment from "moment";
 import palette from "../themes/palette";
 // import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -9,6 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from "next/image";
 import Link from "next/link";
+import { dollarFormatter } from '../utils/sharedUtils';
 
 export interface CampaignCardProps {
     name: string;
@@ -19,6 +21,18 @@ export interface CampaignCardProps {
     imageSrc: string;
     organizer: string;
 }
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 10,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 5,
+      backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+    },
+  }));
 
 const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ date, organizer }) => {
     const [ isFavorite, setIsFavorite ] = useState(false);
@@ -44,7 +58,7 @@ const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ dat
                     <ScheduleRounded fontSize="inherit" />
                     <Typography
                     color="text.secondary"
-                    variant="body1"
+                    variant="body2"
                     fontWeight={500}
                     sx={{ ml: 0.5, mt: '1px', color: palette.secondary.darker }}
                     >
@@ -52,8 +66,8 @@ const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ dat
                     </Typography>
                 </Box>
                 <Box display='flex' flexDirection='row' columnGap={0.7}>
-                <Typography variant='body1'>Organized by</Typography>
-                <Typography variant='body1' sx={{ fontWeight: 700}}>{organizer}</Typography>
+                <Typography variant='body2'>Organized by</Typography>
+                <Typography variant='body2' sx={{ fontWeight: 700}}>{organizer}</Typography>
                 </Box>
             </Box>
             <Box display={'flex'} flexDirection='row' columnGap={1} alignItems='center'>
@@ -94,10 +108,16 @@ const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => 
                             <Box display='flex' flex={1} >
                                 <Image src={`/${imageSrc}`} alt='Campaign desc' height={250} width={300}/>
                             </Box>
-                            <Box display='flex' flexDirection='column' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
+                            <Box display='flex' flexDirection='column' justifyContent='flex-start' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
                                 <CampaignActionBar date={endDate} organizer={organizer} />
                                 <Typography variant="h4">{name}</Typography>
                                 <Typography variant="body1">{description}</Typography>
+                                <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(alreadyRaised * 100) / lookingToRaise} />
+                                <Box display='flex' justifyContent={'flex-end'}>
+                                    <Typography variant='body2'>Raised {dollarFormatter.format(alreadyRaised)} out of {dollarFormatter.format(lookingToRaise)}</Typography>
+
+                                </Box>
+                                
                             </Box>
                         </Box>
                     </CardActionArea>
