@@ -10,7 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from "next/image";
 import Link from "next/link";
-import { dollarFormatter } from '../utils/sharedUtils';
+import { dollarFormatter, round } from '../utils/sharedUtils';
 
 export interface CampaignCardProps {
     name: string;
@@ -114,7 +114,7 @@ const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => 
                                 <Typography variant="body1">{description}</Typography>
                                 <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(alreadyRaised * 100) / lookingToRaise} />
                                 <Box display='flex' justifyContent={'flex-end'}>
-                                    <Typography variant='body2'>Raised {dollarFormatter.format(alreadyRaised)} out of {dollarFormatter.format(lookingToRaise)}</Typography>
+                                    <Typography variant='body2'>Raised {dollarFormatter.format(alreadyRaised)} out of {dollarFormatter.format(lookingToRaise)} ({round(alreadyRaised*100/lookingToRaise, 1)}%)</Typography>
 
                                 </Box>
                                 

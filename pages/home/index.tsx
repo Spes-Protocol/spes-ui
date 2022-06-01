@@ -1,9 +1,11 @@
 import * as _ from 'lodash';
-import { Box, Card, CardActionArea, ImageList, ImageListItem, ImageListItemBar, Toolbar, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import moment from "moment";
 import CampaignCard, { CampaignCardProps } from "../../components/CampaignCard";
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
-import Image from 'next/image';
+import * as React from 'react';
+import { ProfileCard, ProfileCardProps } from '../../components/ProfileCard';
+import CampaignMenuBar from '../../components/CampaignsMenuBar';
 
 const campaignList: CampaignCardProps[] = [
     {
@@ -16,8 +18,17 @@ const campaignList: CampaignCardProps[] = [
         organizer: 'The white house',
     },
     {
+        name: 'Red Pine: Dancing with the Ballers',
+        endDate: moment().subtract(3, 'months').format('LL'),
+        alreadyRaised: 345,
+        lookingToRaise: 1000,
+        description: 'Help fund a book-and-film collaboration between Copper Canyon Press, a nonprofit publisher dedicated to poetry, and Woody Creek Pictures, a production company focused on “films dedicated to the common good.”',
+        imageSrc: 'mockProfiles/10.png',
+        organizer: 'Burning mantaray',
+    },
+    {
         name: 'Luba: An Intelligent, Perimeter Wire Free Robot Lawn Mower',
-        endDate: moment().format('LL'),
+        endDate: moment().subtract(14, 'months').format('LL'),
         alreadyRaised: 20,
         lookingToRaise: 500,
         description: 'Meet Luba, a revolutionary robotic lawnmower that delivers the picture-perfect lawn with a hands-free experience. Thanks to more than 80 patents, Luba features advanced RTK navigation and an interconnected smart system that allows users to program virtual zones in the app schedule.',
@@ -32,50 +43,94 @@ const campaignList: CampaignCardProps[] = [
         description: 'nvallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum',
         imageSrc: 'recur.png',
         organizer: 'The white house',
+    },
+    {
+        name: 'Ohsun: Korean Banchan Deli & Cafe for Seattle',
+        endDate: moment().subtract(22, 'days').format('LL'),
+        alreadyRaised: 200,
+        lookingToRaise: 600,
+        description: 'Help Sara Upshaw and team go from pop-up to a Seattle brick-and-mortar in 2022. A space for great food and community.',
+        imageSrc: 'mockProfiles/2.png',
+        organizer: 'Washington Times',
+    }
+
+]
+
+const profileList: ProfileCardProps[] = [
+    {
+        name: 'St. Jude\'s Cancer Research',
+        location: 'San Francisco, CA',
+        imgSrc: '1',
+    },
+    {
+        name: 'UNICEF USA',
+        location: 'Minneapolis, MN',
+        imgSrc: '2',
+    },
+    {
+        name: 'Heifer International',
+        location: 'Chicago, IL',
+        imgSrc: '3',
+    },
+    {
+        name: 'Charity Water',
+        location: 'New York, NY',
+        imgSrc: '4',
+    },
+    {
+        name: 'Charity Water',
+        location: 'New York, NY',
+        imgSrc: '5',
+    },
+    {
+        name: 'St. Jude\'s Cancer Research',
+        location: 'San Francisco, CA',
+        imgSrc: '6',
+    },
+    {
+        name: 'UNICEF USA',
+        location: 'Minneapolis, MN',
+        imgSrc: '7',
+    },
+    {
+        name: 'Heifer International',
+        location: 'Chicago, IL',
+        imgSrc: '8',
+    },
+    {
+        name: 'Charity Water',
+        location: 'New York, NY',
+        imgSrc: '9',
+    },
+    {
+        name: 'Charity Water',
+        location: 'New York, NY',
+        imgSrc: '10',
     }
 ]
 
-
-const images = [
-    {
-      thumbnail: {
-        uri: "/engage.png",
-        name: "animals"
-      }
-    },
-    { thumbnail: { uri: "/engage.png", name: "city" } },
-    { thumbnail: { uri: "/engage.png", name: "city" } },
-    { thumbnail: { uri: "/engage.png", name: "city" } },
-    {
-      thumbnail: { uri: "/engage.png", name: "nature" }
-    },
-    { thumbnail: { uri: "/engage.png", name: "cats" } },
-    { thumbnail: { uri: "/engage.png", name: "cats" } },
-    { thumbnail: { uri: "/engage.png", name: "cats" } }
-  ];
-
 const ActiveProfiles = () => {
-    return (<ImageList
-        sx={{
-            marginY: 2,
-            marginX: 5,
-          gridAutoFlow: "column",
-          gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
-          gridAutoColumns: "minmax(160px, 1fr)"
-        }}
-      >
-        {images.map((image, index) => (
-          <ImageListItem key={index} sx={{ marginX: 1 }}>
-              <Card>
-              <Image src={image.thumbnail.uri} alt={""} width={100} height={100} />
-                  {image.thumbnail.name}
-              </Card>
-          </ImageListItem>
+    return (
+        <div style={{ width: "100%", overflow: "auto", display: "flex" }}>
+        {_.map(profileList, (profile, index) => (
+          <ProfileCard key={index} location={profile.location} name={profile.name} imgSrc={profile.imgSrc} />
         ))}
-      </ImageList>)
+      </div>
+    )
 }
 
-const Portfolio = () => {
+const Campaigns = () => {    
+    const [isActive, setIsActive] = React.useState(true);
+
+    const handleActiveClick = () => {
+        setIsActive(true);
+    }
+
+    const handlePendingClick = () => {
+        setIsActive(false);
+        console.log(isActive)
+    }
+
     return (
         <DashboardLayout currentPageIndex={0}>
             <Box display='flex' flexDirection={'column'} rowGap={2}>
@@ -94,9 +149,9 @@ const Portfolio = () => {
                     <Typography variant='h5'>
                         Pledge to campaigns that speak to you
                     </Typography>
-
-                    {_.map(campaignList, campaign => {
-                        return (<CampaignCard name={campaign.name} endDate={campaign.endDate} alreadyRaised={campaign.alreadyRaised} lookingToRaise={campaign.lookingToRaise} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
+                    <CampaignMenuBar isActive handleActiveClick={handleActiveClick} handlePendingClick={handlePendingClick} />
+                    {_.map(campaignList, (campaign, index) => {
+                        return (<CampaignCard key={index} name={campaign.name} endDate={campaign.endDate} alreadyRaised={campaign.alreadyRaised} lookingToRaise={campaign.lookingToRaise} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
                     })}
                 </Box>
             </Box>
@@ -104,4 +159,4 @@ const Portfolio = () => {
     );
 };
 
-export default Portfolio;
+export default Campaigns;
