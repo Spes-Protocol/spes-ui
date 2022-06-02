@@ -8,6 +8,15 @@ import { TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { shadeTextFieldStylesHook } from '../../styles/textFieldShade';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import Web3 from 'web3';
+import { ContractKit, newKitFromWeb3 } from '@celo/contractkit';
+import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers';
+import { AbstractProvider } from 'web3-core/types'
+
+export declare class WalletConnectWeb3Provider extends WalletConnectProvider implements AbstractProvider {
+  sendAsync(payload: JsonRpcPayload, callback: (error: Error | null, result?: JsonRpcResponse) => void): void;
+}
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,8 +32,10 @@ const style = {
 
 const CreateCampaignModal = () => {
   const [open, setOpen] = React.useState(false);
+  const [providerKit, setProviderKit] = React.useState<{ provider: WalletConnectProvider | undefined, kit: ContractKit | undefined }>({ provider: undefined, kit: undefined});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
 
   // styles import 
   const inputBaseStyles = shadeTextFieldStylesHook.useInputBase();
@@ -40,6 +51,28 @@ const CreateCampaignModal = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  // TODO: debug some parts of this 
+  const handleWalletConnect = async () => {
+    const provider = new WalletConnectProvider({
+        rpc: {
+          44787: "https://alfajores-forno.celo-testnet.org",
+          42220: "https://forno.celo.org",
+        },
+      });
+  
+      await provider.enable()
+      const web3 = new Web3(provider as WalletConnectWeb3Provider);
+    //   let kit = newKitFromWeb3(web3 as any)
+  
+    //   kit.defaultAccount = provider.accounts[0]
+  
+    //   provider.on("accountsChanged", (accounts: any) => {
+    //     console.log(accounts);
+    //   });
+  
+    //   setProviderKit({provider, kit})
+  }
 
   return (
     <div>
@@ -59,7 +92,8 @@ const CreateCampaignModal = () => {
                 </Typography>
 
                 <form onSubmit={formik.handleSubmit}>
-                <TextField
+                    <Box display='flex' flexDirection='column' margin={4} rowGap={2}>
+                    <TextField
                     label={'Campaign Name'}
                     placeholder={'Name'}
                     margin={'normal'}
@@ -92,8 +126,6 @@ const CreateCampaignModal = () => {
                     InputLabelProps={{ shrink: true, classes: inputLabelStyles }}
                     InputProps={{ classes: inputBaseStyles, disableUnderline: true }}
                 />
-
-                <Box display='flex' flexDirection='row' columnGap={3} alignItems='baseline'>
                     <TextField
                         label={'$ looking to raise '}
                         margin={'normal'}
@@ -110,14 +142,13 @@ const CreateCampaignModal = () => {
                         InputLabelProps={{ shrink: true, classes: inputLabelStyles }}
                         InputProps={{ classes: inputBaseStyles, disableUnderline: true }}
                     />
-                    <Button size='large' variant='outlined' color='primary' sx={{ height: 54 }} startIcon={<AccountBalanceWalletIcon />}>
-                        Connect to Celo wallet
+                    <Button onClick={() => handleWalletConnect} size='large' variant='outlined' color='primary' sx={{ height: 54, border: 2, '&:hover': { border: 2 } }} startIcon={<AccountBalanceWalletIcon />}>
+                        Connect to Valora
                     </Button>
-                </Box>
-                
+                    </Box>
 
                     <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
-                        <Button size='medium' color='error' variant='outlined'>Exit</Button>
+                        <Button size='medium' color='error' variant='outlined' onClick={() => { setOpen(false) }}>Exit</Button>
                         <Button size='medium' color='success' variant='outlined'>Create</Button>
                     </Box>
                 </form>

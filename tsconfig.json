@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "notes"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "notes", "./node_modules/@celo/contractkit/types"],
   "exclude": ["node_modules"]
 }
