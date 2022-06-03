@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import DashboardLayout from '../../../components/Layouts/DashboardLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
+import { shortenString } from '../../../utils/sharedUtils';
 
 const Campaign = () => {
     const router = useRouter();
@@ -12,7 +13,7 @@ const Campaign = () => {
             path: '/home/',
         },
         {
-            name: 'This campaign',
+            name: shortenString('This campaign'),
             path: `/home/campaigns/${campaignId}`,
         }
     ]

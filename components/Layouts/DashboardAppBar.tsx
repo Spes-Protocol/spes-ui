@@ -76,7 +76,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
                 <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none' }}>
                     <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' columnGap={1.5} sx={{ color: selected ? style.itemSelected : style.itemIdle }}>
                     {page.icon}
-                        <Typography variant='h4' >
+                        <Typography variant='h4' letterSpacing={1} >
                             {page.name}
                         </Typography>
                     </Box>

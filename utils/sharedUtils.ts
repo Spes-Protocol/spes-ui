@@ -11,3 +11,7 @@ export const dollarFormatter = new Intl.NumberFormat('en-US', {
     var multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
 }
+
+export const shortenString: (str: string) => string = (str: string) => {
+    return str;
+}
