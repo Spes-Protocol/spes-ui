@@ -36,7 +36,7 @@ const DashboardLayout: React.FC<{ children?: React.ReactNode; currentPageIndex: 
             sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
         >
             <Toolbar />
-            <Box maxWidth="1000px" mx="auto" width="100%" marginTop={8}>
+            <Box maxWidth="1000px" mx="auto" width="100%" marginTop={4}>
             {children}
             </Box>
         </Box>
