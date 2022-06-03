@@ -9,10 +9,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from "next/image";
-import Link from "next/link";
 import { dollarFormatter, round } from '../utils/sharedUtils';
+import Link from 'next/link';
 
 export interface CampaignCardProps {
+    id?: number;
     name: string;
     endDate: string;
     alreadyRaised: number;
@@ -86,42 +87,47 @@ const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ dat
 }
 
 const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => {
-    const { name, endDate, alreadyRaised, lookingToRaise, description, imageSrc, organizer } = props;
+    const { id, name, endDate, alreadyRaised, lookingToRaise, description, imageSrc, organizer } = props;
 
     return (
             <Fade in timeout={700}>
-                <Card
-                    sx={{
-                    minWidth: 800,
-                    maxWidth: 1000,
-                    boxShadow: '6px 6px 0px 0.5px rgba(0, 0, 255, .2)',
-                    border: 1.5,
-                    borderRadius: 0.5,
-                    marginTop: 3,
-                    '&:hover': {
-                        transform: "scale(1.02)",
-                        boxShadow: 5,
-                    },
-                }}>
-                    <CardActionArea href="https://google.com">
-                        <Box display='flex' flexDirection='row' columnGap={4}>
-                            <Box display='flex' flex={1} >
-                                <Image src={`/${imageSrc}`} alt='Campaign desc' height={250} width={300}/>
-                            </Box>
-                            <Box display='flex' flexDirection='column' justifyContent='flex-start' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
-                                <CampaignActionBar date={endDate} organizer={organizer} />
-                                <Typography variant="h4">{name}</Typography>
-                                <Typography variant="body1">{description}</Typography>
-                                <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(alreadyRaised * 100) / lookingToRaise} />
-                                <Box display='flex' justifyContent={'flex-end'}>
-                                    <Typography variant='body2'>Raised {dollarFormatter.format(alreadyRaised)} out of {dollarFormatter.format(lookingToRaise)} ({round(alreadyRaised*100/lookingToRaise, 1)}%)</Typography>
-
+                    <Card
+                        sx={{
+                        minWidth: 800,
+                        maxWidth: 1000,
+                        boxShadow: '6px 6px 0px 0.5px rgba(0, 0, 255, .2)',
+                        border: 1.5,
+                        borderRadius: 0.5,
+                        marginTop: 3,
+                        '&:hover': {
+                            transform: "scale(1.02)",
+                            boxShadow: 5,
+                        },
+                    }}>
+                        <Link href={{
+              pathname: '/home/campaigns/[campaignId]',
+              query: { campaignId: id },
+            }} passHref>
+                        <CardActionArea href="https://google.com">
+                            <Box display='flex' flexDirection='row' columnGap={4}>
+                                <Box display='flex' flex={1} >
+                                    <Image src={`/${imageSrc}`} alt='Campaign desc' height={250} width={300}/>
                                 </Box>
-                                
+                                <Box display='flex' flexDirection='column' justifyContent='flex-start' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
+                                    <CampaignActionBar date={endDate} organizer={organizer} />
+                                    <Typography variant="h4">{name}</Typography>
+                                    <Typography variant="body1">{description}</Typography>
+                                    <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(alreadyRaised * 100) / lookingToRaise} />
+                                    <Box display='flex' justifyContent={'flex-end'}>
+                                        <Typography variant='body2'>Raised {dollarFormatter.format(alreadyRaised)} out of {dollarFormatter.format(lookingToRaise)} ({round(alreadyRaised*100/lookingToRaise, 1)}%)</Typography>
+
+                                    </Box>
+                                    
+                                </Box>
                             </Box>
-                        </Box>
-                    </CardActionArea>
-                </Card>
+                        </CardActionArea>
+                        </Link>
+                    </Card>                
         </Fade>
     )
 };

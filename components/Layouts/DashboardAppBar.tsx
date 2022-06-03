@@ -8,6 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
+import { Link as MUILink } from '@mui/material';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -75,7 +76,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
                 <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none' }}>
                     <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' columnGap={1.5} sx={{ color: selected ? style.itemSelected : style.itemIdle }}>
                     {page.icon}
-                        <Typography variant='h6' >
+                        <Typography variant='h4' >
                             {page.name}
                         </Typography>
                     </Box>
@@ -99,8 +100,8 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
 
   const WebMenuItems = () => {
     const style = {
-        itemSelected: 'blue',
-        itemIdle: palette.primary.dark,
+        itemSelected: 'white',
+        itemIdle: 'black',
       }
       return (
         <Box sx={{ flexGrow: 1, display: 'flex', columnGap: 5, justifyContent: 'center', flexDirection: 'row' }}>
@@ -146,33 +147,39 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
             </Menu>
         </Box>
 
-      <Typography
-        variant="h4"
+        <Link href='/' passHref>
+          <MUILink
+        variant="h2"
+        underline='none'
         noWrap
         component="div"
-        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+        sx={{ color: 'white', flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
       >
         Spes
-      </Typography>
+        </MUILink>
+        </Link>
     </>
-
     )
   }
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#fff', boxShadow: 1, height: '60px' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#736ced', boxShadow: 1, height: '60px' }}>
                 <Box sx={{ marginX: 3, paddingX: 3 }}>
       {/* <Container maxWidth="xl"> */}
         <Toolbar disableGutters>
     {MobileAppBarContents()}
-          <Typography
-            variant="h3"
-            noWrap
-            component="div"
-            sx={{ color: 'black', mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
-            Spes
-          </Typography>
+        <Link href='/' passHref>
+          <MUILink
+              variant="h3"
+              underline='none'
+              noWrap
+              component="div"
+              sx={{ color: 'white', mr: 2, display: { xs: 'none', md: 'flex' } }}
+            >
+              Spes
+            </MUILink>
+        </Link>
+         
 
             <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, columnGap: 5, justifyContent: 'center' }}>
                 <WebMenuItems />

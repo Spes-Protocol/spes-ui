@@ -113,7 +113,7 @@ const ActiveProfiles = () => {
     return (
         <div style={{ width: "100%", overflow: "auto", display: "flex" }}>
         {_.map(profileList, (profile, index) => (
-          <ProfileCard key={index} location={profile.location} name={profile.name} imgSrc={profile.imgSrc} />
+          <ProfileCard key={index} id={index} location={profile.location} name={profile.name} imgSrc={profile.imgSrc} />
         ))}
       </div>
     )
@@ -151,7 +151,7 @@ const Campaigns = () => {
                     </Typography>
                     <CampaignMenuBar isActive handleActiveClick={handleActiveClick} handlePendingClick={handlePendingClick} />
                     {_.map(campaignList, (campaign, index) => {
-                        return (<CampaignCard key={index} name={campaign.name} endDate={campaign.endDate} alreadyRaised={campaign.alreadyRaised} lookingToRaise={campaign.lookingToRaise} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
+                        return (<CampaignCard key={index} id={index} name={campaign.name} endDate={campaign.endDate} alreadyRaised={campaign.alreadyRaised} lookingToRaise={campaign.lookingToRaise} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
                     })}
                 </Box>
             </Box>

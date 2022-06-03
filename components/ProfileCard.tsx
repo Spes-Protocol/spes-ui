@@ -1,18 +1,23 @@
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Fade, Paper, Typography } from "@mui/material";
 import Image from 'next/Image';
+import Link from 'next/Link';
 
 export interface ProfileCardProps {
+    id?: number;
     name: string;
     location: string;
     imgSrc: string;
 }
 
-export const ProfileCard: React.FC<ProfileCardProps> = ({ name, location, imgSrc }) => {
+export const ProfileCard: React.FC<ProfileCardProps> = ({ id, name, location, imgSrc }) => {
     return (
         <Fade in timeout={500}>
-            <Box sx={{ minWidth: "200px", margin: 2 }}>
-                <Card >
-                    <CardActionArea>
+            <Card sx={{ minWidth: "200px", margin: 2 }}>
+            <Link href={{
+              pathname: '/home/profiles/[profileId]',
+              query: { profileId: id },
+            }} passHref>                    
+            <CardActionArea>
                         <Box display='flex' flexDirection={'column'} justifyContent='center' sx={{ height: "100%", minWidth: 200, minHeight: 200 }}>
                             <Image src={`/mockProfiles/${imgSrc}.png`} alt={name} width={100} height={100}  />
                             <Box sx={{ paddingX: 1, }}>
@@ -25,8 +30,8 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ name, location, imgSrc
                             </Box>
                         </Box>
                     </CardActionArea>
-                </Card> 
-            </Box>
+                </Link>
+            </Card> 
         </Fade>
     )
 }
