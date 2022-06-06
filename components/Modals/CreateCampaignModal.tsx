@@ -14,9 +14,9 @@ import { ContractKit, newKitFromWeb3 } from '@celo/contractkit';
 import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers';
 import { AbstractProvider } from 'web3-core/types'
 
-export declare class WalletConnectWeb3Provider extends WalletConnectProvider implements AbstractProvider {
-  sendAsync(payload: JsonRpcPayload, callback: (error: Error | null, result?: JsonRpcResponse) => void): void;
-}
+// export declare class WalletConnectWeb3Provider extends WalletConnectProvider implements AbstractProvider {
+//   sendAsync(payload: JsonRpcPayload, callback: (error: Error | null, result?: JsonRpcResponse) => void): void;
+// }
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -54,15 +54,15 @@ const CreateCampaignModal = () => {
 
   // TODO: debug some parts of this 
   const handleWalletConnect = async () => {
-    const provider = new WalletConnectProvider({
-        rpc: {
-          44787: "https://alfajores-forno.celo-testnet.org",
-          42220: "https://forno.celo.org",
-        },
-      });
+    // const provider = new WalletConnectProvider({
+    //     rpc: {
+    //       44787: "https://alfajores-forno.celo-testnet.org",
+    //       42220: "https://forno.celo.org",
+    //     },
+    //   });
   
-      await provider.enable()
-      const web3 = new Web3(provider as WalletConnectWeb3Provider);
+    //   await provider.enable()
+    //   const web3 = new Web3(provider as WalletConnectWeb3Provider);
     //   let kit = newKitFromWeb3(web3 as any)
   
     //   kit.defaultAccount = provider.accounts[0]

@@ -2,7 +2,7 @@ import { alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-function createGradient(color1, color2) {
+function createGradient(color1: string, color2: string) {
   return `linear-gradient(to bottom, ${color1}, ${color2})`;
 }
 
@@ -39,7 +39,7 @@ const PRIMARY = {
 const SECONDARY = {
   lighter: '#D6E4FF',
   light: '#84A9FF',
-  main: '#8d99ae',
+  main: '#4e4e58',
   dark: '#2b2d42',
   darker: '#1d3557',
   contrastText: '#fff'

@@ -12,6 +12,6 @@ export const dollarFormatter = new Intl.NumberFormat('en-US', {
     return Math.round(value * multiplier) / multiplier;
 }
 
-export const shortenString: (str: string) => string = (str: string) => {
-    return str;
+export const shortenString = (str: string) => {
+    return str.replace(/(.{30})..+/, "$1...");
 }
