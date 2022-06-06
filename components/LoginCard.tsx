@@ -30,11 +30,9 @@ const LoginCard = () => {
                 <Card
                 sx={{
                 minWidth: 360,
-                minHeight: 500,
+                minHeight: 480,
                 maxWidth: 1000,
-                height: 'auto',
                 maxHeight: '10vw',
-                // minHeight: 300,
                 boxShadow: 3, borderRadius: 2,
                 display: 'flex',
                 flexDirection: 'column',
