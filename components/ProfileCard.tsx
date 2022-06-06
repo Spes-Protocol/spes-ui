@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Fade, Paper, Typography } from "@mui/material";
-import Image from 'next/Image';
-import Link from 'next/Link';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export interface ProfileCardProps {
     id?: number;
