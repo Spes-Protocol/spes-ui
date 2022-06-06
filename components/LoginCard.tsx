@@ -30,7 +30,7 @@ const LoginCard = () => {
                 <Card
                 sx={{
                 minWidth: 360,
-                minHeight: 400,
+                minHeight: 500,
                 maxWidth: 1000,
                 height: 'auto',
                 maxHeight: '10vw',
@@ -51,6 +51,7 @@ const LoginCard = () => {
                     </Typography>
                     <TextField id="outlined-basic" label="Email address" variant="outlined" onChange={(e) => setEmail(e.target.value)}
  />
+                    <Typography variant='caption'>By clicking the button below I consent to sign up for any updates from Spes.</Typography>
                     <Box display='flex' flexDirection='row' justifyContent={'center'} alignItems='center' columnGap={3} 
                         onClick={(e) => {
                             e.preventDefault()

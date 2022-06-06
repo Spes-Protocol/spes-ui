@@ -17,6 +17,7 @@ import Link from 'next/link';
 import PublicIcon from '@mui/icons-material/Public';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { supabase } from '../../utils/supabaseClient';
 
 interface DashboardPageSchema {
     name: string;
@@ -66,6 +67,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    supabase.auth.signOut();
   };
 
   const DashboardMenuItems = (style: { itemSelected: string; itemIdle: string; }) => {
