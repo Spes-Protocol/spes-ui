@@ -15,7 +15,7 @@ const langingPageCardsCopy: LandingPageCardProps[] = [
     image: '/secure.png',
   },
   {
-    heading: 'Host campaigns and engage with patrons',
+    heading: 'Host campaigns and engage with supporters',
     description: 'Engage with your supporters and share your results from campaigns by sharing updates and progress with your community and maximize your impact.',
     image: '/engage.png',
     reverse: true,
@@ -60,7 +60,7 @@ const App = () => {
   return (
     <>
     {!session ?
-    <Layout title="Caper - crypto payroll in seconds">
+    <Layout title="Spes - A decentralized protocol to power initiatives that matter">
         <Box display='flex' flexDirection='row' alignItems='center' justifyContent='center' columnGap={8}>
           <LoginCopy />
           <Divider sx={{ borderRightWidth: 5 }} orientation="vertical" variant="middle" flexItem />
