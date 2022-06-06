@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../utils/supabaseClient'
 import Account from '../components/Account'
 import { AuthSession } from '@supabase/supabase-js'
+import { useRouter } from 'next/router';
+import Campaigns from './home';
 
 const langingPageCardsCopy: LandingPageCardProps[] = [
   {
@@ -48,13 +50,19 @@ const LoginCopy = () => {
 
 const App = () => {
   const [session, setSession] = useState<AuthSession | null>(null)
+  const router = useRouter();
 
   useEffect(() => {
+
     setSession(supabase.auth.session())
 
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
+
+    // if (session) {
+    //   router.push('/home')
+    // }
   }, [])
 
   return (
@@ -67,7 +75,7 @@ const App = () => {
           <LoginCard />
         </Box>
       </Layout> : 
-      <Account key={session.user?.id} session={session} />
+      <Campaigns />
   }
     </>
   );

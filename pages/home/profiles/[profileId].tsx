@@ -32,7 +32,7 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
                 Profile
             </Typography>
             <RouteTree routes={routes} />
-            <p>Profile Id: {profile.id}</p>
+            <p>Profile Id: {JSON.stringify(profile)}</p>
             
         </Box>
     </DashboardLayout>

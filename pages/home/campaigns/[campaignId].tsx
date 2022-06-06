@@ -32,7 +32,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
                 Campaign
             </Typography>
             <RouteTree routes={routes} />
-            <p>Campaign Id: {campaignId}</p>
+            <p>Campaign Id: {JSON.stringify(campaign)}</p>
             
         </Box>
     </DashboardLayout>
@@ -40,7 +40,6 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
 };
 
 export default Campaign;
-
 
 export const getStaticPaths: GetStaticPaths = async () => {
     // Get the paths we want to pre-render based on users

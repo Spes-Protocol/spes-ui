@@ -21,7 +21,7 @@ const Account: React.FC<{ session: AuthSession }> = ({ session }) => {
       const user: AuthUser = supabase.auth.user()!
 
       let { data, error, status } = await supabase
-        .from('profiles')
+        .from('user')
         .select(`username, website, avatar_url`)
         .eq('id', user.id)
         .single()
@@ -55,7 +55,7 @@ const Account: React.FC<{ session: AuthSession }> = ({ session }) => {
         updated_at: new Date(),
       }
 
-      let { error } = await supabase.from('profiles').upsert(updates, {
+      let { error } = await supabase.from('user').upsert(updates, {
         returning: 'minimal', // Don't return the value after inserting
       })
 
