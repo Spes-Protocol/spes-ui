@@ -8,11 +8,11 @@ import { TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { shadeTextFieldStylesHook } from '../../styles/textFieldShade';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import Web3 from 'web3';
-import { ContractKit, newKitFromWeb3 } from '@celo/contractkit';
-import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers';
-import { AbstractProvider } from 'web3-core/types'
+// import WalletConnectProvider from '@walletconnect/web3-provider';
+// import Web3 from 'web3';
+// import { ContractKit, newKitFromWeb3 } from '@celo/contractkit';
+// import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers';
+// import { AbstractProvider } from 'web3-core/types'
 
 // export declare class WalletConnectWeb3Provider extends WalletConnectProvider implements AbstractProvider {
 //   sendAsync(payload: JsonRpcPayload, callback: (error: Error | null, result?: JsonRpcResponse) => void): void;
@@ -32,7 +32,7 @@ const style = {
 
 const CreateCampaignModal = () => {
   const [open, setOpen] = React.useState(false);
-  const [providerKit, setProviderKit] = React.useState<{ provider: WalletConnectProvider | undefined, kit: ContractKit | undefined }>({ provider: undefined, kit: undefined});
+  // const [providerKit, setProviderKit] = React.useState<{ provider: WalletConnectProvider | undefined, kit: ContractKit | undefined }>({ provider: undefined, kit: undefined});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
