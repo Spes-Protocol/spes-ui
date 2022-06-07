@@ -21,6 +21,7 @@ export interface CampaignCardProps {
     description: string;
     imageSrc: string;
     organizer: string;
+    active?: boolean;
 }
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({

@@ -38,24 +38,23 @@ const SearchOptions = () => {
   );
 }
 
-const CampaignMenuBar: React.FC<{ isActive: boolean; handleActiveClick: any; handlePendingClick: any; }> = ({ isActive, handleActiveClick, handlePendingClick }) => {
+const CampaignMenuBar: React.FC<{ toggleActive: boolean; toggleState: any; }> = ({ toggleActive, toggleState }) => {
     // const [isActive, setIsActive] = React.useState(true);
 
-    // const handleActiveClick = () => {
-    //     setIsActive(true);
-    // }
+    const handleActiveClick = () => {
+        toggleState(true);
+    }
 
-    // const handlePendingClick = () => {
-    //     setIsActive(false);
-    //     console.log(isActive)
-    // }
+    const handlePendingClick = () => {
+        toggleState(false);
+    }
     return (
         <Box display={'flex'} flexDirection='column' rowGap={2}>
             <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={4} alignItems='center' sx={{ my: 2 }}>
-                    <Link component="button" variant='h3' underline='none' sx={{ color: isActive ? 'black' : '#aaa', borderBottom: isActive ? 2 : 0 }} onClick={() => { handleActiveClick }}>
+                    <Link component="button" variant='h4' underline='none' sx={{ color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 2 : 0 }} onClick={handleActiveClick}>
                         Active
                     </Link>
-                    <Link component="button" variant='h3' underline='none'  sx={{ color: isActive ? '#aaa' : 'black', borderBottom: isActive ? 0 : 2 }} onClick={() => { handlePendingClick }}>
+                    <Link component="button" variant='h4' underline='none'  sx={{ color: toggleActive ? '#aaa' : 'black', borderBottom: toggleActive ? 0 : 2 }} onClick={handlePendingClick}>
                         Pending
                     </Link>
             </Box>

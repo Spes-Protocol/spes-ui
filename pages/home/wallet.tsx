@@ -1,14 +1,14 @@
 import { Box, Button, Card, Toolbar, Typography } from "@mui/material";
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
-import WalletCard from "../../components/WalletCard";
+import HomeWalletConnect from "../../components/HomeWalletConnect";
 // import WalletTable from "../../components/Wallet/WalletTable";
 
 const Wallet = () => {
     return (
         <DashboardLayout currentPageIndex={2}>
-            <Box maxWidth="1000px" mx="auto" width="100%" marginTop={8} paddingX={4} display='flex' flexDirection='column' rowGap={3}>
+            <Box display='flex' flexDirection={'column'} rowGap={2}>
                 <Box>
-                    <Typography variant='h4'>
+                    <Typography variant='h3'>
                         Your wallet
                     </Typography>
                     <Typography display="inline" variant="subtitle1" color={'#6c757d'}>
@@ -16,7 +16,7 @@ const Wallet = () => {
                         You can add or remove any of your crypto wallets from your payment policy at any time. 
                     </Typography>
                     <Box display='flex' justifyContent='center' alignItems={'center'} marginTop={4}>
-                    <WalletCard />
+                    <HomeWalletConnect />
                     </Box>
                     
                 </Box>

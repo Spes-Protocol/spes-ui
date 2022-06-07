@@ -75,7 +75,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
         const selected = drawerOption === index;
         return (
             <Link key={index} href={page.path} passHref>
-                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none' }}>
+                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none', borderColor: 'black', '&:hover': { backgroundColor: '#cdb4db', borderBottom: 3 } }}>
                     <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' columnGap={1.5} sx={{ color: selected ? style.itemSelected : style.itemIdle }}>
                     {page.icon}
                         <Typography variant='h4' letterSpacing={1} >

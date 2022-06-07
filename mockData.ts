@@ -12,6 +12,7 @@ export const campaignList: CampaignCardProps[] = [
         description: 'Introducing the 7-in-1 YesWelder Firstess CT2050. Combining the most powerful welding and cutting tools into an easy-to-use professional machine, the CT2050 is a workhorse, allowing you to cycle through AC/DC TIG, AC/DC Pulse TIG, Stick Welding, Plasma Cutting, and more at the tap of a button.',
         imageSrc: 'engage.png',
         organizer: 'The white house',
+        active: true,
     },
     {
         id: 1,
@@ -22,6 +23,7 @@ export const campaignList: CampaignCardProps[] = [
         description: 'Help fund a book-and-film collaboration between Copper Canyon Press, a nonprofit publisher dedicated to poetry, and Woody Creek Pictures, a production company focused on “films dedicated to the common good.”',
         imageSrc: 'mockProfiles/10.png',
         organizer: 'Burning mantaray',
+        active: true,
     },
     {
         id: 2,
@@ -32,6 +34,7 @@ export const campaignList: CampaignCardProps[] = [
         description: 'Meet Luba, a revolutionary robotic lawnmower that delivers the picture-perfect lawn with a hands-free experience. Thanks to more than 80 patents, Luba features advanced RTK navigation and an interconnected smart system that allows users to program virtual zones in the app schedule.',
         imageSrc: 'secure.png',
         organizer: 'Kickstarter',
+        active: true,
     },
     {
         id: 3,
@@ -42,6 +45,7 @@ export const campaignList: CampaignCardProps[] = [
         description: 'nvallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum',
         imageSrc: 'recur.png',
         organizer: 'The white house',
+        active: false,
     },
     {
         id: 4,
@@ -52,6 +56,7 @@ export const campaignList: CampaignCardProps[] = [
         description: 'Help Sara Upshaw and team go from pop-up to a Seattle brick-and-mortar in 2022. A space for great food and community.',
         imageSrc: 'mockProfiles/2.png',
         organizer: 'Washington Times',
+        active: false,
     }
 
 ]

@@ -6,7 +6,7 @@ const DappWallet: React.FC = () => {
     const { address, connect } = useContractKit();
     return (
         <main>
-            <Box
+            <Card
             sx={{
                 // height: 500,
                 width: 500,
@@ -25,12 +25,12 @@ const DappWallet: React.FC = () => {
                 </Box>
                 <Typography variant='body2'>Your wallet details will appear here after you connect to your Celo wallet.</Typography>
                 <Button onClick={() => connect().catch(e => console.log(e))} variant='contained' size='large' color='warning' sx={{ textTransform: 'none' }}>Connect Wallet</Button>
-            </Box>
+            </Card>
         </main>
     )
 }
 
-const Wallet: React.FC = () => {
+const HomeWalletConnect: React.FC = () => {
 
     return (
         <ContractKitProvider
@@ -46,4 +46,4 @@ const Wallet: React.FC = () => {
     )
 };
 
-export default Wallet;
+export default HomeWalletConnect;
