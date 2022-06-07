@@ -24,7 +24,7 @@ const DappWallet: React.FC = () => {
                     <Typography variant='h3'>Wallet Swap</Typography>
                 </Box>
                 <Typography variant='body2'>Your wallet details will appear here after you connect to your Celo wallet.</Typography>
-                <Button onClick={connect} variant='contained' size='large' color='warning' sx={{ textTransform: 'none' }}>Connect Wallet</Button>
+                <Button onClick={() => connect().catch(e => console.log(e))} variant='contained' size='large' color='warning' sx={{ textTransform: 'none' }}>Connect Wallet</Button>
             </Box>
         </main>
     )
@@ -47,35 +47,3 @@ const Wallet: React.FC = () => {
 };
 
 export default Wallet;
-// import React from 'react';
-// import { useContractKit } from '@celo-tools/use-contractkit';
-// import { ContractKitProvider } from '@celo-tools/use-contractkit';
-// import '@celo-tools/use-contractkit/lib/styles.css';
-
-// function App () {
-//   const { address, connect } = useContractKit()
-
-//   return (
-//     <main>
-//       <h1>Celo Voting DApp</h1>
-//       <p>{address}</p>
-//       <button onClick={connect}>Click here to connect your wallet</button>
-//     </main>
-//   )
-// }
-
-// function WrappedApp() {
-//   return (
-//     <ContractKitProvider
-//       dapp={{
-//           icon: '',
-//           name: "My awesome dApp",
-//           description: "My awesome description",
-//           url: "https://example.com",
-//         }}
-//     >
-//       <App />
-//     </ContractKitProvider>
-//   );
-// }
-// export default WrappedApp;
