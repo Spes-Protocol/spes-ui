@@ -1,4 +1,4 @@
-import { Box, Toolbar, Typography } from "@mui/material";
+import { Box, Card, Paper, Toolbar, Typography } from "@mui/material";
 import ContributionChart from "../../components/ContributionChart";
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
 import PledgeCard from "../../components/PledgeCard";
@@ -10,11 +10,13 @@ const Profile = () => {
             <Typography variant='h3'>
                 My pledges
             </Typography>
-            <Box display='flex' flexDirection='row' flexWrap='wrap' width='100%'>
+            <Box display='flex' flexDirection='row' flexWrap='wrap' width='100%' columnGap={10}>
                 <Box display='flex' flexDirection='column' rowGap={2}>
                     <Typography variant='h5'>
                         Your active pledges 
                     </Typography>
+                    <PledgeCard />
+                    <PledgeCard />
                     <PledgeCard />
                     <PledgeCard />
                 </Box>

@@ -6,7 +6,7 @@ import DashboardLayout from "../../components/Layouts/DashboardLayout";
 import * as React from 'react';
 import { ProfileCard, ProfileCardProps } from '../../components/ProfileCard';
 import CampaignMenuBar from '../../components/CampaignsMenuBar';
-import { campaignList, profileList } from '../../mockData';
+import { campaignList, profileList } from '../../utils/mockData';
 
 const ActiveProfiles = () => {
     return (

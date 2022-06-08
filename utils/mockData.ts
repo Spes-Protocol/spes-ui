@@ -1,6 +1,6 @@
 import moment from "moment"
-import { CampaignCardProps } from "./components/CampaignCard"
-import { ProfileCardProps } from "./components/ProfileCard"
+import { CampaignCardProps } from "../components/CampaignCard"
+import { ProfileCardProps } from "../components/ProfileCard"
 
 export const campaignList: CampaignCardProps[] = [
     {
