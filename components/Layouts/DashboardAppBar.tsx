@@ -70,14 +70,14 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
     supabase.auth.signOut();
   };
 
-  const DashboardMenuItems = (style: { itemSelected: string; itemIdle: string; }) => {
+  const DashboardMenuItems = (style: { itemSelected: string; itemIdle: string; onHover: string; }) => {
       return dashboardPages.map((page, index) => {
         const selected = drawerOption === index;
         return (
             <Link key={index} href={page.path} passHref>
-                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none', borderColor: 'black', '&:hover': { backgroundColor: '#cdb4db', borderBottom: 3 } }}>
+                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ borderRadius: 5, textTransform: 'none', '&:hover': { backGroundColor: style.onHover } }}>
                     <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' columnGap={1.5} sx={{ color: selected ? style.itemSelected : style.itemIdle }}>
-                    {page.icon}
+                        {page.icon}
                         <Typography variant='h4' letterSpacing={1} >
                             {page.name}
                         </Typography>
@@ -90,11 +90,12 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
 
   const MobileMenuItems = () => {
       const style = {
-        itemSelected: palette.primary.main,
+        itemSelected: '#736ced',
         itemIdle: palette.primary.dark,
+        onHover: '#eee',
       }
       return (
-        <Box sx={{ flexGrow: 1, display: 'flex', columnGap: 5, justifyContent: 'center', flexDirection: 'column' }}>
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column' }}>
             {DashboardMenuItems(style)}
         </Box>
       )
@@ -104,6 +105,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
     const style = {
         itemSelected: 'white',
         itemIdle: 'black',
+        onHover: '#736ced'
       }
       return (
         <Box sx={{ flexGrow: 1, display: 'flex', columnGap: 5, justifyContent: 'center', flexDirection: 'row' }}>
