@@ -15,3 +15,7 @@ export const dollarFormatter = new Intl.NumberFormat('en-US', {
 export const shortenString = (str: string) => {
     return str.replace(/(.{30})..+/, "$1...");
 }
+
+export const getRandomInt = (max: number) => {
+  return Math.floor(Math.random() * max);
+}

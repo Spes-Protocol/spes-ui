@@ -17,7 +17,7 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
     const { profileId } = router.query;
     const routes: RouteNode[] = [
         {
-            name: '🏡',
+            name: '🏡 Profiles',
             path: '/home/',
         },
         {

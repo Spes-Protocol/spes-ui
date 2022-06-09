@@ -7,6 +7,7 @@ import { campaignList } from '../../../utils/mockData';
 import { CampaignPage } from '../../../types';
 import { shortenString } from '../../../utils/sharedUtils';
 import CampaignGallery from '../../../components/CampaignPage/CampaignGallery';
+import CampaignDescription from '../../../components/CampaignPage/CampaignDescription';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
@@ -18,7 +19,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
     const { campaignId } = router.query;
     const routes: RouteNode[] = [
         {
-            name: '🏡',
+            name: '🏡  Campaigns',
             path: '/home/',
         },
         {
@@ -33,7 +34,10 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
                 Campaign
             </Typography>
             <RouteTree routes={routes} />
-            <CampaignGallery />
+            <Box>
+              <CampaignGallery />
+              <CampaignDescription campaignDescription={campaign} />
+            </Box>
 
             <p>Campaign Id: {JSON.stringify(campaign)}</p>
         </Box>

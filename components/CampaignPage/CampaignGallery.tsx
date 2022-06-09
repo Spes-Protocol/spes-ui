@@ -2,7 +2,8 @@ import * as React from 'react';
 import Image from 'next/image';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Box, Paper } from '@mui/material';
+import { Box, Button, Link, Paper } from '@mui/material';
+import { getRandomInt } from '../../utils/sharedUtils';
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
@@ -22,28 +23,40 @@ const CampaignGallery = () => {
             alignItems: 'center',
             p: 2,
             boxShadow: 6,
-            width: 820,
-            height: 430,
+            width: 650,
+            height: 450,
         }}
       >
-<ImageList
+          <Box display='flex' flexDirection='row' columnGap={2} margin={1}>
+              <Box borderRadius={1} border={1}>
+                <Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={400} width={400} />
+              </Box>
+              <Box display='flex' flexDirection='column' rowGap={2}>
+              <Box borderRadius={1} border={1}><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></Box>
+              <Box borderRadius={1} border={1}><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></Box>
+              </Box>
+          </Box>
+{/* <ImageList
       sx={{ width: 800, height: 400 }}
       variant="quilted"
-      cols={4}
+      cols={3}
       rowHeight={198}
     >
       {itemData.map((item) => (
         <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-            <Image
-            {...srcset(item.img, 121, item.rows, item.cols)}
-            alt={item.title}
-            loading="lazy"
-            layout='fill'
-          />
-          
+                <Box sx={{ '&:hover': {  transform: "scale(1.02)" } }}>
+                    <a href='#'>
+                        <Image
+                            {...srcset(item.img, 121, item.rows, item.cols)}
+                            alt={item.title}
+                            loading="lazy"
+                            layout='fill'
+                        />
+                    </a>
+                </Box>
         </ImageListItem>
       ))}
-    </ImageList>
+    </ImageList> */}
       </Paper>
     
   );
@@ -65,11 +78,6 @@ const itemData = [
   {
     img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
     title: 'Camera',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-    title: 'Coffee',
-    cols: 2,
   },
 //   {
 //     img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
