@@ -3,9 +3,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import DashboardLayout from '../../../components/Layouts/DashboardLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
-import { campaignList } from '../../../mockData';
+import { campaignList } from '../../../utils/mockData';
 import { CampaignPage } from '../../../types';
 import { shortenString } from '../../../utils/sharedUtils';
+import CampaignGallery from '../../../components/CampaignPage/CampaignGallery';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
@@ -32,8 +33,9 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
                 Campaign
             </Typography>
             <RouteTree routes={routes} />
+            <CampaignGallery />
+
             <p>Campaign Id: {JSON.stringify(campaign)}</p>
-            
         </Box>
     </DashboardLayout>
     )

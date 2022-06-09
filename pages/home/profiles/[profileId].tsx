@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import DashboardLayout from '../../../components/Layouts/DashboardLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
-import { profileList } from '../../../mockData';
+import { profileList } from '../../../utils/mockData';
 import { ProfilePage } from '../../../types';
 import { shortenString } from '../../../utils/sharedUtils';
 
