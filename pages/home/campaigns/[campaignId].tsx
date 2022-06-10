@@ -34,9 +34,9 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
                 Campaign
             </Typography>
             <RouteTree routes={routes} />
-            <Box>
+            <Box display='flex' flexDirection='row' columnGap={2}>
               <CampaignGallery />
-              <CampaignDescription campaignDescription={campaign} />
+              <CampaignDescription description={campaign} />
             </Box>
 
             <p>Campaign Id: {JSON.stringify(campaign)}</p>
@@ -50,7 +50,7 @@ export default Campaign;
 export const getStaticPaths: GetStaticPaths = async () => {
     // Get the paths we want to pre-render based on users
     const paths = campaignList.map((campaign) => ({
-      params: { campaignId: campaign.id!.toString() },
+      params: { campaignId: campaign.campaignId!.toString() },
     }))
   
     // We'll pre-render only these paths at build time.
@@ -64,7 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   export const getStaticProps: GetStaticProps = async ({ params }) => {
     try {
       const id = params?.campaignId
-      const item = campaignList.find((data) => data.id === Number(id))
+      const item = campaignList.find((data) => data.campaignId === id)
       // By returning { props: item }, the StaticPropsDetail component
       // will receive `item` as a prop at build time
       return { props: { campaign: item } }

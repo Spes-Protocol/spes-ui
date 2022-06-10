@@ -11,18 +11,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from "next/image";
 import { dollarFormatter, round } from '../utils/sharedUtils';
 import Link from 'next/link';
+import { CampaignCard } from '../types';
 
-export interface CampaignCardProps {
-    id?: number;
-    name: string;
-    postedDate: string;
-    alreadyRaised: number;
-    lookingToRaise: number;
-    description: string;
-    imageSrc: string;
-    organizer: string;
-    active?: boolean;
-}
+export type CampaignCardProps = CampaignCard;
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -88,7 +79,7 @@ const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ dat
 }
 
 const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => {
-    const { id, name, postedDate, alreadyRaised, lookingToRaise, description, imageSrc, organizer } = props;
+    const { campaignId, name, postedDate, moneyRaised, moneyToRaise, description, mainImage, organizerName } = props;
 
     return (
             <Fade in timeout={700}>
@@ -107,20 +98,20 @@ const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => 
                     }}>
                         <Link href={{
               pathname: '/home/campaigns/[campaignId]',
-              query: { campaignId: id },
+              query: { campaignId },
             }} passHref>
                         <CardActionArea href="https://google.com">
                             <Box display='flex' flexDirection='row' columnGap={4}>
                                 <Box display='flex' flex={1} >
-                                    <Image src={`/${imageSrc}`} alt='Campaign desc' height={250} width={300}/>
+                                    <Image src={`/${mainImage}`} alt='Campaign desc' height={250} width={300}/>
                                 </Box>
                                 <Box display='flex' flexDirection='column' justifyContent='flex-start' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
-                                    <CampaignActionBar date={postedDate} organizer={organizer} />
+                                    <CampaignActionBar date={postedDate} organizer={organizerName} />
                                     <Typography variant="h4">{name}</Typography>
                                     <Typography variant="body1">{description}</Typography>
-                                    <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(alreadyRaised * 100) / lookingToRaise} />
+                                    <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(moneyRaised * 100) / moneyToRaise} />
                                     <Box display='flex' justifyContent={'flex-end'}>
-                                        <Typography variant='body2'>Raised {dollarFormatter.format(alreadyRaised)} out of {dollarFormatter.format(lookingToRaise)} ({round(alreadyRaised*100/lookingToRaise, 1)}%)</Typography>
+                                        <Typography variant='body2'>Raised {dollarFormatter.format(moneyRaised)} out of {dollarFormatter.format(moneyToRaise)} ({round(moneyRaised*100/moneyToRaise, 1)}%)</Typography>
 
                                     </Box>
                                     

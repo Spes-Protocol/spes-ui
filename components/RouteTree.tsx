@@ -20,7 +20,7 @@ const RouteTree: React.FC<{ routes: RouteTreeProps }> = ({ routes }) => {
                 return (
                     <Box key={index} display='flex' flexDirection='row' columnGap={2} alignItems='center'>
                     <Link href={node.path} passHref>
-                        <Button size='small' variant='outlined' sx={{ letterSpacing: 1, borderRadius: 6, textTransform: 'none' }}>
+                        <Button size='small' color='secondary' variant='outlined' sx={{ letterSpacing: 1, borderRadius: 6, textTransform: 'none' }}>
                             {node.name}
                         </Button>
                     </Link>

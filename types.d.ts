@@ -1,17 +1,24 @@
-export interface CampaignPage {
-    campaignId: string;
-    name: string;
-    description: string;
-    money_raised: number;
-    money_to_raise: number;
-    ownerId: string;
-    wallet: string;
+export type CampaignPage = CampaignCard & {
+    organizerId: string;
     tags: string[];
+    wallet: string;
     donations: Transaction[];
     timeline: Activity[];
     usage: InternalUsage;
     pledgers: Pledge[];
 };
+
+export interface CampaignCard {
+    campaignId?: string;
+    name: string;
+    description: string;
+    postedDate: string;
+    moneyRaised: number;
+    moneyToRaise: number;
+    organizerName?: string;
+    mainImage: string;
+    active?: boolean;
+}
 
 export interface Pledge {
     pledgeId: string;

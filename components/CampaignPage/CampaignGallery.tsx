@@ -2,8 +2,10 @@ import * as React from 'react';
 import Image from 'next/image';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Box, Button, Link, Paper } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Link, Paper, Typography } from '@mui/material';
 import { getRandomInt } from '../../utils/sharedUtils';
+import CollectionsIcon from '@mui/icons-material/Collections';
+import { profileList } from '../../utils/mockData';
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
@@ -14,51 +16,51 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
   };
 }
 
+const ClickableGalleryImage = ({ children }: { children: React.ReactNode }) => {
+    return (
+        // <Box >
+
+        <Box sx={{ '&:hover': {  transform: "scale(1.02)" } }} borderRadius={1} border={1}>
+                    <a href='#'>
+            {children}
+            </a>
+        </Box>
+        // </a>
+        // </Box>
+    )
+}
+
 const CampaignGallery = () => {
   return (
-      <Paper
-        sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            p: 2,
-            boxShadow: 6,
-            width: 650,
-            height: 450,
-        }}
-      >
-          <Box display='flex' flexDirection='row' columnGap={2} margin={1}>
-              <Box borderRadius={1} border={1}>
-                <Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={400} width={400} />
-              </Box>
-              <Box display='flex' flexDirection='column' rowGap={2}>
-              <Box borderRadius={1} border={1}><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></Box>
-              <Box borderRadius={1} border={1}><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></Box>
-              </Box>
-          </Box>
-{/* <ImageList
-      sx={{ width: 800, height: 400 }}
-      variant="quilted"
-      cols={3}
-      rowHeight={198}
-    >
-      {itemData.map((item) => (
-        <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                <Box sx={{ '&:hover': {  transform: "scale(1.02)" } }}>
-                    <a href='#'>
-                        <Image
-                            {...srcset(item.img, 121, item.rows, item.cols)}
-                            alt={item.title}
-                            loading="lazy"
-                            layout='fill'
-                        />
-                    </a>
+            <Paper
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    p: 2,
+                    boxShadow: 4,
+                    minWidth: 500,
+                    maxWidth: 650,
+                    // width: 650,
+                    // height: 450,
+                }}
+            >
+                <Box display='flex' flexDirection='column' rowGap={2}>
+                    <Box display='flex' flexDirection='row' columnGap={2}>
+                        <ClickableGalleryImage>
+                            <Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={400} width={400} />
+                        </ClickableGalleryImage>
+                        <Box display='flex' flexDirection='column' rowGap={2}>
+                            <ClickableGalleryImage><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
+                            <ClickableGalleryImage><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
+                        </Box>
+                    </Box>
+                    <Box display='flex' flexDirection='row' justifyContent='flex-end' alignItems='center'>
+                        <Typography fontStyle='italic' flexWrap={'wrap'}>© Copyright owned by Bloom, a non-profit 501.c.3 organization</Typography>
+                        <Button startIcon={<CollectionsIcon />} sx={{ minWidth: 180, }} size='large' color='secondary' variant='contained'>Explore</Button>
+                    </Box>
                 </Box>
-        </ImageListItem>
-      ))}
-    </ImageList> */}
-      </Paper>
-    
+            </Paper>
   );
 }
 

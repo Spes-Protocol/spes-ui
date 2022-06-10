@@ -48,7 +48,7 @@ const Campaigns = () => {
                     </Typography>
                     <CampaignMenuBar toggleActive={isActive} toggleState={setIsActive} />
                     {_.map(isActive ? _.filter(campaignList, campaign => campaign.active ) : _.filter(campaignList, campaign => campaign.active === false ), (campaign, index) => {
-                        return (<CampaignCard key={index} id={campaign.id} name={campaign.name} postedDate={campaign.postedDate} alreadyRaised={campaign.alreadyRaised} lookingToRaise={campaign.lookingToRaise} description={campaign.description} imageSrc={campaign.imageSrc} organizer={campaign.organizer} />)
+                        return (<CampaignCard key={index} campaignId={campaign.campaignId} name={campaign.name} postedDate={campaign.postedDate} moneyRaised={campaign.moneyRaised} moneyToRaise={campaign.moneyToRaise} description={campaign.description} mainImage={campaign.mainImage} organizerName={campaign.organizerName} />)
                     })}
                 </Box>
             </Box>
