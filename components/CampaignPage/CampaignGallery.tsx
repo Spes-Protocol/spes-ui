@@ -18,15 +18,11 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 
 const ClickableGalleryImage = ({ children }: { children: React.ReactNode }) => {
     return (
-        // <Box >
-
-        <Box sx={{ '&:hover': {  transform: "scale(1.02)" } }} borderRadius={1} border={1}>
+        <Box sx={{ '&:hover': {  transform: "scale(1.02)" } }} borderRadius={1} border={0.5}>
                     <a href='#'>
             {children}
             </a>
         </Box>
-        // </a>
-        // </Box>
     )
 }
 

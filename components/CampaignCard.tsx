@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { ScheduleRounded } from "@mui/icons-material";
 import { styled } from '@mui/material/styles';
 import { Box, Button, ButtonBase, Card, CardActionArea, Fade, IconButton, LinearProgress, linearProgressClasses, Typography } from "@mui/material";
-import moment from "moment";
-import palette from "../themes/palette";
 // import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
@@ -12,20 +10,27 @@ import Image from "next/image";
 import { dollarFormatter, round } from '../utils/sharedUtils';
 import Link from 'next/link';
 import { CampaignCard } from '../types';
+import { BorderLinearProgress } from '../styles/progressBar.styles';
+import palette from '../themes/palette';
+import { Variant } from '@mui/material/styles/createTypography';
 
 export type CampaignCardProps = CampaignCard;
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 10,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
-    },
-  }));
+export const DatePosted: React.FC<{ date: string, variant: Variant }> = ({ date, variant }) => {
+    return (
+        <Box display='flex' flexDirection='row' alignItems='center'>
+            <ScheduleRounded fontSize="inherit" />
+            <Typography
+                color="text.secondary"
+                variant={variant}
+                fontWeight={500}
+                sx={{ ml: 0.5, mt: '1px', color: palette.secondary.darker }}
+            >
+                {date}
+            </Typography>
+    </Box>
+    )
+}
 
 const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ date, organizer }) => {
     const [ isFavorite, setIsFavorite ] = useState(false);
@@ -47,20 +52,10 @@ const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ dat
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'} }>
             <Box display='flex' alignItems='center' flexDirection='row' columnGap={3}>
-                <Box display='flex' flexDirection='row' alignItems='center'>
-                    <ScheduleRounded fontSize="inherit" />
-                    <Typography
-                    color="text.secondary"
-                    variant="body2"
-                    fontWeight={500}
-                    sx={{ ml: 0.5, mt: '1px', color: palette.secondary.darker }}
-                    >
-                    {date}
-                    </Typography>
-                </Box>
+                <DatePosted date={date} variant={'body2'} />
                 <Box display='flex' flexDirection='row' columnGap={0.7}>
-                <Typography variant='body2'>Organized by</Typography>
-                <Typography variant='body2' sx={{ fontWeight: 700}}>{organizer}</Typography>
+                    <Typography variant='body2'>Organized by</Typography>
+                    <Typography variant='body2' sx={{ fontWeight: 700}}>{organizer}</Typography>
                 </Box>
             </Box>
             <Box display={'flex'} flexDirection='row' columnGap={1} alignItems='center'>
@@ -111,7 +106,7 @@ const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => 
                                     <Typography variant="body1">{description}</Typography>
                                     <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(moneyRaised * 100) / moneyToRaise} />
                                     <Box display='flex' justifyContent={'flex-end'}>
-                                        <Typography variant='body2'>Raised {dollarFormatter.format(moneyRaised)} out of {dollarFormatter.format(moneyToRaise)} ({round(moneyRaised*100/moneyToRaise, 1)}%)</Typography>
+                                        <Typography variant='body2'>Raised {dollarFormatter.format(moneyRaised)} of {dollarFormatter.format(moneyToRaise)} ({round(moneyRaised*100/moneyToRaise, 1)}%)</Typography>
 
                                     </Box>
                                     

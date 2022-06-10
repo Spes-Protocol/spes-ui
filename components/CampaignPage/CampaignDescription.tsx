@@ -1,10 +1,11 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Chip, IconButton, Paper, Typography } from "@mui/material";
 import { profileList } from "../../utils/mockData";
-import { getRandomInt } from "../../utils/sharedUtils";
-import { CampaignCardProps } from "../CampaignCard";
+import { dollarFormatter, getRandomInt, round } from "../../utils/sharedUtils";
+import { CampaignCardProps, DatePosted } from "../CampaignCard";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import Image from 'next/image';
+import { BorderLinearProgress } from "../../styles/progressBar.styles";
 
 interface CampaignDescriptionProps {
     description: CampaignCardProps;
@@ -32,6 +33,7 @@ const CampaignActions = () => {
 }
 
 const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ description } : { description: CampaignCardProps; } ) => {
+    const { name, postedDate, moneyRaised, moneyToRaise, active } = description;
     const randomProfileIdx = getRandomInt(10);
     return (
             <Paper
@@ -43,10 +45,11 @@ const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ description }
                     p: 2,
                     boxShadow: 4,
                     minWidth: 300,
+                    maxWidth: 350,
                 }}
             >
-                <Card>
-                    <CardActionArea sx={{ display: 'flex', flexDirection:'row', justifyContent: 'flex-start', px: 1, }}>
+                <Card sx={{boxShadow: 4}}>
+                    <CardActionArea sx={{ display: 'flex', flexDirection:'row', justifyContent: 'flex-start', px: 1 }}>
                         <CardMedia>
                             <Image width='70' height='70' src={`/mockProfiles/${randomProfileIdx}.png`} alt={profileList[randomProfileIdx].name} />
                         </CardMedia>
@@ -56,6 +59,16 @@ const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ description }
                         </CardContent>
                     </CardActionArea>
                 </Card>
+                <Box display='flex' flexDirection='column' rowGap={1}>
+                    <Typography variant='h4'>{name}</Typography>
+                    <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
+                        <DatePosted date={postedDate} variant='body1'/>
+                        <Chip label={active ? 'Active' : 'Pending'} color={active ? 'success' : 'warning'} size='small' variant="outlined" />
+                    </Box>
+                    <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(moneyRaised * 100) / moneyToRaise} />
+                    <Typography variant='body1'>Raised {dollarFormatter.format(moneyRaised)} of {dollarFormatter.format(moneyToRaise)} ({round(moneyRaised*100/moneyToRaise, 1)}%) {moneyRaised ? '🎉' : ''}</Typography>
+
+                </Box>
                 <CampaignActions />
 
             </Paper>

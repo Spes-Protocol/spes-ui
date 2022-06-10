@@ -1,6 +1,7 @@
 import moment from "moment"
 import { CampaignCardProps } from "../components/CampaignCard"
 import { ProfileCardProps } from "../components/ProfileCard"
+import { CampaignPage } from "../types"
 
 export const campaignList: CampaignCardProps[] = [
     {
@@ -60,6 +61,59 @@ export const campaignList: CampaignCardProps[] = [
     }
 
 ]
+
+export const campaignMainPage: { [index: string]: CampaignPage } = {
+    '0': {
+        ...(campaignList[0]),
+        organizerId: '',
+        tags: [],
+        wallet: '',
+        donations: [],
+        timeline: [],
+        usage: {},
+        pledgers: [],
+    },
+    '1': {
+        ...campaignList[1],
+        organizerId: '',
+        tags: [],
+        wallet: '',
+        donations: [],
+        timeline: [],
+        usage: {},
+        pledgers: [],
+    },
+    '2': {
+        ...campaignList[2],
+        organizerId: '',
+        tags: [],
+        wallet: '',
+        donations: [],
+        timeline: [],
+        usage: {},
+        pledgers: [],
+    },
+    '3': {
+        ...campaignList[3],
+        organizerId: '',
+        tags: [],
+        wallet: '',
+        donations: [],
+        timeline: [],
+        usage: {},
+        pledgers: [],
+    },
+    '4': {
+        ...campaignList[4],
+        organizerId: '',
+        tags: [],
+        wallet: '',
+        donations: [],
+        timeline: [],
+        usage: {},
+        pledgers: [],
+    },
+}
 
 export const profileList: ProfileCardProps[] = [
     {
