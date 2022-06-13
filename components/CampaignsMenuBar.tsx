@@ -51,10 +51,10 @@ const CampaignMenuBar: React.FC<{ toggleActive: boolean; toggleState: any; }> = 
     return (
         <Box display={'flex'} flexDirection='column' rowGap={2}>
             <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={4} alignItems='center' sx={{ my: 2 }}>
-                    <Link component="button" variant='h4' underline='none' sx={{ color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 2 : 0 }} onClick={handleActiveClick}>
+                    <Link component="button" variant='h4' underline='none' sx={{ py: 0.5, color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 3 : 0 }} onClick={handleActiveClick}>
                         Active
                     </Link>
-                    <Link component="button" variant='h4' underline='none'  sx={{ color: toggleActive ? '#aaa' : 'black', borderBottom: toggleActive ? 0 : 2 }} onClick={handlePendingClick}>
+                    <Link component="button" variant='h4' underline='none'  sx={{ py: 0.5, color: toggleActive ? '#aaa' : 'black', borderBottom: toggleActive ? 0 : 3 }} onClick={handlePendingClick}>
                         Pending
                     </Link>
             </Box>

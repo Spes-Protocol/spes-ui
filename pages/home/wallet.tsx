@@ -1,11 +1,11 @@
 import { Box, Button, Card, Toolbar, Typography } from "@mui/material";
-import DashboardLayout from "../../components/Layouts/DashboardLayout";
+import HomepageLayout from "../../components/Layouts/HomepageLayout";
 import HomeWalletConnect from "../../components/HomeWalletConnect";
 // import WalletTable from "../../components/Wallet/WalletTable";
 
 const Wallet = () => {
     return (
-        <DashboardLayout currentPageIndex={2}>
+        <HomepageLayout currentPageIndex={2}>
             <Box display='flex' flexDirection={'column'} rowGap={2}>
                 <Box>
                     <Typography variant='h3'>
@@ -22,7 +22,7 @@ const Wallet = () => {
                 </Box>
                 {/* <WalletTable /> */}
             </Box>
-        </DashboardLayout>
+        </HomepageLayout>
     );
 };
 

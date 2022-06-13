@@ -8,7 +8,7 @@ import { supabase } from '../utils/supabaseClient'
 import Account from '../components/Account'
 import { AuthSession } from '@supabase/supabase-js'
 import { useRouter } from 'next/router';
-import Campaigns from './home';
+import Campaigns from './home/campaigns';
 
 const langingPageCardsCopy: LandingPageCardProps[] = [
   {

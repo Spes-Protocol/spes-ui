@@ -2,7 +2,7 @@
 
 import { yellow } from '@mui/material/colors';
 
-const ShadeInputBase = ({ palette }: { palette: any }) => {
+const ShadeInputBase = ({ palette }) => {
   const color = yellow[700];
   const error = '#ff6b81';
   return {

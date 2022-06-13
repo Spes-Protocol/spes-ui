@@ -13,9 +13,9 @@ export const shadeInputBaseStyles = (theme: any) => {
 
 export const shadeInputLabelStyles = ({ palette }: { palette: any }) => ({
   root: {
-    color: palette.text.primary,
+    // color: palette.text.primary,
     '&$focused:not($error)': {
-      // color: palette.text.primary,
+      color: palette.text.primary,
     },
   },
   error: {},

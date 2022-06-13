@@ -1,3 +1,9 @@
+export interface DashboardPageSchema {
+    name: string;
+    path: string;
+    icon: React.ReactElement;
+}
+
 export type CampaignPage = CampaignCard & {
     organizerId: string;
     tags: string[];

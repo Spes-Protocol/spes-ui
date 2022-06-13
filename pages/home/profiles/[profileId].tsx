@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import DashboardLayout from '../../../components/Layouts/DashboardLayout';
+import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
 import { profileList } from '../../../utils/mockData';
 import { ProfilePage } from '../../../types';
@@ -26,7 +26,7 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
         }
     ]
     return (
-        <DashboardLayout currentPageIndex={0}>
+        <HomepageLayout currentPageIndex={0}>
         <Box display='flex' flexDirection={'column'} rowGap={2}>
             <Typography variant='h3'>
                 Profile
@@ -35,7 +35,7 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
             <p>Profile Id: {JSON.stringify(profile)}</p>
             
         </Box>
-    </DashboardLayout>
+    </HomepageLayout>
     )
 };
 

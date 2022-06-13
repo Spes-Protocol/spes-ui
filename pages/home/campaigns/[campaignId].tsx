@@ -1,13 +1,15 @@
+import * as _ from 'lodash';
 import { Box, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import DashboardLayout from '../../../components/Layouts/DashboardLayout';
+import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
-import { campaignList } from '../../../utils/mockData';
+import { campaignList, campaignMainPage } from '../../../utils/mockData';
 import { CampaignPage } from '../../../types';
 import { shortenString } from '../../../utils/sharedUtils';
 import CampaignGallery from '../../../components/CampaignPage/CampaignGallery';
 import CampaignDescription from '../../../components/CampaignPage/CampaignDescription';
+import PledgeCard from '../../../components/PledgeCard';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
@@ -28,20 +30,21 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
         }
     ]
     return (
-        <DashboardLayout currentPageIndex={0}>
+        <HomepageLayout currentPageIndex={0}>
         <Box display='flex' flexDirection={'column'} rowGap={2}>
             <Typography variant='h3'>
                 Campaign
             </Typography>
             <RouteTree routes={routes} />
-            <Box display='flex' flexDirection='row' columnGap={2}>
+            <Box display='flex' flexDirection='row' columnGap={3}>
               <CampaignGallery />
               <CampaignDescription description={campaign} />
+              {/* <PledgeCard /> */}
             </Box>
 
             <p>Campaign Id: {JSON.stringify(campaign)}</p>
         </Box>
-    </DashboardLayout>
+    </HomepageLayout>
     )
 };
 
@@ -64,7 +67,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   export const getStaticProps: GetStaticProps = async ({ params }) => {
     try {
       const id = params?.campaignId
-      const item = campaignList.find((data) => data.campaignId === id)
+      const item = campaignMainPage[_.isArray(id) ? id[0] : id]
       // By returning { props: item }, the StaticPropsDetail component
       // will receive `item` as a prop at build time
       return { props: { campaign: item } }

@@ -1,26 +1,44 @@
-import { Card, CardActionArea } from "@mui/material";
+import { Box, IconButton, Paper, Typography } from "@mui/material";
+import HomeIcon from '@mui/icons-material/Home';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
+const Router = ({ pledge, setRoute }) => {
+    return (
+        <Box display='flex' flexDirection='row' alignItems='center' justifyContent='center'>
+        <IconButton>
+            <HomeIcon />
+        </IconButton>
+        <RemoveIcon />
+        <IconButton>
+            <AddShoppingCartIcon />
+        </IconButton>
+    </Box>
+
+    )
+}
 
 const PledgeCard = () => {
     return (
-        <Card
-            sx={{
-                minHeight: 300,
-                minWidth: 400,
-                // maxWidth: 600,
-                boxShadow: '6px 6px 0px 0.5px rgba(0, 0, 255, .2)',
-                border: 1.5,
-                borderRadius: 0.5,
-                marginBottom: 2,
-                '&:hover': {
-                    transform: "scale(1.02)",
-                    boxShadow: 5,
-                },
-            }}
-        >
-            <CardActionArea>
+        <Paper
+                 sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    // justifyContent: 'space-between',
+                    alignItems: 'center',
+                    p: 3,
+                    boxShadow: 4,
+                    minWidth: 300,
+                    maxWidth: 350,
+                }}
+            >
+            <Router pledge={true} setRoute={() => {}} />
+            <Box display='flex' flexDirection='column' justifyContent='flex-start'>
+                <Typography variant='h4'>Set pledge terms</Typography>
 
-            </CardActionArea>
-        </Card>
+            </Box>
+            
+        </Paper>
     )
 };
 

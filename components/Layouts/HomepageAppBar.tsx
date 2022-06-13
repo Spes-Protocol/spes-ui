@@ -15,26 +15,21 @@ import MenuItem from '@mui/material/MenuItem';
 import palette from '../../themes/palette';
 import Link from 'next/link';
 import PublicIcon from '@mui/icons-material/Public';
-import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { supabase } from '../../utils/supabaseClient';
-
-interface DashboardPageSchema {
-    name: string;
-    path: string;
-    icon: React.ReactElement;
-}
+import { DashboardPageSchema } from '../../types';
 
 const dashboardPages: DashboardPageSchema[] = [
     {
         name: 'Campaigns',
-        path: '/home',
+        path: '/home/campaigns/',
         icon: <PublicIcon />,
     },
     {
-        name: 'My pledges',
-        path: '/home/pledges',
-        icon: <VolunteerActivismIcon />,
+        name: 'Dashboard',
+        path: '/home/dashboard',
+        icon: <DashboardIcon />,
     },
     {
         name: 'Wallet',
@@ -45,7 +40,7 @@ const dashboardPages: DashboardPageSchema[] = [
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIndex }) => {
+const HomepageAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIndex }) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [drawerOption, setDrawerOption] = React.useState(currentPageIndex);
@@ -75,7 +70,7 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
         const selected = drawerOption === index;
         return (
             <Link key={index} href={page.path} passHref>
-                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ borderRadius: 5, textTransform: 'none', '&:hover': { backGroundColor: style.onHover } }}>
+                <Button key={index} onClick={() => {handleMenuItemClick(index)}} sx={{ textTransform: 'none', '&:hover': { backGroundColor: style.onHover } }}>
                     <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' columnGap={1.5} sx={{ color: selected ? style.itemSelected : style.itemIdle }}>
                         {page.icon}
                         <Typography variant='h4'>
@@ -225,4 +220,4 @@ const DashboardAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageIn
     </AppBar>
   );
 };
-export default DashboardAppBar;
+export default HomepageAppBar;

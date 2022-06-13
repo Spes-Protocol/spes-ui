@@ -6,57 +6,39 @@ import Modal from '@mui/material/Modal';
 import AddIcon from '@mui/icons-material/Add';
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { shadeTextFieldStylesHook } from '../../styles/textFieldShade';
+import { shadeTextFieldStylesHook } from '../../../styles/textFieldShade';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CampaignWalletConnect from '../CampaignWalletConnect';
+import CampaignWalletConnect from '../../../components/CampaignWalletConnect';
+import HomepageLayout from '../../../components/Layouts/HomepageLayout';
+import CampaignLayout from '../../../components/Layouts/CampaignLayout';
+import palette from '../../../themes/palette';
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
-const CreateCampaignModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const CreateCampaign = () => {
 
-  // styles import 
-  const inputBaseStyles = shadeTextFieldStylesHook.useInputBase();
-  const inputLabelStyles = shadeTextFieldStylesHook.useInputLabel();
+    // styles import 
+    // const inputBaseStyles = shadeTextFieldStylesHook.useInputBase;
+    // const inputLabelStyles = shadeTextFieldStylesHook.useInputLabel;
 
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      description: '',
-      moneyToRaise: 0,
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+    const formik = useFormik({
+        initialValues: {
+          name: '',
+          description: '',
+          moneyToRaise: 0,
+        },
+        onSubmit: (values) => {
+          alert(JSON.stringify(values, null, 2));
+        },
+      });
 
-  return (
-    <div>
-        <Dialog
-                // fullScreen
-            open={open}
-            onClose={handleClose}
-            // aria-labelledby="modal-modal-title"
-            // aria-describedby="modal-modal-description"
-        >
-            {/* <Box sx={style}> */}
-            <DialogTitle>
-
-            </DialogTitle>
-            <DialogContent>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+    return (
+        <HomepageLayout currentPageIndex={0}>
+            <CampaignLayout currentCampaignPageIndex={1}>
+                <Box display='flex' flexDirection={'column'} rowGap={2}>
+                <Typography id="modal-modal-title" variant="h4" component="h2">
+                    Create your campaign here
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     Your campaign is visible to the broader Spes community, who is able to set up recurring donations to your Celo wallet. 
                 </Typography>
 
@@ -73,11 +55,11 @@ const CreateCampaignModal = () => {
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
                     required
-                    InputLabelProps={{ shrink: true, classes: inputLabelStyles }}
-                    InputProps={{ classes: inputBaseStyles, disableUnderline: true }}
+                    // InputLabelProps={{ shrink: true, classes: inputLabelStyles(palette) }}
+                    // InputProps={{ classes: inputBaseStyles(palette), disableUnderline: true }}
                 />
                 <TextField
-                    fullWidth
+                    // fullWidth
                     label={'Campaign description'}
                     margin={'normal'}
 
@@ -92,8 +74,8 @@ const CreateCampaignModal = () => {
                     multiline
                     rows={3}
                     required
-                    InputLabelProps={{ shrink: true, classes: inputLabelStyles }}
-                    InputProps={{ classes: inputBaseStyles, disableUnderline: true }}
+                    // InputLabelProps={{ shrink: true, classes: inputLabelStyles(palette) }}
+                    // InputProps={{ classes: inputBaseStyles(palette), disableUnderline: true }}
                 />
                     <TextField
                         label={'$ looking to raise '}
@@ -108,8 +90,8 @@ const CreateCampaignModal = () => {
 
                         placeholder=" $ amount"
                         required
-                        InputLabelProps={{ shrink: true, classes: inputLabelStyles }}
-                        InputProps={{ classes: inputBaseStyles, disableUnderline: true }}
+                        // InputLabelProps={{ shrink: true, classes: inputLabelStyles(palette) }}
+                        // InputProps={{ classes: inputBaseStyles(palette), disableUnderline: true }}
                     />
                     <CampaignWalletConnect />
                     {/* <Button onClick={() => handleWalletConnect} size='large' variant='outlined' color='primary' sx={{ height: 54, border: 2, '&:hover': { border: 2 } }} startIcon={<AccountBalanceWalletIcon />}>
@@ -117,20 +99,15 @@ const CreateCampaignModal = () => {
                     </Button> */}
                     </Box>
 
-                    {/* <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
-                        <Button size='medium' color='error' variant='outlined' onClick={() => { setOpen(false) }}>Exit</Button>
+                    <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
                         <Button size='medium' color='success' variant='outlined'>Create</Button>
-                    </Box> */}
+                        <Button size='medium' color='error' variant='outlined'>Exit</Button>
+                    </Box>
                 </form>
-            </DialogContent>
-            <DialogActions>
-                <Button size='medium' color='error' variant='outlined' onClick={() => { setOpen(false) }}>Exit</Button>
-                <Button size='medium' color='success' variant='outlined'>Create</Button>
-            </DialogActions>
-            {/* </Box> */}
-        </Dialog>
-    </div>
-  );
-}
+                </Box>
+            </CampaignLayout>
+        </HomepageLayout>
+    );
+};
 
-export default CreateCampaignModal;
+export default CreateCampaign;

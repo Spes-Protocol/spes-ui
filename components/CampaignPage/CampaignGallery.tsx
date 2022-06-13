@@ -33,7 +33,7 @@ const CampaignGallery = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    p: 2,
+                    p: 3,
                     boxShadow: 4,
                     minWidth: 500,
                     maxWidth: 650,

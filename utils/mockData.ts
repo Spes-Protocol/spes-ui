@@ -22,7 +22,7 @@ export const campaignList: CampaignCardProps[] = [
         moneyRaised: 345,
         moneyToRaise: 1000,
         description: 'Help fund a book-and-film collaboration between Copper Canyon Press, a nonprofit publisher dedicated to poetry, and Woody Creek Pictures, a production company focused on “films dedicated to the common good.”',
-        mainImage: 'mockProfiles/10.png',
+        mainImage: 'mockProfiles/9.png',
         organizerName: 'Burning mantaray',
         active: true,
     },
@@ -66,7 +66,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
     '0': {
         ...(campaignList[0]),
         organizerId: '',
-        tags: [],
+        tags: ['charity', 'climate', 'earth', 'UN'],
         wallet: '',
         donations: [],
         timeline: [],

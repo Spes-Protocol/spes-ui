@@ -1,48 +1,100 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Drawer from '@mui/material/Drawer';
-import Toolbar from '@mui/material/Toolbar';
-import { drawerWidth } from '../../utils/constants';
-import DashboardAppBar from './DashboardAppBar';
-import Head from 'next/head';
-import ThemeConfig from '../../themes';
-import ScrollToTop from '../ScrollToTop';
-import GlobalStyles from '../../themes/globalStyles';
+import React from 'react';
+import * as _ from 'lodash';
+import { Box, Button, Divider, ListItem, ListItemIcon, Typography } from "@mui/material";
+// import AddchartOutlinedIcon from '@mui/icons-material/AddchartOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
+import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
+import FestivalOutlinedIcon from '@mui/icons-material/FestivalOutlined';
+import palette from '../../themes/palette';
+import Link from 'next/link';
+import { Link as MuiLink } from '@mui/material';
+import PaidIcon from '@mui/icons-material/Paid';
+import { DashboardPageSchema } from '../../types';
 
-const DashboardLayout: React.FC<{ children?: React.ReactNode; currentPageIndex: number }> = ({ children, currentPageIndex }) => {
-    // const [mobileOpen, setMobileOpen] = React.useState(false);
- 
-    // const handleDrawerToggle = () => {
-    //   setMobileOpen(!mobileOpen);
-    // };
-    
-    return (
-      <ThemeConfig>
-      <ScrollToTop />
-      <GlobalStyles />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" /> */}
-          {/* <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'></link> */}
-        </Head>
-        <CssBaseline />
-        <DashboardAppBar currentPageIndex={currentPageIndex} />
-        <Box
-            component="main"
-            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-        >
-            <Toolbar />
-            <Box maxWidth="1000px" mx="auto" width="100%" marginTop={4}>
-            {children}
+const dashboardMenuList: DashboardPageSchema[] = [
+    {
+        name: 'Your Profile',
+        icon: <PermIdentityOutlinedIcon />,
+        path: '/home/dashboard',
+    },
+    {
+        name: 'Spes Portfolio',
+        icon: <AutoGraphOutlinedIcon />,
+        path: '/home/dashboard/portfolio',
+    },
+    {
+        name: 'Your Pledges',
+        icon: <VolunteerActivismOutlinedIcon />,
+        path: '/home/dashboard/pledges',
+    },
+    {
+        name: 'Manage Campaigns',
+        icon: <FestivalOutlinedIcon />,
+        path: '/home/dashboard/manage',
+    },
+]
+
+/**
+ * 
+ * @param param0             
+ * <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={4} alignItems='center' sx={{ my: 2 }}>
+                    <Link component="button" variant='h4' underline='none' sx={{ color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 3 : 0 }} onClick={handleActiveClick}>
+                        Active
+                    </Link>
+                    <Link component="button" variant='h4' underline='none'  sx={{ color: toggleActive ? '#aaa' : 'black', borderBottom: toggleActive ? 0 : 3 }} onClick={handlePendingClick}>
+                        Pending
+                    </Link>
             </Box>
+ * @returns 
+ */
+
+const Menu: React.FC<{ currentDashboardPageIndex: number }> = ({ currentDashboardPageIndex }) => {
+    const [menuOption, setMenuOption] = React.useState(currentDashboardPageIndex);
+
+    const handleMenuClick = (index: number) => {
+        setMenuOption(index);
+    }
+
+    return (
+        <Box
+            display='flex'
+            // justifyContent={'center'}
+            flexDirection={'row'}
+            columnGap={5}
+            marginBottom={4}
+        >
+            {_.map(dashboardMenuList, (menuItem, index) => {
+                const selected = menuOption === index;
+                return (
+                    <Link key={index} href={menuItem.path} passHref>
+                        <MuiLink onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
+                            {menuItem.name}
+                        </MuiLink>
+                        {/* <Button size='large' startIcon={menuItem.icon} onClick={() => {handleMenuClick(index)}} variant='text' sx={{ borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
+                            {menuItem.name}
+                        </Button> */}
+                    </Link>
+                )
+            })}
         </Box>
-      </Box>
-      </ThemeConfig>
-    );
-  }
-  
-export default DashboardLayout;
+    )
+}
+
+const MyDashboardLayout: React.FC<{ children: React.ReactNode; currentDashboardPageIndex: number }> = ({ children, currentDashboardPageIndex }) => {
+    return (
+        <Box display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+            <Menu currentDashboardPageIndex={currentDashboardPageIndex} />
+            
+            {/* <Box maxWidth="1000px" mx="auto" width="100%" marginTop={8} paddingX={4}> */}
+                {/* <Box display='flex' flexDirection='column' rowGap={1}> */}
+                    {children}
+                {/* </Box>
+            </Box> */}
+        </Box>
+    )
+};
+
+export default MyDashboardLayout;

@@ -1,11 +1,13 @@
 import { Box, Card, Paper, Toolbar, Typography } from "@mui/material";
-import ContributionChart from "../../components/ContributionChart";
-import DashboardLayout from "../../components/Layouts/DashboardLayout";
-import PledgeCard from "../../components/PledgeCard";
+import ContributionChart from "../../../components/ContributionChart";
+import MyDashboardLayout from "../../../components/Layouts/DashboardLayout";
+import HomepageLayout from "../../../components/Layouts/HomepageLayout";
+import PledgeCard from "../../../components/PledgeCard";
 
 const Profile = () => {
     return (
-        <DashboardLayout currentPageIndex={1}>
+        <HomepageLayout currentPageIndex={1}>
+            <MyDashboardLayout currentDashboardPageIndex={2}>
             <Box display='flex' flexDirection={'column'} rowGap={2}>
             <Typography variant='h3'>
                 My pledges
@@ -29,7 +31,8 @@ const Profile = () => {
             </Box>
 
             </Box>
-        </DashboardLayout>
+            </MyDashboardLayout>
+        </HomepageLayout>
     );
 };
 
