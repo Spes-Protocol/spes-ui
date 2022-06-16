@@ -7,6 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import palette from '../../themes/palette';
 import Link from 'next/link';
+import { Link as MuiLink } from '@mui/material';
 import PaidIcon from '@mui/icons-material/Paid';
 import { DashboardPageSchema } from '../../types';
 
@@ -47,10 +48,10 @@ const Menu: React.FC<{ currentCampaignPageIndex: number }> = ({ currentCampaignP
                 const selected = menuOption === index;
                 return (
                     <Link key={index} href={menuItem.path} passHref>
-                        <Button size='large' startIcon={menuItem.icon} onClick={() => {handleMenuClick(index)}} color='error' variant={selected ? 'contained' : 'outlined'}>
-                            {menuItem.name}
-                        </Button>
-                    </Link>
+                    <MuiLink display='flex' flexDirection={'row'} alignItems='center' columnGap={1} onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
+                        {menuItem.icon} {menuItem.name}
+                    </MuiLink>
+                </Link>
                 )
             })}
         </Box>

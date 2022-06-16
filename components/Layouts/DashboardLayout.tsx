@@ -63,15 +63,15 @@ const Menu: React.FC<{ currentDashboardPageIndex: number }> = ({ currentDashboar
             display='flex'
             // justifyContent={'center'}
             flexDirection={'row'}
-            columnGap={5}
+            columnGap={4}
             marginBottom={4}
         >
             {_.map(dashboardMenuList, (menuItem, index) => {
                 const selected = menuOption === index;
                 return (
                     <Link key={index} href={menuItem.path} passHref>
-                        <MuiLink onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
-                            {menuItem.name}
+                        <MuiLink display='flex' flexDirection={'row'} alignItems='center' columnGap={1} onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
+                            {menuItem.icon} {menuItem.name}
                         </MuiLink>
                         {/* <Button size='large' startIcon={menuItem.icon} onClick={() => {handleMenuClick(index)}} variant='text' sx={{ borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
                             {menuItem.name}

@@ -7,7 +7,7 @@ const DappWallet: React.FC = () => {
     const { address, connect } = useContractKit();
     return (
         <main>
-            <Button onClick={() => connect().catch(e => console.log(e))} size='large' variant='outlined' color='primary' sx={{ height: 54, border: 2, '&:hover': { border: 2 } }} startIcon={<AccountBalanceWalletIcon />}>
+            <Button onClick={() => connect().catch(e => console.log(e))} size='large' variant='outlined' color='primary' sx={{ marginTop: 2, borderRadius: 0, border: 2, '&:hover': { border: 2 } }} startIcon={<AccountBalanceWalletIcon />}>
                 Connect to Valora
             </Button>
             {/* <Box
