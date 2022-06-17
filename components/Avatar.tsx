@@ -1,6 +1,10 @@
+import { Box, Button } from '@mui/material'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../utils/supabaseClient'
+import InputWrapper from './InputWrapper'
+import UploadIcon from '@mui/icons-material/Upload';
+
 
 export default function Avatar({ url, size, onUpload }: { url: string, size: number, onUpload: (a: string) => void }) {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
@@ -55,33 +59,40 @@ export default function Avatar({ url, size, onUpload }: { url: string, size: num
 
   return (
     <div>
+      <InputWrapper titleVariant='body1' title={'Upload your campaign avatar'}>
       {avatarUrl ? (
-        <Image
-          src={avatarUrl}
-          alt="Avatar"
-          className="avatar image"
-          width={size}
-          height={size}
-        />
+        <Box width={500} height={500} position='relative'>
+          <Image
+            src={avatarUrl}
+            alt="Avatar"
+            className="avatar image"
+            layout={'fill'} 
+            objectFit={'contain'}
+          />
+        </Box>
+        
       ) : (
-        <div className="avatar no-image" style={{ height: size, width: size }} />
+        <></>
       )}
-      <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
-          {uploading ? 'Uploading ...' : 'Upload'}
-        </label>
-        <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
-          type="file"
-          id="single"
-          accept="image/*"
-          onChange={uploadAvatar}
-          disabled={uploading}
-        />
-      </div>
+              <Button
+                  startIcon={<UploadIcon />}
+                  variant="contained"
+                  color='secondary'
+                  component="label"
+                  size='large'
+                  sx={{ textTransform: 'none' }}
+                  disabled={uploading}
+                  >
+                  {uploading ? 'Uploading ...' : 'Upload Files'}
+                  <input
+                      type="file"
+                      hidden
+                      id="single"
+                      accept="image/*"
+                      onChange={uploadAvatar}
+                  />
+              </Button>
+          </InputWrapper>
     </div>
   )
 }

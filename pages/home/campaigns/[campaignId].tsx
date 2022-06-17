@@ -22,7 +22,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
     const routes: RouteNode[] = [
         {
             name: '🏡  Campaigns',
-            path: '/home/',
+            path: '/home/campaigns',
         },
         {
             name: shortenString(campaign.name),

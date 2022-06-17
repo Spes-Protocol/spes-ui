@@ -4,10 +4,11 @@ export interface DashboardPageSchema {
     icon: React.ReactElement;
 }
 
-export type CampaignPage = CampaignCard & {
+interface CampaignPage extends CampaignCard {
     organizerId: string;
     tags: string[];
     wallet: string;
+    markdownDescription: string;
     donations: Transaction[];
     timeline: Activity[];
     usage: InternalUsage;

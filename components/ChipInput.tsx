@@ -36,13 +36,14 @@ const top100Tags = [
     'shelter'
 ]
 
-export default function ChipInput() {
+const ChipInput: React.FC<{ onChange: (event: React.ChangeEvent<HTMLInputElement>, newValue: string[]) => void }> = ({ onChange })  => {
   return (
     <Autocomplete
       multiple
       id="checkboxes-tags-demo"
       options={top100Tags}
       disableCloseOnSelect
+      onChange={onChange}
       getOptionLabel={(option) => option}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
@@ -64,3 +65,5 @@ export default function ChipInput() {
     />
   );
 }
+
+export default ChipInput;

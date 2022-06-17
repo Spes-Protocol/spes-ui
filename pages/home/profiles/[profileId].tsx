@@ -18,7 +18,7 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
     const routes: RouteNode[] = [
         {
             name: '🏡 Profiles',
-            path: '/home/',
+            path: '/home/campaigns',
         },
         {
             name: `${shortenString(profile.name)}`,
