@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade } from '@mui/material';
+import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
@@ -18,6 +18,7 @@ import Image from 'next/image';
 // import ReactMarkdown from 'react-markdown';
 import Markdown from 'markdown-to-jsx';
 import ReactMarkdown from 'react-markdown';
+import InputWrapper from '../../../components/InputWrapper';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
@@ -41,11 +42,11 @@ const campaignPageMenuItems: CampaignPageMenuSchema[] = [
     menuItem: 'BIO',
   },
   {
-    name: 'Donations',
+    name: 'cDonations',
     menuItem: 'DONATIONS',
   },
   {
-    name: 'Progress',
+    name: 'Insights',
     menuItem: 'INSIGHTS',
   }
 ];
@@ -87,17 +88,6 @@ const CampaignPageProfile = () => {
   )
 }
 
-const CampaignPledgeCard = () => {
-  return (
-    <Fade in timeout={500}>
-      <Paper elevation={8} sx={{  minWidth: 300,
-          maxWidth: 350, }}>
-            pledge card here
-        </Paper>
-    </Fade>
-  )
-}
-
 const Campaign = ({ campaign, errors }: CampaignPageProps) => {
     const [ selectedMenuItem, setSelectedMenuItem ] = useState<MenuItem>('BIO');
     const [ pledgeClicked, setPledgeClicked ] = useState<boolean>(false);
@@ -118,6 +108,38 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
             path: `/home/campaigns/${campaignId}`,
         }
     ]
+
+    const CampaignPledgeCard = () => {
+      return (
+        <Fade in timeout={500}>
+          <Paper elevation={8} sx={{  minWidth: 300,
+              maxWidth: 350, p: 2, display: 'flex', flexDirection: 'column', rowGap: 2 }}>
+                <Typography variant='h4'>Your pledge</Typography>
+                <Box>
+                  <Typography variant='body2'>A message from {campaign.organizerName}</Typography>
+                  <Box display='flex' flexDirection='row' columnGap={2}>
+                    <Divider sx={{ borderRightWidth: 5 }} orientation="vertical" variant="middle" flexItem/>
+                    <Typography variant='overline' sx={{ color: 'gray' }}>Thank you for donating to our cause. With Spes, we are dedicated to bringing transparency and accountability into our campaigns and organization at large. We look forward to updating you on our progress.</Typography>
+                  </Box>
+                </Box>
+                <InputWrapper title={'Choose your donation amount'} titleVariant={'body2'}>
+                  <TextField
+                      placeholder={'A short blurb describing what you are raising money for'}
+                      id="description"
+                      name="description"
+                      sx={{ [`& fieldset`]: {
+                          borderRadius: 0,
+                      }, }}
+                      // value={values.description}
+                      // onChange={handleChange}
+                      // error={touched.description && Boolean(errors.description)}
+                      required
+                  />
+                </InputWrapper>
+            </Paper>
+        </Fade>
+      )
+    }
 
     const Bio = () => {
       const [content, setContent] = useState("");
