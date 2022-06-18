@@ -85,99 +85,97 @@ const CreateCampaign = () => {
                 
 
                 <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      {({ handleChange, values, setFieldValue, touched, errors }) => (
-        <Form>
-<Box display='flex' flexDirection='column' margin={4} rowGap={4}>
-                            <InputWrapper titleVariant='body1' title='Your Campaign Name'>
-                                <TextField
-                                    placeholder={'A campaign name that captures your mission'}
-                                    id="name"
-                                    name="name"
-                                    sx={{ width: 500, [`& fieldset`]: {
-                                        borderRadius: 0,
-                                    }, }}
-                                    value={values.name}
-                                    onChange={handleChange}
-                                    error={touched.name && Boolean(errors.name)}
-                                    required
-                                />
-                            </InputWrapper> 
-                            <InputWrapper titleVariant='body1' title='A short description'>
-                                <TextField
-                                    placeholder={'A short blurb describing what you are raising money for'}
-                                    id="description"
-                                    name="description"
-                                    sx={{ width: 500, [`& fieldset`]: {
-                                        borderRadius: 0,
-                                    }, }}
-                                    value={values.description}
-                                    onChange={handleChange}
-                                    error={touched.description && Boolean(errors.description)}
-                                    required
-                                />
-                            </InputWrapper>                             
-                            <Box display='flex' flexDirection='column' rowGap={1}>
-                                <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between' columnGap={1}>
-                                    <Typography letterSpacing={1} variant='body1'>{'Your Campaign Story'}</Typography>
-                                    <Box display='flex' flexDirection='row' columnGap={1}>
-                                        <AntSwitch toggle={markdownPreviewToggle} toggleHandler={handleMarkdownPreviewToggle()}  />{markdownPreviewToggle ? 'Disable' : 'Enable'}{' markdown preview'}
-                                    </Box>
-                                </Box>
-                            {markdownPreviewToggle ? <Card sx={{ p: 2, width: 500 }}>
-                                    <ReactMarkdown>{values.markdownDescription}</ReactMarkdown>
-                                </Card> : <TextField
-                                    sx={{ width: 500, [`& fieldset`]: {
-                                        borderRadius: 0,
-                                    }, }}
-                                    id="markdownDescription"
-                                    name="markdownDescription"
-                                    value={values.markdownDescription}
-                                    onChange={handleChange}
-                                    error={touched.markdownDescription && Boolean(errors.markdownDescription)}
+                    {({ handleChange, values, setFieldValue, touched, errors }) => (
+                        <Form>
+                            <Box display='flex' flexDirection='column' margin={4} rowGap={4}>
+                                <InputWrapper titleVariant='body1' title='Your Campaign Name'>
+                                    <TextField
+                                        placeholder={'A campaign name that captures your mission'}
+                                        id="name"
+                                        name="name"
+                                        sx={{ width: 500, [`& fieldset`]: {
+                                            borderRadius: 0,
+                                        }, }}
+                                        value={values.name}
+                                        onChange={handleChange}
+                                        error={touched.name && Boolean(errors.name)}
+                                        required
+                                    />
+                                </InputWrapper> 
+                                <InputWrapper titleVariant='body1' title='A short description'>
+                                    <TextField
+                                        placeholder={'A short blurb describing what you are raising money for'}
+                                        id="description"
+                                        name="description"
+                                        sx={{ width: 500, [`& fieldset`]: {
+                                            borderRadius: 0,
+                                        }, }}
+                                        value={values.description}
+                                        onChange={handleChange}
+                                        error={touched.description && Boolean(errors.description)}
+                                        required
+                                    />
+                                </InputWrapper>                             
+                                    <Box display='flex' flexDirection='column' rowGap={1}>
+                                        <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between' columnGap={1}>
+                                            <Typography letterSpacing={1} variant='body1'>{'Your Campaign Story'}</Typography>
+                                            <Box display='flex' flexDirection='row' columnGap={1}>
+                                                <AntSwitch toggle={markdownPreviewToggle} toggleHandler={handleMarkdownPreviewToggle()}  />{markdownPreviewToggle ? 'Disable' : 'Enable'}{' markdown preview'}
+                                            </Box>
+                                        </Box>
+                                        {markdownPreviewToggle ? <Card sx={{ p: 2, width: 500 }}>
+                                                <ReactMarkdown>{values.markdownDescription}</ReactMarkdown>
+                                            </Card> : <TextField
+                                                sx={{ width: 500, [`& fieldset`]: {
+                                                    borderRadius: 0,
+                                                }, }}
+                                                id="markdownDescription"
+                                                name="markdownDescription"
+                                                value={values.markdownDescription}
+                                                onChange={handleChange}
+                                                error={touched.markdownDescription && Boolean(errors.markdownDescription)}
 
-                                    placeholder="Share your campaign's story"
-                                    multiline
-                                    minRows={10}
-                                /> }
-                            
-                            </Box>
-                            <Avatar
-      url={avatarUrl}
-      size={150}
-      onUpload={(url) => {
-        setAvatarUrl(url)
-        // updateProfile({ username, website, avatar_url: url })
-      }}
-    />
-                        <InputWrapper titleVariant='body1' title='Looking to raise'>
-                            <TextField
-                            sx={{ width: 500, [`& fieldset`]: {
-                                borderRadius: 0,
-                            }, }}
-                            id="moneyToRaise"
-                            name="moneyToRaise"
-                            value={values.moneyToRaise}
-                            onChange={handleChange}
-                            error={touched.moneyToRaise && Boolean(errors.moneyToRaise)}
-                            placeholder=" $ amount"
-                            required
-                            />
-                            </InputWrapper> 
-                        <InputWrapper titleVariant='body1' title='Tags'>
-                           <ChipInput onChange={(e, value) => {
-              setFieldValue(
-                "tags",
-                value
-              );
-            }} />
-                        </InputWrapper> 
-                    <CampaignWalletConnect />
+                                                placeholder="Share your campaign's story"
+                                                multiline
+                                                minRows={10}
+                                            /> }
+                                    </Box>
+                                    <Avatar
+                                        url={avatarUrl}
+                                        size={150}
+                                        onUpload={(url) => {
+                                            setAvatarUrl(url)
+                                            // updateProfile({ username, website, avatar_url: url })
+                                        }}
+                                    />
+                                <InputWrapper titleVariant='body1' title='Looking to raise'>
+                                    <TextField
+                                    sx={{ width: 500, [`& fieldset`]: {
+                                        borderRadius: 0,
+                                    }, }}
+                                    id="moneyToRaise"
+                                    name="moneyToRaise"
+                                    value={values.moneyToRaise}
+                                    onChange={handleChange}
+                                    error={touched.moneyToRaise && Boolean(errors.moneyToRaise)}
+                                    placeholder=" $ amount"
+                                    required
+                                    />
+                                </InputWrapper> 
+                                <InputWrapper titleVariant='body1' title='Tags'>
+                                    <ChipInput onChange={(e, value) => {
+                                        setFieldValue(
+                                            "tags",
+                                            value
+                                        );
+                                    }} />
+                                </InputWrapper> 
+                                <CampaignWalletConnect />
                     </Box>
 
                     <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
                         <Button sx={{ border: 2, '&:hover': { border: 2 }}} type='submit' size='large' color='success' variant='outlined'>Create</Button>
                         <Button sx={{ border: 2, '&:hover': { border: 2 }}}  type='submit' size='large' color='error' variant='outlined'>Exit</Button>
-
                     </Box>
             </Form>
             )}

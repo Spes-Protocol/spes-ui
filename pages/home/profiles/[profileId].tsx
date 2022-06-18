@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
 import { profileList } from '../../../utils/mockData';
-import { ProfilePage } from '../../../types';
+import { ProfileCard } from '../../../types';
 import { shortenString } from '../../../utils/sharedUtils';
 
-interface ProfilePageProps {
-    profile: ProfilePage;
+interface ProfileCardProps {
+    profile: ProfileCard;
     errors?: string;
 }
 
-const Profile = ({ profile, errors }: ProfilePageProps) => {
+const Profile = ({ profile, errors }: ProfileCardProps) => {
     const router = useRouter();
     const { profileId } = router.query;
     const routes: RouteNode[] = [

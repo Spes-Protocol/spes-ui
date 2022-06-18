@@ -28,8 +28,8 @@ const PledgeCard = () => {
                     alignItems: 'center',
                     p: 3,
                     boxShadow: 4,
-                    minWidth: 300,
-                    maxWidth: 350,
+                    minWidth: 250,
+                    maxWidth: 300,
                 }}
             >
             <Router pledge={true} setRoute={() => {}} />

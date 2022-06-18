@@ -1,26 +1,29 @@
 import * as _ from 'lodash';
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Chip, IconButton, Paper, Typography } from "@mui/material";
-import { profileList } from "../../utils/mockData";
+import { Box, Button, Chip, IconButton, Paper, Typography } from "@mui/material";
 import { dollarFormatter, getRandomInt, round } from "../../utils/sharedUtils";
-import { CampaignCardProps, DatePosted } from "../CampaignCard";
+import { DatePosted } from "../CampaignCard";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import IosShareIcon from '@mui/icons-material/IosShare';
-import Image from 'next/image';
 import { BorderLinearProgress } from "../../styles/progressBar.styles";
 import { CampaignPage } from "../../types";
 import React, { useState } from 'react';
 
 interface CampaignDescriptionProps {
-    description: CampaignPage;
+    page: CampaignPage;
+    pledgeClicked: boolean;
+    setPledgeClicked: any;
 }
 
-const CampaignActions = () => {
+const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ pledgeClicked, setPledgeClicked }) => {
     // these are coming from an API post supabase
     const [ following, setFollowing ] = useState(false);
     const [ isFavorite, setIsFavorite ] = useState(false);
-    const [ hasPledged, setPledge ] = useState(false);
+
+    const handlePledgeClick = () => {
+        setPledgeClicked(!pledgeClicked);
+    }
 
     const hadleFollowing = (event: React.MouseEvent<HTMLElement>) => {
         setFollowing(!following);
@@ -36,12 +39,14 @@ const CampaignActions = () => {
         console.log('add to favorites')
     }
 
-    const handlePledge = (event: React.MouseEvent<HTMLElement>) => {
-        setPledge(!hasPledged);
-    }
-
     return (
         <Box display='flex' flexDirection={'column'} rowGap={1}>
+            <Button fullWidth startIcon={following ? <CheckOutlinedIcon /> : null} variant={following ? "contained" : "outlined"} color='error' size='medium' onClick={hadleFollowing}>
+                {following ? 'Following' : 'Follow'}
+            </Button>
+            <Button fullWidth variant="contained" color={pledgeClicked ? 'warning' : 'error'} size='medium' onClick={handlePledgeClick}>
+                Pledge
+            </Button>
             <Box display='flex' flexDirection={'row'} columnGap={3} justifyContent='center' alignItems={'center'}>
                 <IconButton onClick={handleFavorite}>
                     {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
@@ -50,49 +55,36 @@ const CampaignActions = () => {
                     <IosShareIcon />
                 </IconButton>
             </Box>
-            <Button fullWidth startIcon={following ? <CheckOutlinedIcon /> : null} variant={following ? "contained" : "outlined"} color='error' size='medium' onClick={hadleFollowing}>
-                {following ? 'Following' : 'Follow'}
-            </Button>
-            <Button fullWidth variant="contained" color='error' size='medium'>
-                Pledge
-            </Button>
         </Box>
     )
 }
 
-const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ description } : { description: CampaignPage; } ) => {
-    const { name, postedDate, moneyRaised, moneyToRaise, active, tags } = description;
-    const randomProfileIdx = getRandomInt(10);
-    return (
-            <Paper
+const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ page, pledgeClicked, setPledgeClicked } : CampaignDescriptionProps ) => {
+    const { name, postedDate, moneyRaised, moneyToRaise, active, tags, description } = page;
+    return (<>
+        <Paper
+                elevation={8}
                  sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     // alignItems: 'center',
                     p: 3,
-                    boxShadow: 4,
+                    
                     minWidth: 300,
                     maxWidth: 350,
+                    rowGap: 2,
                 }}
             >
-                <Card sx={{boxShadow: 4}}>
-                    <CardActionArea sx={{ display: 'flex', flexDirection:'row', justifyContent: 'flex-start', px: 1 }}>
-                        <CardMedia>
-                            <Image width='70' height='70' src={`/mockProfiles/${randomProfileIdx}.png`} alt={profileList[randomProfileIdx].name} />
-                        </CardMedia>
-                        <CardContent>
-                            <Typography fontWeight={900} flexWrap={'wrap'}  variant='body1'>{profileList[randomProfileIdx].name}</Typography>
-                            <Typography variant='subtitle2' sx={{ color: '#888' }}>{profileList[randomProfileIdx].location}</Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
+                
                 <Box display='flex' flexDirection='column' rowGap={1}>
-                    <Typography variant='h4'>{name}</Typography>
                     <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
                         <DatePosted date={postedDate} variant='body1'/>
                         <Chip label={active ? 'Active' : 'Pending'} color={active ? 'success' : 'warning'} size='small' variant="outlined" />
                     </Box>
+                    <Typography variant='h4'>{name}</Typography>
+                    <Typography variant='body1'>{description}</Typography>
+
                     <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(moneyRaised * 100) / moneyToRaise} />
                     <Typography variant='body1'>Raised {dollarFormatter.format(moneyRaised)} of {dollarFormatter.format(moneyToRaise)} ({round(moneyRaised*100/moneyToRaise, 1)}%) {moneyRaised ? '🎉' : ''}</Typography>
                     <Box display='flex' flexDirection='row' columnGap={1}>
@@ -103,8 +95,9 @@ const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ description }
                     })}
                     </Box>
                 </Box>
-                <CampaignActions />
+                <CampaignActions pledgeClicked={pledgeClicked} setPledgeClicked={setPledgeClicked} />
             </Paper>
+    </>
     )
 };
 

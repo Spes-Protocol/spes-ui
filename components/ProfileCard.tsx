@@ -6,13 +6,13 @@ export interface ProfileCardProps {
     id?: number;
     name: string;
     location: string;
-    imgSrc: string;
+    imgSrc?: string;
 }
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({ id, name, location, imgSrc }) => {
     return (
         <Fade in timeout={500}>
-            <Card sx={{ minWidth: "200px", margin: 2 }}>
+            <Card elevation={8} sx={{ minWidth: "200px", margin: 2 }}>
             <Link href={{
               pathname: '/home/profiles/[profileId]',
               query: { profileId: id },

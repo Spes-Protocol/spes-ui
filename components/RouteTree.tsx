@@ -19,12 +19,12 @@ const RouteTree: React.FC<{ routes: RouteTreeProps }> = ({ routes }) => {
             {_.map(routes as RouteTreeProps, (node: RouteNode, index) => {
                 return (
                     <Box key={index} display='flex' flexDirection='row' columnGap={2} alignItems='center'>
-                    <Link href={node.path} passHref>
-                        <Button size='small' color='secondary' variant='outlined' sx={{ letterSpacing: 1, borderRadius: 6, textTransform: 'none' }}>
-                            {node.name}
-                        </Button>
-                    </Link>
-                    <ArrowForwardIos />
+                        {index == 0 ? <></> : <ArrowForwardIos />}
+                        <Link href={node.path} passHref>
+                            <Button size='small' color='secondary' variant='outlined' sx={{ letterSpacing: 1, borderRadius: 6, textTransform: 'none' }}>
+                                {node.name}
+                            </Button>
+                        </Link>
                     </Box>
                 )
             })}

@@ -1,22 +1,111 @@
 import * as _ from 'lodash';
-import { Box, Typography } from '@mui/material';
+import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
-import { campaignList, campaignMainPage } from '../../../utils/mockData';
+import { campaignList, campaignMainPage, profileList } from '../../../utils/mockData';
 import { CampaignPage } from '../../../types';
-import { shortenString } from '../../../utils/sharedUtils';
+import { shortenString, getRandomInt } from '../../../utils/sharedUtils';
 import CampaignGallery from '../../../components/CampaignPage/CampaignGallery';
 import CampaignDescription from '../../../components/CampaignPage/CampaignDescription';
-import PledgeCard from '../../../components/PledgeCard';
+import { useEffect, useState } from 'react';
+import { stringAvatar } from '../../../utils/sharedUtils';
+import LeftPage from '../../../components/Layouts/LeftPage';
+import RightPage from '../../../components/Layouts/RightPage';
+import Image from 'next/image';
+// import md from '../../../public/mockCampaignMarkdown.md';
+// import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
+import ReactMarkdown from 'react-markdown';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
     errors?: string;
 }
 
+type MenuItem = 'BIO' | 'DONATIONS' | 'TIMELINE' | 'INSIGHTS';
+
+interface CampaignPageMenuSchema {
+  name: string;
+  menuItem: MenuItem;
+}
+
+const campaignPageMenuItems: CampaignPageMenuSchema[] = [
+  {
+    name: 'Timeline',
+    menuItem: 'TIMELINE',
+  },
+  {
+    name: 'Bio',
+    menuItem: 'BIO',
+  },
+  {
+    name: 'Donations',
+    menuItem: 'DONATIONS',
+  },
+  {
+    name: 'Progress',
+    menuItem: 'INSIGHTS',
+  }
+];
+
+const CampaignPageMenu: React.FC<{ selected: MenuItem; setSelected: (e: React.ChangeEvent<HTMLInputElement>) => void }> = ({ selected, setSelected }) => {
+  return (
+    <Box display='flex' flexDirection='column'>
+      <Box display='flex' flexDirection='row' columnGap={2} alignItems='center' justifyContent='space-between'>
+        {_.map(campaignPageMenuItems, (menuOption, index) => {
+          return (
+            <Link key={index} component="button" value={menuOption.menuItem} variant='h4' underline='none' sx={{ py: 0.5, color: selected === menuOption.menuItem ? 'black' : '#aaa', borderBottom: selected === menuOption.menuItem ? 3 : 0 }} onClick={(e) => setSelected(e)}>
+              {menuOption.name}
+            </Link>
+          )
+        })}
+      </Box>
+      <Divider sx={{ borderBottomWidth: 2 }} />
+    </Box>
+  )
+}
+
+const CampaignPageProfile = () => {
+  const randomProfileIdx = getRandomInt(10);
+  return (
+<Card elevation={8} sx={{  minWidth: 300,
+                    maxWidth: 350, }}>
+                    <CardActionArea sx={{ display: 'flex', flexDirection:'row', justifyContent: 'flex-start', px: 1 }}>
+                        <CardMedia>
+                            <Image width='70' height='70' src={`/mockProfiles/${randomProfileIdx}.png`} alt={profileList[randomProfileIdx].name} />
+                        </CardMedia>
+                        <CardContent>
+                            <Typography fontWeight={900} flexWrap={'wrap'}  variant='body1'>{profileList[randomProfileIdx].name}</Typography>
+                            <Typography variant='subtitle2' sx={{ color: '#888' }}>{profileList[randomProfileIdx].location}</Typography>
+                        </CardContent>
+                    </CardActionArea>
+        </Card>
+            // </Paper>
+    
+  )
+}
+
+const CampaignPledgeCard = () => {
+  return (
+    <Fade in timeout={500}>
+      <Paper elevation={8} sx={{  minWidth: 300,
+          maxWidth: 350, }}>
+            pledge card here
+        </Paper>
+    </Fade>
+  )
+}
+
 const Campaign = ({ campaign, errors }: CampaignPageProps) => {
+    const [ selectedMenuItem, setSelectedMenuItem ] = useState<MenuItem>('BIO');
+    const [ pledgeClicked, setPledgeClicked ] = useState<boolean>(false);
+
+    const handleMenuItemChange = (event) => {
+      setSelectedMenuItem(event.target.value);
+    }
+
     const router = useRouter();
     const { campaignId } = router.query;
     const routes: RouteNode[] = [
@@ -29,21 +118,81 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
             path: `/home/campaigns/${campaignId}`,
         }
     ]
+
+    const Bio = () => {
+      const [content, setContent] = useState("");
+
+      useEffect(() => {
+        fetch("/mockCampaignMarkdown.md")
+          .then((res) => res.text())
+          .then((text) => setContent(text));
+      }, []);
+    
+      return (
+        <>
+          <CampaignGallery supportingUsers={campaign.pledgers} />
+          <Paper sx={{ p: 3, display:'flex', flexDirection:'column', rowGap:2  }} >
+            {/* <div> */}
+              <ReactMarkdown>
+                {content}
+              </ReactMarkdown>
+            {/* </div>  */}
+          </Paper>
+        </>
+      )
+    }
+
+    const Page = () => {
+      switch (selectedMenuItem) {
+        case 'BIO': return (
+          <Bio />
+        );
+        case 'TIMELINE': return (<>{'timeline'}</>);
+        case 'DONATIONS': return (<>{'donations'}</>);
+        case 'INSIGHTS': return (<>{'insights'}</>);
+      }
+    } 
+
     return (
         <HomepageLayout currentPageIndex={0}>
-        <Box display='flex' flexDirection={'column'} rowGap={2}>
-            <Typography variant='h3'>
-                Campaign
-            </Typography>
+          <Box display='flex' flexDirection={'column'} rowGap={3}>
+            <RouteTree routes={routes} />
+            <Box display='flex' flexDirection='row' columnGap={4}>
+              <LeftPage>
+                <CampaignPageProfile />
+                <CampaignDescription page={campaign} pledgeClicked={pledgeClicked} setPledgeClicked={setPledgeClicked} />
+                <Box display='flex' flexDirection='row' columnGap={2} alignItems='center'>
+                      <Typography variant='body2'>
+                        Spes Pledgers
+                      </Typography>
+                      <AvatarGroup max={5} total={campaign.pledgers.length}>
+                        {/* expand on hover and link to profile page */}
+                        {_.map(campaign.pledgers, (user, index) => {
+                            return (
+                                <Avatar key={index} src={user.imgSrc ? `/mockProfiles/${user.imgSrc}.png` : ''} {..._.isNil(user.imgSrc) ? stringAvatar(user.name) : {}} />
+                            )
+                        })}
+                      </AvatarGroup>
+                </Box>
+                { pledgeClicked ? <CampaignPledgeCard /> : <></> }
+              </LeftPage>
+              <RightPage>
+                <CampaignPageMenu selected={selectedMenuItem} setSelected={handleMenuItemChange} />
+                <Page />  
+              </RightPage>
+            </Box>
+          </Box>
+
+
+        {/* <Box display='flex' flexDirection={'column'} rowGap={2}>
             <RouteTree routes={routes} />
             <Box display='flex' flexDirection='row' columnGap={3}>
-              <CampaignGallery />
-              <CampaignDescription description={campaign} />
-              {/* <PledgeCard /> */}
+              <CampaignGallery supportingUsers={campaign.pledgers} />
+              <CampaignDescription page={campaign} />
             </Box>
-
+            <CampaignPageMenu selected={selectedMenuItem} />
             <p>Campaign Id: {JSON.stringify(campaign)}</p>
-        </Box>
+        </Box> */}
     </HomepageLayout>
     )
 };

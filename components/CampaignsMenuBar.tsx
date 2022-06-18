@@ -49,14 +49,17 @@ const CampaignMenuBar: React.FC<{ toggleActive: boolean; toggleState: any; }> = 
         toggleState(false);
     }
     return (
-        <Box display={'flex'} flexDirection='column' rowGap={2}>
-            <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={4} alignItems='center' sx={{ my: 2 }}>
-                    <Link component="button" variant='h4' underline='none' sx={{ py: 0.5, color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 3 : 0 }} onClick={handleActiveClick}>
-                        Active
-                    </Link>
-                    <Link component="button" variant='h4' underline='none'  sx={{ py: 0.5, color: toggleActive ? '#aaa' : 'black', borderBottom: toggleActive ? 0 : 3 }} onClick={handlePendingClick}>
-                        Pending
-                    </Link>
+        <Box display={'flex'} flexDirection='column' rowGap={2} sx={{ my: 2, }}>
+            <Box display='flex' flexDirection='column'>
+                <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={4} alignItems='center'>
+                        <Link component="button" variant='h4' underline='none' sx={{ py: 0.5, color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 3 : 0 }} onClick={handleActiveClick}>
+                            Active
+                        </Link>
+                        <Link component="button" variant='h4' underline='none'  sx={{ py: 0.5, color: toggleActive ? '#aaa' : 'black', borderBottom: toggleActive ? 0 : 3 }} onClick={handlePendingClick}>
+                            Pending
+                        </Link>
+                </Box>
+                <Divider sx={{ borderBottomWidth: 2 }} />
             </Box>
             <Box display='flex' flexDirection='row' justifyContent={'space-between'}>
                 <SearchOptions />

@@ -12,7 +12,7 @@ interface CampaignPage extends CampaignCard {
     donations: Transaction[];
     timeline: Activity[];
     usage: InternalUsage;
-    pledgers: Pledge[];
+    pledgers: ProfileCard[];
 };
 
 export interface CampaignCard {
@@ -55,9 +55,9 @@ export interface InternalUsage {
 
 }
 
-export interface ProfilePage {
+export interface ProfileCard {
     id?: number;
     name: string;
     location: string;
-    imgSrc: string;
+    imgSrc?: string;
 }

@@ -1,4 +1,4 @@
-import { Box, Button, Card, Fade, TextField, Typography, Divider } from "@mui/material";
+import { Box, Button, Card, Fade, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { supabase } from '../utils/supabaseClient'
 import { useState } from "react";
