@@ -1,5 +1,5 @@
 const Modal = () => {
-    return (<></>)
+    return (null)
 };
 
 export default Modal;

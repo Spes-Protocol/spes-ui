@@ -4,18 +4,19 @@ export interface DashboardPageSchema {
     icon: React.ReactElement;
 }
 
-interface CampaignPage extends CampaignCard {
+interface CampaignPage extends CampaignCardSchema {
     organizerId: string;
     tags: string[];
     wallet: string;
     markdownDescription: string;
+    gallery: string[];
     donations: Transaction[];
     timeline: Activity[];
     usage: InternalUsage;
     pledgers: ProfileCard[];
 };
 
-export interface CampaignCard {
+export interface CampaignCardSchema {
     campaignId?: string;
     name: string;
     description: string;
@@ -47,7 +48,8 @@ export interface Activity {
 export interface Transaction {
     transactionId: string;
     ownerId: string;
-    amount: string;
+    amount: number;
+    heading: string;
     message: string;
 }
 

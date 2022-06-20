@@ -16,7 +16,7 @@ const ClickableGalleryImage = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-const CampaignGallery = ({ supportingUsers }: { supportingUsers: ProfileCard[] }) => {
+const CampaignGallery = ({ gallery }: { gallery: string[] }) => {
   return (
             <Paper
               elevation={8}
@@ -35,11 +35,11 @@ const CampaignGallery = ({ supportingUsers }: { supportingUsers: ProfileCard[] }
                 <Box display='flex' flexDirection='column' rowGap={2}>
                     <Box display='flex' flexDirection='row' columnGap={2}>
                         <ClickableGalleryImage>
-                            <Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={400} width={400} />
+                            <Image src={'/' + gallery[0]} alt='Bloom image' height={400} width={400} />
                         </ClickableGalleryImage>
                         <Box display='flex' flexDirection='column' rowGap={2}>
-                            <ClickableGalleryImage><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
-                            <ClickableGalleryImage><Image src={`/bloom/${getRandomInt(47)}.png`} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
+                            <ClickableGalleryImage><Image src={'/' + gallery[1]} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
+                            <ClickableGalleryImage><Image src={'/' + gallery[2]} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
                             <Button startIcon={<CollectionsIcon />} sx={{ minWidth: 180, }} size='large' color='secondary' variant='contained'>Explore</Button>
                         </Box>
                     </Box>

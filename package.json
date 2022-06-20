@@ -27,6 +27,7 @@
     "@visx/responsive": "^2.10.0",
     "@visx/scale": "^2.2.2",
     "@visx/shape": "^2.10.0",
+    "babel-plugin-styled-components": "^2.0.7",
     "bignumber.js": "^9.0.2",
     "emotion": "^11.0.0",
     "formik": "^2.2.9",

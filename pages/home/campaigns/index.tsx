@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Box, Typography } from "@mui/material";
 import moment from "moment";
-import CampaignCard, { CampaignCardProps } from "../../../components/CampaignCard";
+import CampaignCard from "../../../components/CampaignCard";
 import HomepageLayout from "../../../components/Layouts/HomepageLayout";
 import * as React from 'react';
 import { ProfileCard, ProfileCardProps } from '../../../components/ProfileCard';

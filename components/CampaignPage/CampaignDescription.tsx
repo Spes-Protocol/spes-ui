@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Box, Button, Chip, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Button, Chip, IconButton, Fade, Paper, Typography } from "@mui/material";
 import { dollarFormatter, getRandomInt, round } from "../../utils/sharedUtils";
 import { DatePosted } from "../CampaignCard";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,18 +12,13 @@ import React, { useState } from 'react';
 
 interface CampaignDescriptionProps {
     page: CampaignPage;
-    pledgeClicked: boolean;
-    setPledgeClicked: any;
+    setPledgeOnClick: any;
 }
 
-const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ pledgeClicked, setPledgeClicked }) => {
+const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ setPledgeOnClick }) => {
     // these are coming from an API post supabase
     const [ following, setFollowing ] = useState(false);
     const [ isFavorite, setIsFavorite ] = useState(false);
-
-    const handlePledgeClick = () => {
-        setPledgeClicked(!pledgeClicked);
-    }
 
     const hadleFollowing = (event: React.MouseEvent<HTMLElement>) => {
         setFollowing(!following);
@@ -44,7 +39,7 @@ const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ ple
             <Button fullWidth startIcon={following ? <CheckOutlinedIcon /> : null} variant={following ? "contained" : "outlined"} color='error' size='medium' onClick={hadleFollowing}>
                 {following ? 'Following' : 'Follow'}
             </Button>
-            <Button fullWidth variant="contained" color={pledgeClicked ? 'warning' : 'error'} size='medium' onClick={handlePledgeClick}>
+            <Button fullWidth variant="contained" color={'error'} size='medium' onClick={() => setPledgeOnClick('PLEDGE')}>
                 Pledge
             </Button>
             <Box display='flex' flexDirection={'row'} columnGap={3} justifyContent='center' alignItems={'center'}>
@@ -59,7 +54,7 @@ const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ ple
     )
 }
 
-const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ page, pledgeClicked, setPledgeClicked } : CampaignDescriptionProps ) => {
+const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ page, setPledgeOnClick } : CampaignDescriptionProps ) => {
     const { name, postedDate, moneyRaised, moneyToRaise, active, tags, description } = page;
     return (<>
         <Paper
@@ -95,7 +90,7 @@ const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ page, pledgeC
                     })}
                     </Box>
                 </Box>
-                <CampaignActions pledgeClicked={pledgeClicked} setPledgeClicked={setPledgeClicked} />
+                <CampaignActions setPledgeOnClick={setPledgeOnClick} />
             </Paper>
     </>
     )

@@ -71,9 +71,7 @@ export default function Avatar({ url, size, onUpload }: { url: string, size: num
           />
         </Box>
         
-      ) : (
-        <></>
-      )}
+      ) : null}
               <Button
                   startIcon={<UploadIcon />}
                   variant="contained"

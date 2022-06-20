@@ -9,12 +9,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from "next/image";
 import { dollarFormatter, round } from '../utils/sharedUtils';
 import Link from 'next/link';
-import { CampaignCard } from '../types';
+import { CampaignCardSchema } from '../types';
 import { BorderLinearProgress } from '../styles/progressBar.styles';
 import palette from '../themes/palette';
 import { Variant } from '@mui/material/styles/createTypography';
 
-export type CampaignCardProps = CampaignCard;
+export type CampaignCardProps = CampaignCardSchema;
 
 export const DatePosted: React.FC<{ date: string, variant: Variant }> = ({ date, variant }) => {
     return (
@@ -98,7 +98,7 @@ const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => 
                         <CardActionArea href="https://google.com">
                             <Box display='flex' flexDirection='row' columnGap={4}>
                                 <Box display='flex' flex={1} >
-                                    <Image src={`/${mainImage}`} alt='Campaign desc' height={250} width={300}/>
+                                    <Image src={'/' + mainImage} alt='Campaign desc' height={250} width={300}/>
                                 </Box>
                                 <Box display='flex' flexDirection='column' justifyContent='flex-start' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
                                     <CampaignActionBar date={postedDate} organizer={organizerName} />

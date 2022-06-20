@@ -8,8 +8,7 @@ export const dollarFormatter = new Intl.NumberFormat('en-US', {
   });
 
   export const round = (value: number, precision: number) => {
-    var multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
+    return (Math.round(value * 100) / 100).toFixed(precision)
 }
 
 export const shortenString = (str: string) => {

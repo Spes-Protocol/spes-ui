@@ -19,7 +19,7 @@ const RouteTree: React.FC<{ routes: RouteTreeProps }> = ({ routes }) => {
             {_.map(routes as RouteTreeProps, (node: RouteNode, index) => {
                 return (
                     <Box key={index} display='flex' flexDirection='row' columnGap={2} alignItems='center'>
-                        {index == 0 ? <></> : <ArrowForwardIos />}
+                        {index == 0 ? null : <ArrowForwardIos />}
                         <Link href={node.path} passHref>
                             <Button size='small' color='secondary' variant='outlined' sx={{ letterSpacing: 1, borderRadius: 6, textTransform: 'none' }}>
                                 {node.name}

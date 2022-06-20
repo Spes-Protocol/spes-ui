@@ -6,11 +6,10 @@ import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
 import { campaignList, campaignMainPage, profileList } from '../../../utils/mockData';
 import { CampaignPage } from '../../../types';
-import { shortenString, getRandomInt } from '../../../utils/sharedUtils';
+import { shortenString, getRandomInt, stringAvatar } from '../../../utils/sharedUtils';
 import CampaignGallery from '../../../components/CampaignPage/CampaignGallery';
 import CampaignDescription from '../../../components/CampaignPage/CampaignDescription';
 import { useEffect, useState } from 'react';
-import { stringAvatar } from '../../../utils/sharedUtils';
 import LeftPage from '../../../components/Layouts/LeftPage';
 import RightPage from '../../../components/Layouts/RightPage';
 import Image from 'next/image';
@@ -19,20 +18,34 @@ import Image from 'next/image';
 import Markdown from 'markdown-to-jsx';
 import ReactMarkdown from 'react-markdown';
 import InputWrapper from '../../../components/InputWrapper';
+import Donations from '../../../components/Donations';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
     errors?: string;
 }
 
-type MenuItem = 'BIO' | 'DONATIONS' | 'TIMELINE' | 'INSIGHTS';
+type MenuItem = 'BIO' | 'TRANSACTIONS' | 'TIMELINE' | 'INSIGHTS' | 'PLEDGE';
 
 interface CampaignPageMenuSchema {
   name: string;
   menuItem: MenuItem;
 }
 
+const setStyle = (selected, menuItem) => {
+  if (selected === menuItem) {
+    return {
+      borderBottom: 3, color: menuItem === 'PLEDGE' ? '#736ced' : 'black', textShadow: menuItem === 'PLEDGE' ? '1px 1px 2px pink' : '',
+    }
+  }
+  return { color: menuItem === 'PLEDGE' ? '#736ced' : 'gray', borderBottom: 0, textShadow: menuItem === 'PLEDGE' ? '1px 1px 2px pink' : '' }
+}
+
 const campaignPageMenuItems: CampaignPageMenuSchema[] = [
+  {
+    name: 'Pledge',
+    menuItem: 'PLEDGE',
+  },
   {
     name: 'Timeline',
     menuItem: 'TIMELINE',
@@ -42,8 +55,8 @@ const campaignPageMenuItems: CampaignPageMenuSchema[] = [
     menuItem: 'BIO',
   },
   {
-    name: 'cDonations',
-    menuItem: 'DONATIONS',
+    name: 'cTransactions',
+    menuItem: 'TRANSACTIONS',
   },
   {
     name: 'Insights',
@@ -57,7 +70,7 @@ const CampaignPageMenu: React.FC<{ selected: MenuItem; setSelected: (e: React.Ch
       <Box display='flex' flexDirection='row' columnGap={2} alignItems='center' justifyContent='space-between'>
         {_.map(campaignPageMenuItems, (menuOption, index) => {
           return (
-            <Link key={index} component="button" value={menuOption.menuItem} variant='h4' underline='none' sx={{ py: 0.5, color: selected === menuOption.menuItem ? 'black' : '#aaa', borderBottom: selected === menuOption.menuItem ? 3 : 0 }} onClick={(e) => setSelected(e)}>
+            <Link key={index} component="button" value={menuOption.menuItem} variant='h4' underline='none' sx={{ py: 0.5, ...setStyle(selected, menuOption.menuItem)}} onClick={(e) => setSelected(e)}>
               {menuOption.name}
             </Link>
           )
@@ -69,7 +82,7 @@ const CampaignPageMenu: React.FC<{ selected: MenuItem; setSelected: (e: React.Ch
 }
 
 const CampaignPageProfile = () => {
-  const randomProfileIdx = getRandomInt(10);
+  const randomProfileIdx = 6;
   return (
 <Card elevation={8} sx={{  minWidth: 300,
                     maxWidth: 350, }}>
@@ -152,7 +165,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
     
       return (
         <>
-          <CampaignGallery supportingUsers={campaign.pledgers} />
+          <CampaignGallery gallery={campaign.gallery} />
           <Paper sx={{ p: 3, display:'flex', flexDirection:'column', rowGap:2  }} >
             {/* <div> */}
               <ReactMarkdown>
@@ -170,8 +183,9 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
           <Bio />
         );
         case 'TIMELINE': return (<>{'timeline'}</>);
-        case 'DONATIONS': return (<>{'donations'}</>);
+        case 'TRANSACTIONS': return (<Donations />);
         case 'INSIGHTS': return (<>{'insights'}</>);
+        case 'PLEDGE': return (<CampaignPledgeCard />);
       }
     } 
 
@@ -182,7 +196,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
             <Box display='flex' flexDirection='row' columnGap={4}>
               <LeftPage>
                 <CampaignPageProfile />
-                <CampaignDescription page={campaign} pledgeClicked={pledgeClicked} setPledgeClicked={setPledgeClicked} />
+                <CampaignDescription page={campaign} setPledgeOnClick={setSelectedMenuItem} />
                 <Box display='flex' flexDirection='row' columnGap={2} alignItems='center'>
                       <Typography variant='body2'>
                         Spes Pledgers
@@ -196,7 +210,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
                         })}
                       </AvatarGroup>
                 </Box>
-                { pledgeClicked ? <CampaignPledgeCard /> : <></> }
+                { pledgeClicked ? <CampaignPledgeCard /> : null }
               </LeftPage>
               <RightPage>
                 <CampaignPageMenu selected={selectedMenuItem} setSelected={handleMenuItemChange} />

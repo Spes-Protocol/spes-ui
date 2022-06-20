@@ -1,7 +1,45 @@
 import moment from "moment"
 import { CampaignCardProps } from "../components/CampaignCard"
 import { ProfileCardProps } from "../components/ProfileCard"
-import { CampaignPage, ProfileCard } from "../types"
+import { CampaignPage, ProfileCard, Transaction } from "../types"
+
+export const donations: Transaction[] = [
+    {
+        transactionId: '0',
+        ownerId: '0',
+        amount: 60,
+        heading: 'Transfer to Paint the world',
+        message: 'Donation by Anonymous'
+    },
+    {
+        transactionId: '1',
+        ownerId: '1',
+        amount: -50,
+        heading: 'Monthly withdrawal by Org',
+        message: 'Funds used to support staff'
+    },
+    {
+        transactionId: '2',
+        ownerId: '2',
+        amount: -42,
+        heading: 'Monthly withdrawal by Org',
+        message: 'Funds used for booking expenses'
+    },
+    {
+        transactionId: '3',
+        ownerId: '3',
+        amount: 30,
+        heading: 'Weekly contribution',
+        message: 'Donation by Celo user 0x3287432vu3bb2n'
+    },
+    {
+        transactionId: '4',
+        ownerId: '4',
+        amount: -42,
+        heading: 'Monthly withdrawal by Org',
+        message: 'Funds used for food'
+    }
+];
 
 export const campaignList: CampaignCardProps[] = [
     {
@@ -165,6 +203,7 @@ export const profileList2: ProfileCard[] = [
 export const campaignMainPage: { [index: string]: CampaignPage } = {
     '0': {
         ...(campaignList[0]),
+        gallery: ['engage.png', 'bloom/0.png', 'bloom/3.png'],
         organizerId: '',
         tags: ['charity', 'climate', 'earth', 'UN'],
         markdownDescription: '',
@@ -176,6 +215,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
     },
     '1': {
         ...campaignList[1],
+        gallery: ['mockProfiles/9.png', 'bloom/10.png', 'bloom/13.png'],
         organizerId: '',
         tags: [],
         markdownDescription: '',
@@ -187,6 +227,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
     },
     '2': {
         ...campaignList[2],
+        gallery: ['secure.png', 'bloom/20.png', 'bloom/23.png'],
         organizerId: '',
         tags: [],
         markdownDescription: '',
@@ -198,6 +239,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
     },
     '3': {
         ...campaignList[3],
+        gallery: ['recur.png', 'bloom/30.png', 'bloom/33.png'],
         organizerId: '',
         tags: [],
         markdownDescription: '',
@@ -209,6 +251,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
     },
     '4': {
         ...campaignList[4],
+        gallery: ['mockProfiles/2.png', 'bloom/40.png', 'bloom/17.png'],
         organizerId: '',
         tags: [],
         markdownDescription: '',
