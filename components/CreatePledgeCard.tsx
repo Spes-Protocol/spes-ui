@@ -9,20 +9,22 @@ import moment from "moment";
 
 const CreatePledgeCard = () => {
   const initialValues = {
-    currency: "USD",
-    amount: 30,
+    currency: 'USD',
+    amount: '',
     cadenceType: '',
-    cadenceUnit: 'MONTHLY',
-    cadenceValue: 1,
+    cadenceUnit: '',
+    cadenceValue: '',
   };
 
   const createPledgeSummary = (values) => {
+    const recurringMessage = `You are set to donate to this cause ${_.toLower(values.cadenceUnit)}, ${values.cadenceValue} times for a set amount of ${values.currency} ${values.amount}.`;
+    const singleMessage = `You are set to donate to this cause a set amount of ${values.currency} ${values.amount}.`;
+    const commonMessage = `You can also update your pledge at any time from the dashboard. Your first payment will be scheduled for ${moment().add('days', 2).format('LL')} on checkout.`
       return (
       <Fade in timeout={700}>
         <Alert icon={false} severity="success">
           <Typography variant='body1'>
-          You are set to donate to this cause {_.toLower(values.cadenceUnit)}, {values.cadenceValue} times for a set amount of {values.currency} {values.amount}. You can change your pledge at any time from the dashboard. Your first payment is on {moment().add('days', 2).format('LL')}
-
+          {values.cadenceType === 'RECURRING' ? recurringMessage : singleMessage} {commonMessage}
           </Typography>
         </Alert>
       </Fade>
@@ -34,9 +36,11 @@ const CreatePledgeCard = () => {
       <>
         <InputWrapper title={'Cadence Unit'} titleVariant={'body2'}>
                       <Select
+                        required
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={values.cadenceUnit}
+                        defaultValue='USD'
                         label="Cadence Unit"
                         onChange={e => {
                           setFieldValue('cadenceUnit', e.target.value);
@@ -52,7 +56,7 @@ const CreatePledgeCard = () => {
                     <InputWrapper title={'Cadence Value'} titleVariant={'body2'}>
                       <OutlinedInput
                           startAdornment={<InputAdornment position="start"><EventAvailableIcon /></InputAdornment>}
-                          placeholder={'Donation amount'}
+                          placeholder={'eg. 2 times per month'}
                           id="cadenceValue"
                           name="cadenceValue"
                           // sx={{ [`& fieldset`]: {
@@ -83,6 +87,7 @@ const CreatePledgeCard = () => {
                     <Box sx={{ display: 'flex', flexDirection: 'column', rowGap:2,}}>
                     <InputWrapper title={'Currency'} titleVariant={'body2'}>
                       <Select
+                        required
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={values.currency}
@@ -101,7 +106,7 @@ const CreatePledgeCard = () => {
                     <InputWrapper title={'Choose your donation amount'} titleVariant={'body2'}>
                       <OutlinedInput
                           startAdornment={<InputAdornment position="start">{values.currency === 'USD' ? '$' : values.currency === 'REAL' ? 'R$' : '€'}</InputAdornment>}
-                          placeholder={'Donation amount'}
+                          placeholder={'30'}
                           id="amount"
                           name="amount"
                           // sx={{ [`& fieldset`]: {
@@ -114,28 +119,32 @@ const CreatePledgeCard = () => {
                       />
                     </InputWrapper>
                     <InputWrapper title={'Pledge type'} titleVariant={'body2'}>
-                    <RadioGroup
-                      row
-                      // defaultValue="RECURRING"
-                      name={'cadenceType'}
-                      value={values.cadenceType}
-                      onChange={e => {
-                        setFieldValue('cadenceType', e.target.value);
-                      }}
-                    >
-                      <FormControlLabel value="RECURRING" control={<Radio color="error" />} label="Recurring" />
-                      <FormControlLabel value="SINGLE" control={<Radio color='error' />} label="Single" />
-                      <FormControlLabel
-                        value="disabled"
-                        disabled
-                        control={<Radio />}
-                        label="Challenge"
-                      />
-                    </RadioGroup>
+                      <FormControl required>
+                        <RadioGroup
+                        row
+                        aria-required
+                        // defaultValue="RECURRING"
+                        name={'cadenceType'}
+                        value={values.cadenceType}
+                        onChange={e => {
+                          setFieldValue('cadenceType', e.target.value);
+                        }}
+                      >
+                        <FormControlLabel value="RECURRING" control={<Radio color="error" />} label="Recurring" />
+                        <FormControlLabel value="SINGLE" control={<Radio color='error' />} label="Single" />
+                        <FormControlLabel
+                          value="disabled"
+                          disabled
+                          control={<Radio />}
+                          label="Challenge"
+                        />
+                      </RadioGroup>
+                      </FormControl>
+                   
                     </InputWrapper>
                     {values.cadenceType === 'RECURRING' ? Recurring(handleChange, values, setFieldValue, touched, errors) : null}
                     {values.cadenceType != '' ? createPledgeSummary(values) : null}
-                    <Button onClick={() => onSubmit} size='large' startIcon={<VolunteerActivismIcon />} variant='outlined' color='error' sx={{ letterSpacing: 1.5 }}>Checkout</Button>
+                    <Button type='submit' onClick={() => onSubmit} size='large' startIcon={<VolunteerActivismIcon />} variant='outlined' color='error' sx={{ letterSpacing: 1.5 }}>Checkout</Button>
                     </Box>
                   </Form>
               )}</Formik>
