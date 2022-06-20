@@ -55,7 +55,7 @@ const LoginCard = () => {
                             e.preventDefault()
                             handleLogin(email)
                         }}>
-                        <Button disabled={loading} size='large' sx={{ textTransform: 'none' }} variant="outlined" color="error">{loading ? 'Loading' : 'Send magic link'}</Button>
+                        <Button disabled={loading} size='large' sx={{ letterSpacing: 1.5 }} variant="outlined" color="error">{loading ? 'Loading' : 'Send magic link'}</Button>
                     </Box>
                     {emailSent ? <Typography variant='body2' sx={{ color: '#ff70a6', fontWeight: 700 }}>Check your email for the login link! 🎉</Typography> : undefined}
                     {magicLinkError ? <Typography variant='subtitle2' color='red'>{magicLinkError}</Typography> : undefined}

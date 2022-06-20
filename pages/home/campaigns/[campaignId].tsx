@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField } from '@mui/material';
+import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField, Snackbar, Alert, AlertTitle, Slide, SlideProps } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
@@ -19,10 +19,15 @@ import Markdown from 'markdown-to-jsx';
 import ReactMarkdown from 'react-markdown';
 import InputWrapper from '../../../components/InputWrapper';
 import Donations from '../../../components/Donations';
+import CreatePledgeCard from '../../../components/CreatePledgeCard';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
     errors?: string;
+}
+
+function TransitionLeft(props) {
+  return <Slide {...props} direction="left" />;
 }
 
 type MenuItem = 'BIO' | 'TRANSACTIONS' | 'TIMELINE' | 'INSIGHTS' | 'PLEDGE';
@@ -64,18 +69,35 @@ const campaignPageMenuItems: CampaignPageMenuSchema[] = [
   }
 ];
 
-const CampaignPageMenu: React.FC<{ selected: MenuItem; setSelected: (e: React.ChangeEvent<HTMLInputElement>) => void }> = ({ selected, setSelected }) => {
+const CampaignPageMenu: React.FC<{ organizer: string; selected: MenuItem; setSelected: (e: React.ChangeEvent<HTMLInputElement>) => void }> = ({ organizer, selected, setSelected }) => {
+  const [showAlert, setShowAlert] = useState(false);
   return (
     <Box display='flex' flexDirection='column'>
       <Box display='flex' flexDirection='row' columnGap={2} alignItems='center' justifyContent='space-between'>
         {_.map(campaignPageMenuItems, (menuOption, index) => {
           return (
-            <Link key={index} component="button" value={menuOption.menuItem} variant='h4' underline='none' sx={{ py: 0.5, ...setStyle(selected, menuOption.menuItem)}} onClick={(e) => setSelected(e)}>
+            <Link key={index} component="button" value={menuOption.menuItem} variant='h4' underline='none' sx={{ py: 0.5, ...setStyle(selected, menuOption.menuItem)}} onClick={(e) => {
+              setSelected(e)
+              console.log(e);
+
+              if (e.target.value == 'PLEDGE') {
+                setShowAlert(true);
+              }
+            }}>
               {menuOption.name}
             </Link>
           )
         })}
       </Box>
+      <Snackbar TransitionComponent={TransitionLeft} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={showAlert} autoHideDuration={10000} onClose={() => setShowAlert(false)}>
+        <Alert onClose={() => setShowAlert(false)} severity='success' sx={{ maxWidth: 500 }}>
+        <AlertTitle>A message from {organizer}</AlertTitle>
+        <Box display='flex' flexDirection='row' columnGap={2}>
+                    <Divider sx={{ borderRightWidth: 5 }} orientation="vertical" variant="middle" flexItem/>
+                    <Typography variant='body2' sx={{ color: 'gray' }}>Thank you for donating to our cause. With Spes, we are dedicated to bringing transparency and accountability into our campaigns and organization at large. We look forward to updating you on our progress.</Typography>
+                  </Box>
+      </Alert>
+      </Snackbar>
       <Divider sx={{ borderBottomWidth: 2 }} />
     </Box>
   )
@@ -103,7 +125,6 @@ const CampaignPageProfile = () => {
 
 const Campaign = ({ campaign, errors }: CampaignPageProps) => {
     const [ selectedMenuItem, setSelectedMenuItem ] = useState<MenuItem>('BIO');
-    const [ pledgeClicked, setPledgeClicked ] = useState<boolean>(false);
 
     const handleMenuItemChange = (event) => {
       setSelectedMenuItem(event.target.value);
@@ -122,38 +143,6 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
         }
     ]
 
-    const CampaignPledgeCard = () => {
-      return (
-        <Fade in timeout={500}>
-          <Paper elevation={8} sx={{  minWidth: 300,
-              maxWidth: 350, p: 2, display: 'flex', flexDirection: 'column', rowGap: 2 }}>
-                <Typography variant='h4'>Your pledge</Typography>
-                <Box>
-                  <Typography variant='body2'>A message from {campaign.organizerName}</Typography>
-                  <Box display='flex' flexDirection='row' columnGap={2}>
-                    <Divider sx={{ borderRightWidth: 5 }} orientation="vertical" variant="middle" flexItem/>
-                    <Typography variant='overline' sx={{ color: 'gray' }}>Thank you for donating to our cause. With Spes, we are dedicated to bringing transparency and accountability into our campaigns and organization at large. We look forward to updating you on our progress.</Typography>
-                  </Box>
-                </Box>
-                <InputWrapper title={'Choose your donation amount'} titleVariant={'body2'}>
-                  <TextField
-                      placeholder={'A short blurb describing what you are raising money for'}
-                      id="description"
-                      name="description"
-                      sx={{ [`& fieldset`]: {
-                          borderRadius: 0,
-                      }, }}
-                      // value={values.description}
-                      // onChange={handleChange}
-                      // error={touched.description && Boolean(errors.description)}
-                      required
-                  />
-                </InputWrapper>
-            </Paper>
-        </Fade>
-      )
-    }
-
     const Bio = () => {
       const [content, setContent] = useState("");
 
@@ -164,16 +153,18 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
       }, []);
     
       return (
-        <>
+        // <>
+          <Paper elevation={8} sx={{ p: 5, display:'flex', flexDirection:'column', rowGap:2  }} >
           <CampaignGallery gallery={campaign.gallery} />
-          <Paper sx={{ p: 3, display:'flex', flexDirection:'column', rowGap:2  }} >
             {/* <div> */}
+            <Typography variant='h3'>Our story</Typography>
+            <Divider />
               <ReactMarkdown>
                 {content}
               </ReactMarkdown>
             {/* </div>  */}
           </Paper>
-        </>
+        // </>
       )
     }
 
@@ -185,7 +176,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
         case 'TIMELINE': return (<>{'timeline'}</>);
         case 'TRANSACTIONS': return (<Donations />);
         case 'INSIGHTS': return (<>{'insights'}</>);
-        case 'PLEDGE': return (<CampaignPledgeCard />);
+        case 'PLEDGE': return (<CreatePledgeCard />);
       }
     } 
 
@@ -210,25 +201,13 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
                         })}
                       </AvatarGroup>
                 </Box>
-                { pledgeClicked ? <CampaignPledgeCard /> : null }
               </LeftPage>
               <RightPage>
-                <CampaignPageMenu selected={selectedMenuItem} setSelected={handleMenuItemChange} />
+                <CampaignPageMenu organizer={campaign.organizerName} selected={selectedMenuItem} setSelected={handleMenuItemChange} />
                 <Page />  
               </RightPage>
             </Box>
           </Box>
-
-
-        {/* <Box display='flex' flexDirection={'column'} rowGap={2}>
-            <RouteTree routes={routes} />
-            <Box display='flex' flexDirection='row' columnGap={3}>
-              <CampaignGallery supportingUsers={campaign.pledgers} />
-              <CampaignDescription page={campaign} />
-            </Box>
-            <CampaignPageMenu selected={selectedMenuItem} />
-            <p>Campaign Id: {JSON.stringify(campaign)}</p>
-        </Box> */}
     </HomepageLayout>
     )
 };

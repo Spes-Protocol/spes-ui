@@ -28,14 +28,19 @@ export interface CampaignCardSchema {
     active?: boolean;
 }
 
+type Currency = 'USD' | 'REAL' | 'EURO';
+type CadenceUnit = 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'YEARLY';
+type CadenceType = 'SINGLE' | 'RECURRING' | 'CHALLENGE';
+
 export interface Pledge {
     pledgeId: string;
     ownerId: string;
     campaignId: string;
+    cadenceType: CadenceType;
+    currency: Currency;
     amount: number;
-    cadence_unit: string;
-    cadence_value: number;
-
+    cadenceUnit?: string;
+    cadenceValue?: number;
 }
 
 export interface Activity {

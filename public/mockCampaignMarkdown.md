@@ -1,80 +1,25 @@
----
-__Advertisement :)__
+## Our goal to help raise money for the people of Tenderloin in SF
 
-- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
-  resize in browser.
-- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
-  i18n with plurals support and easy syntax.
+It is our humble goal to raise money for the tenderloin in San Francisco. We are humbled by the effort of the local communities that have contributed to the homeless situation in SF. With rising prices and sky high inflation, soon we will be unable to support those on the streets. Your kind donation will help in the following ways:
 
-You will like those projects!
+- food and shelter for those in need
+- funds to help each person get access to a shower
+- clean the streets and give them clean access to medical supplies
+- connect them to the nearest medical care
+- blankets for when it is too cold outside
 
----
+### Phase 1 (June 2022)
 
-# h1 Heading 8-)
-## h2 Heading
-### h3 Heading
-#### h4 Heading
-##### h5 Heading
-###### h6 Heading
+*Rolling out volunteers* - with the help of volunteers we see a clear path to helping homeless people in need.  
 
+### Phase 2 (July 2022)
 
-## Horizontal Rules
+**Longer term we want a more systemic change to poverty** -- We want to give people the podium to learn and help them voice their opinions to the systems that are currently oppressive to the lowest earning members of society. 
 
-___
+### Phase 3 (October 2022)
 
----
+*As we have more support* -- we plan to mobilize more support with the help of California's governer, Gavin Newsom and London Breed in our effort to empower homeless people and reduce crime on the streets. 
 
-***
+## Final Note
 
-
-## Typographic replacements
-
-Enable typographer option to see result.
-
-(c) (C) (r) (R) (tm) (TM) (p) (P) +-
-
-test.. test... test..... test?..... test!....
-
-!!!!!! ???? ,,  -- ---
-
-"Smartypants, double quotes" and 'single quotes'
-
-
-## Emphasis
-
-**This is bold text**
-
-__This is bold text__
-
-*This is italic text*
-
-_This is italic text_
-
-~~Strikethrough~~
-
-
-## Blockquotes
-
-
-> Blockquotes can also be nested...
->> ...by using additional greater-than signs right next to each other...
-> > > ...or with spaces between arrows.
-
-
-## Lists
-
-Unordered
-
-+ Create a list by starting a line with `+`, `-`, or `*`
-+ Sub-lists are made by indenting 2 spaces:
-- Marker character change forces new list start:
-    * Ac tristique libero volutpat at
-    + Facilisis in pretium nisl aliquet
-    - Nulla volutpat aliquam velit
-+ Very easy!
-
-Ordered
-
-1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
+```We hold ourselves accountable to the highest standards. Your donation will go a long way and we want to update you on this platform by posting updates on how your pledges on any cadence helps us make progress towards our goals above. We believe together we can end the systemic oppression which inevitably will be accelarated by inflation but we are focused on setting up processes and systems to counter the effects. ```

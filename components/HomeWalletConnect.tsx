@@ -24,7 +24,7 @@ const DappWallet: React.FC = () => {
                     <Typography variant='h3'>Wallet Swap</Typography>
                 </Box>
                 <Typography variant='body2'>Your wallet details will appear here after you connect to your Celo wallet.</Typography>
-                <Button onClick={() => connect().catch(e => console.log(e))} variant='contained' size='large' color='warning' sx={{ textTransform: 'none' }}>Connect Wallet</Button>
+                <Button onClick={() => connect().catch(e => console.log(e))} variant='contained' size='large' color='warning' sx={{ letterSpacing: 1.5 }}>Connect Wallet</Button>
             </Card>
         </main>
     )

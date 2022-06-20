@@ -58,9 +58,7 @@ const ChipInput: React.FC<{ onChange: (event: React.ChangeEvent<HTMLInputElement
       )}
       style={{ width: 500 }}
       renderInput={(params) => (
-        <TextField sx={{ width: 500, [`& fieldset`]: {
-            borderRadius: 0,
-          }, }} {...params} placeholder="Campaign tags" />
+        <TextField sx={{ width: 500 }} {...params} placeholder="Campaign tags" />
       )}
     />
   );

@@ -36,10 +36,10 @@ const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ set
 
     return (
         <Box display='flex' flexDirection={'column'} rowGap={1}>
-            <Button fullWidth startIcon={following ? <CheckOutlinedIcon /> : null} variant={following ? "contained" : "outlined"} color='error' size='medium' onClick={hadleFollowing}>
+            <Button sx={{ letterSpacing: 1.5 }} fullWidth startIcon={following ? <CheckOutlinedIcon /> : null} variant={following ? "contained" : "outlined"} color='error' size='medium' onClick={hadleFollowing}>
                 {following ? 'Following' : 'Follow'}
             </Button>
-            <Button fullWidth variant="contained" color={'error'} size='medium' onClick={() => setPledgeOnClick('PLEDGE')}>
+            <Button sx={{ letterSpacing: 1.5 }} fullWidth variant="contained" color={'error'} size='medium' onClick={() => setPledgeOnClick('PLEDGE')}>
                 Pledge
             </Button>
             <Box display='flex' flexDirection={'row'} columnGap={3} justifyContent='center' alignItems={'center'}>

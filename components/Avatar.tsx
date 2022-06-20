@@ -78,7 +78,7 @@ export default function Avatar({ url, size, onUpload }: { url: string, size: num
                   color='secondary'
                   component="label"
                   size='large'
-                  sx={{ textTransform: 'none' }}
+                  sx={{ letterSpacing: 1.5 }}
                   disabled={uploading}
                   >
                   {uploading ? 'Uploading ...' : 'Upload Files'}

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import Image from 'next/image';
-import {  Box, Button,  Paper } from '@mui/material';
+import {  Box, Button,  Modal,  Paper } from '@mui/material';
 import { getRandomInt } from '../../utils/sharedUtils';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import { ProfileCard } from '../../types';
+import palette from '../../themes/palette';
+import GalleryModal from '../Modals/GalleryModal';
 
 const ClickableGalleryImage = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -16,23 +18,43 @@ const ClickableGalleryImage = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  // p: 4,
+};
+
+
 const CampaignGallery = ({ gallery }: { gallery: string[] }) => {
+  const [openGallery, setOpenGallery] = React.useState(false);
   return (
-            <Paper
-              elevation={8}
-                sx={{
-                    display: 'flex',
+            // <Paper
+            //   elevation={8}
+            //     sx={{
+            //         display: 'flex',
+            //         justifyContent: 'center',
+            //         alignItems: 'center',
+            //         p: 3,
+            //         // boxShadow: 4,
+            //         minWidth: 500,
+            //         maxWidth: 650,
+            //         // width: 650,
+            //         // height: 450,
+            //     }}
+            // >
+                <Box sx={{ display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     p: 3,
                     // boxShadow: 4,
                     minWidth: 500,
-                    maxWidth: 650,
-                    // width: 650,
-                    // height: 450,
-                }}
-            >
-                <Box display='flex' flexDirection='column' rowGap={2}>
+                    maxWidth: 650, }}>
                     <Box display='flex' flexDirection='row' columnGap={2}>
                         <ClickableGalleryImage>
                             <Image src={'/' + gallery[0]} alt='Bloom image' height={400} width={400} />
@@ -40,7 +62,17 @@ const CampaignGallery = ({ gallery }: { gallery: string[] }) => {
                         <Box display='flex' flexDirection='column' rowGap={2}>
                             <ClickableGalleryImage><Image src={'/' + gallery[1]} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
                             <ClickableGalleryImage><Image src={'/' + gallery[2]} alt='Bloom image' height={200} width={200} /></ClickableGalleryImage>
-                            <Button startIcon={<CollectionsIcon />} sx={{ minWidth: 180, }} size='large' color='secondary' variant='contained'>Explore</Button>
+                            <Button startIcon={<CollectionsIcon />} sx={{ minWidth: 180, letterSpacing: 1.5 }} size='large' color='secondary' variant='contained' onClick={() => setOpenGallery(true)}>Explore</Button>
+                            <Modal
+                              open={openGallery}
+                              onClose={() => setOpenGallery(false)}
+                              aria-labelledby="modal-modal-title"
+                              aria-describedby="modal-modal-description"
+                            >
+                              <Box sx={style}>
+                                <GalleryModal gallery={gallery} />
+                              </Box>
+                            </Modal>
                         </Box>
                     </Box>
                     {/* <Box display='flex' flexDirection='row' justifyContent='flex-end' alignItems='center'>
@@ -48,7 +80,7 @@ const CampaignGallery = ({ gallery }: { gallery: string[] }) => {
                         <Button startIcon={<CollectionsIcon />} sx={{ minWidth: 180, }} size='large' color='secondary' variant='contained'>Explore</Button>
                     </Box> */}
                 </Box>
-            </Paper>
+            // </Paper>
   );
 }
 

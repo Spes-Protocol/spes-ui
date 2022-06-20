@@ -39,10 +39,11 @@ const Menu: React.FC<{ currentCampaignPageIndex: number }> = ({ currentCampaignP
     return (
         <Box display='flex'
         // justifyContent={'center'}
-        flexDirection={'column'} marginBottom={4}>
+        flexDirection={'column'} maxWidth={450} marginBottom={4}>
+            
             <Box
             display='flex'
-            // justifyContent={'center'}
+            justifyContent={'flex-start'}
             flexDirection={'row'}
             columnGap={4}
             >
