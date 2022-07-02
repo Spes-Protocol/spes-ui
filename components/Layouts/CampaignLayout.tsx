@@ -9,7 +9,6 @@ import palette from '../../themes/palette';
 import Link from 'next/link';
 import { Link as MuiLink } from '@mui/material';
 import PaidIcon from '@mui/icons-material/Paid';
-import { DashboardPageSchema } from '../../types';
 
 const campaignMenuList: DashboardPageSchema[] = [
     {
@@ -39,7 +38,7 @@ const Menu: React.FC<{ currentCampaignPageIndex: number }> = ({ currentCampaignP
     return (
         <Box display='flex'
         // justifyContent={'center'}
-        flexDirection={'column'} maxWidth={450} marginBottom={4}>
+        flexDirection={'column'} marginBottom={3}>
             
             <Box
             display='flex'

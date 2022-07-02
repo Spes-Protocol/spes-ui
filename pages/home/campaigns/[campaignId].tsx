@@ -1,11 +1,10 @@
 import * as _ from 'lodash';
-import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField, Snackbar, Alert, AlertTitle, Slide, SlideProps } from '@mui/material';
+import { Avatar, AvatarGroup, Box, Divider, Link, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField, Snackbar, Alert, AlertTitle, Slide, SlideProps, createTheme, IconButton } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
 import { campaignList, campaignMainPage, profileList } from '../../../utils/mockData';
-import { CampaignPage } from '../../../types';
 import { shortenString, getRandomInt, stringAvatar } from '../../../utils/sharedUtils';
 import CampaignGallery from '../../../components/CampaignPage/CampaignGallery';
 import CampaignDescription from '../../../components/CampaignPage/CampaignDescription';
@@ -20,6 +19,9 @@ import ReactMarkdown from 'react-markdown';
 import InputWrapper from '../../../components/InputWrapper';
 import Donations from '../../../components/Donations';
 import CreatePledgeCard from '../../../components/CreatePledgeCard';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import { ThemeProvider } from '@mui/styles';
 
 interface CampaignPageProps {
     campaign: CampaignPage;
@@ -104,17 +106,37 @@ const CampaignPageMenu: React.FC<{ organizer: string; selected: MenuItem; setSel
 }
 
 const CampaignPageProfile = () => {
+  const [ userFollows, setUserFollows ] = useState(false);
+
+  const handleFollowAction = (event: React.MouseEvent<HTMLElement>) => {
+    setUserFollows(!userFollows);
+    // send API to add to favorites
+    event.stopPropagation();
+    event.preventDefault();
+    console.log('add to favorites')
+}
+
   const randomProfileIdx = 6;
   return (
-<Card elevation={8} sx={{  minWidth: 300,
+<Card elevation={4} sx={{  minWidth: 300,
                     maxWidth: 350, }}>
                     <CardActionArea sx={{ display: 'flex', flexDirection:'row', justifyContent: 'flex-start', px: 1 }}>
                         <CardMedia>
                             <Image width='70' height='70' src={`/mockProfiles/${randomProfileIdx}.png`} alt={profileList[randomProfileIdx].name} />
                         </CardMedia>
-                        <CardContent>
+                        <CardContent sx={{ display: 'flex', flexDirection: 'row', p: 2, columnGap: 1 }}>
+                          <Box display='flex' flexDirection='column'>
                             <Typography fontWeight={900} flexWrap={'wrap'}  variant='body1'>{profileList[randomProfileIdx].name}</Typography>
                             <Typography variant='subtitle2' sx={{ color: '#888' }}>{profileList[randomProfileIdx].location}</Typography>
+                          </Box>
+                          <Box>
+                          <IconButton onClick={(event: React.MouseEvent<HTMLElement>) => handleFollowAction(event)}>
+                    {
+                        userFollows ? <HowToRegIcon /> :  
+                        <PersonAddAltIcon />
+                    }
+                </IconButton>
+                          </Box>
                         </CardContent>
                     </CardActionArea>
         </Card>
@@ -154,7 +176,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
     
       return (
         // <>
-          <Paper elevation={8} sx={{ p: 5, display:'flex', flexDirection:'column', rowGap:2  }} >
+          <Paper elevation={4} sx={{ p: 5, display:'flex', flexDirection:'column', rowGap:2  }} >
           <CampaignGallery gallery={campaign.gallery} />
             {/* <div> */}
             <Typography variant='h3'>Our story</Typography>
@@ -184,7 +206,7 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
         <HomepageLayout currentPageIndex={0}>
           <Box display='flex' flexDirection={'column'} rowGap={3}>
             <RouteTree routes={routes} />
-            <Box display='flex' flexDirection='row' columnGap={4}>
+            <Box display='flex' flexDirection='row' columnGap={3}>
               <LeftPage>
                 <CampaignPageProfile />
                 <CampaignDescription page={campaign} setPledgeOnClick={setSelectedMenuItem} />

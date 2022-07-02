@@ -31,19 +31,6 @@ const GalleryModal = ({ gallery }) => {
 
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-      {/* <Paper
-        square
-        elevation={0}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default',
-        }}
-      >
-        <Typography>{gallery[activeStep].label}</Typography>
-      </Paper> */}
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

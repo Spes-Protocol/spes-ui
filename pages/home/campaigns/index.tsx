@@ -4,7 +4,7 @@ import moment from "moment";
 import CampaignCard from "../../../components/CampaignCard";
 import HomepageLayout from "../../../components/Layouts/HomepageLayout";
 import * as React from 'react';
-import { ProfileCard, ProfileCardProps } from '../../../components/ProfileCard';
+import { ProfileCard } from '../../../components/ProfileCard';
 import CampaignMenuBar from '../../../components/CampaignsMenuBar';
 import { campaignList, profileList } from '../../../utils/mockData';
 import CampaignLayout from '../../../components/Layouts/CampaignLayout';

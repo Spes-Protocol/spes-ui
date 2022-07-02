@@ -1,8 +1,17 @@
-export interface DashboardPageSchema {
+interface DashboardPageSchema {
     name: string;
     path: string;
     icon: React.ReactElement;
 }
+
+interface ProfileCardSchema {
+    id?: number;
+    name: string;
+    location: string;
+    imgSrc?: string;
+}
+
+interface ProfilePage extends ProfileCardSchema {}
 
 interface CampaignPage extends CampaignCardSchema {
     organizerId: string;
@@ -13,10 +22,10 @@ interface CampaignPage extends CampaignCardSchema {
     donations: Transaction[];
     timeline: Activity[];
     usage: InternalUsage;
-    pledgers: ProfileCard[];
+    pledgers: ProfileCardSchema[];
 };
 
-export interface CampaignCardSchema {
+interface CampaignCardSchema {
     campaignId?: string;
     name: string;
     description: string;
@@ -32,7 +41,7 @@ type Currency = 'USD' | 'REAL' | 'EURO';
 type CadenceUnit = 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'YEARLY';
 type CadenceType = 'SINGLE' | 'RECURRING' | 'CHALLENGE';
 
-export interface Pledge {
+interface Pledge {
     pledgeId: string;
     ownerId: string;
     campaignId: string;
@@ -43,14 +52,14 @@ export interface Pledge {
     cadenceValue?: number;
 }
 
-export interface Activity {
+interface Activity {
     imageSrc: string;
     createdAt: string;
     location: string;
     caption: string;
 }
 
-export interface Transaction {
+interface Transaction {
     transactionId: string;
     ownerId: string;
     amount: number;
@@ -58,13 +67,38 @@ export interface Transaction {
     message: string;
 }
 
-export interface InternalUsage {
+interface InternalUsage {
 
 }
 
-export interface ProfileCard {
-    id?: number;
-    name: string;
-    location: string;
-    imgSrc?: string;
+type PostType = 'MEDIA' | 'TEXT' | 'POLL';
+
+namespace Media {
+    interface Content {
+        title: string;
+        link: string;    
+    }
+}
+
+namespace Poll {
+    interface Option {
+        name: string;
+        votes: number;
+    }
+
+    interface Content {
+        title: string;
+        options: Option[];
+    }
+}
+
+interface BasePost {
+    type: PostType;
+    postId: string;
+    campaignId: string;
+    caption?: string;
+    media?: Media.Content;
+    poll?: Poll.Content;
+    likes: number;
+    date: string;
 }

@@ -1,13 +1,25 @@
-import { Alert, Fade, Box, MenuItem, OutlinedInput, Paper, Select, Button, Typography, InputAdornment, RadioGroup, FormControlLabel, Radio, FormControl } from "@mui/material";
+import { Alert, Fade, Box, MenuItem, OutlinedInput, Paper, Select, Button, Typography, InputAdornment, RadioGroup, FormControlLabel, Radio, FormControl, Chip, Slide } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as _ from 'lodash';
 import palette from "../themes/palette";
 import InputWrapper from "./InputWrapper";
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import moment from "moment";
+import { useState } from "react";
 
 const CreatePledgeCard = () => {
+  const [cadenceTypeError, setCadenceTypeError] = useState<boolean>(false);
+
+  const CadenceRequired = () => {
+    return (
+      <Slide direction="right" in={cadenceTypeError} mountOnEnter unmountOnExit>
+        <Chip size='small' icon={<PriorityHighIcon />} label="Required" color="info" variant='outlined' />
+      </Slide>
+    )
+  }
+
   const initialValues = {
     currency: 'USD',
     amount: '',
@@ -73,12 +85,17 @@ const CreatePledgeCard = () => {
   }
 
   const onSubmit = (values) => {
+    if (!values.cadenceType) {
+        setCadenceTypeError(true);
+    } else {
+      setCadenceTypeError(false);
       alert(JSON.stringify(values, null, 2));
+    }
   }
 
     return (
       <Fade in timeout={500}>
-        <Paper elevation={8} sx={{
+        <Paper elevation={1} sx={{
             maxWidth: 400, p: 3, display: 'flex', flexDirection: 'column', rowGap: 2 }}>
               <Typography variant='h4'>Your pledge</Typography>
               <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -118,7 +135,11 @@ const CreatePledgeCard = () => {
                           required
                       />
                     </InputWrapper>
-                    <InputWrapper title={'Pledge type'} titleVariant={'body2'}>
+                    <Box display='flex' flexDirection='column' rowGap={1}>
+                      <Box display='flex' flexDirection='row' columnGap={2} alignItems='center'>
+                        <Typography letterSpacing={1} variant={'body2'}>{'Pledge Type'}</Typography>
+                        <CadenceRequired />
+                      </Box>
                       <FormControl required>
                         <RadioGroup
                         row
@@ -128,6 +149,7 @@ const CreatePledgeCard = () => {
                         value={values.cadenceType}
                         onChange={e => {
                           setFieldValue('cadenceType', e.target.value);
+                          setCadenceTypeError(false);
                         }}
                       >
                         <FormControlLabel value="RECURRING" control={<Radio color="error" />} label="Recurring" />
@@ -140,8 +162,7 @@ const CreatePledgeCard = () => {
                         />
                       </RadioGroup>
                       </FormControl>
-                   
-                    </InputWrapper>
+                    </Box>
                     {values.cadenceType === 'RECURRING' ? Recurring(handleChange, values, setFieldValue, touched, errors) : null}
                     {values.cadenceType != '' ? createPledgeSummary(values) : null}
                     <Button type='submit' onClick={() => onSubmit} size='large' startIcon={<VolunteerActivismIcon />} variant='outlined' color='error' sx={{ letterSpacing: 1.5 }}>Checkout</Button>

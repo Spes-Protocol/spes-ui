@@ -4,7 +4,6 @@ import Image from 'next/image';
 import {  Box, Button,  Modal,  Paper } from '@mui/material';
 import { getRandomInt } from '../../utils/sharedUtils';
 import CollectionsIcon from '@mui/icons-material/Collections';
-import { ProfileCard } from '../../types';
 import palette from '../../themes/palette';
 import GalleryModal from '../Modals/GalleryModal';
 
@@ -34,20 +33,6 @@ const style = {
 const CampaignGallery = ({ gallery }: { gallery: string[] }) => {
   const [openGallery, setOpenGallery] = React.useState(false);
   return (
-            // <Paper
-            //   elevation={8}
-            //     sx={{
-            //         display: 'flex',
-            //         justifyContent: 'center',
-            //         alignItems: 'center',
-            //         p: 3,
-            //         // boxShadow: 4,
-            //         minWidth: 500,
-            //         maxWidth: 650,
-            //         // width: 650,
-            //         // height: 450,
-            //     }}
-            // >
                 <Box sx={{ display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',

@@ -49,7 +49,7 @@ const CampaignMenuBar: React.FC<{ toggleActive: boolean; toggleState: any; }> = 
     }
     return (
         <Box display={'flex'} flexDirection='column' rowGap={2} sx={{ my: 2, }}>
-            <Box display='flex' flexDirection='column' maxWidth={250}>
+            <Box display='flex' flexDirection='column'>
                 <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={4} alignItems='center'>
                         <Link component="button" variant='h4' underline='none' sx={{ py: 0.5, color: toggleActive ? 'black' : '#aaa', borderBottom: toggleActive ? 3 : 0 }} onClick={handleActiveClick}>
                             Active

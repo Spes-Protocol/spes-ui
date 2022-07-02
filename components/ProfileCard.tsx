@@ -2,17 +2,12 @@ import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia,
 import Image from 'next/image';
 import Link from 'next/link';
 
-export interface ProfileCardProps {
-    id?: number;
-    name: string;
-    location: string;
-    imgSrc?: string;
-}
+type ProfileCardProps = ProfileCardSchema;
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({ id, name, location, imgSrc }) => {
     return (
         <Fade in timeout={500}>
-            <Card elevation={8} sx={{ minWidth: "200px", margin: 2 }}>
+            <Card elevation={4} sx={{ minWidth: "200px", margin: 2 }}>
             <Link href={{
               pathname: '/home/profiles/[profileId]',
               query: { profileId: id },

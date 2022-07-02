@@ -76,13 +76,17 @@ const CreateCampaign = () => {
     return (
         <HomepageLayout currentPageIndex={0}>
             <CampaignLayout currentCampaignPageIndex={1}>
-            <Typography id="modal-modal-title" variant="h4" component="h2">
+                <Box display='flex' flexDirection='column' justifyContent='center' alignItems='flex-start' rowGap={3}>
+                    <Box>
+                    <Typography id="modal-modal-title" variant="h4">
                     Create your campaign here
                 </Typography>
                 <Typography variant='subtitle1'>
                     Your campaign is visible to the broader Spes community, who is able to set up recurring donations to your Celo wallet. 
                 </Typography>
-                <Paper elevation={8} sx={{ maxWidth: 600, p: 3, marginTop: 3, display: 'flex', flexDirection:'column', rowGap: 2, alignItems:'center' }}>
+                        </Box>
+                
+                <Paper elevation={4} sx={{ maxWidth: 600, p: 3, display: 'flex', flexDirection:'column', rowGap: 2, alignItems:'center' }}>
                 {/* <Box > */}
                     <Formik initialValues={initialValues} onSubmit={onSubmit}>
                         {({ handleChange, values, setFieldValue, touched, errors }) => (
@@ -180,18 +184,22 @@ const CreateCampaign = () => {
                                         }} />
                                     </InputWrapper> 
                                     <CampaignWalletConnect />
-                                    <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
-                                    <Button sx={{ letterSpacing: 1.5, border: 2, '&:hover': { border: 2 }}} type='submit' size='large' color='success' variant='outlined'>Create</Button>
-                                    <Button sx={{ letterSpacing: 1.5, border: 2, '&:hover': { border: 2 }}}  type='submit' size='large' color='error' variant='outlined'>Exit</Button>
+                                    {/* <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
+                                        <Button sx={{ letterSpacing: 1.5, border: 2, '&:hover': { border: 2 }}} type='submit' size='large' color='success' variant='outlined'>Create</Button>
+                                        <Button sx={{ letterSpacing: 1.5, border: 2, '&:hover': { border: 2 }}}  type='submit' size='large' color='error' variant='outlined'>Exit</Button>
+                                    </Box> */}
                                 </Box>
-                                </Box>
-
-                                
                             </Form>
                 )}
                     </Formik>
                 {/* </Box> */}
                 </Paper>
+                <Box display='flex' flexDirection='row' justifyContent='flex-end' columnGap={2}>
+                                        <Button sx={{ letterSpacing: 1.5, border: 2, '&:hover': { border: 2 }}} type='submit' size='large' color='success' variant='outlined'>Create</Button>
+                                        <Button sx={{ letterSpacing: 1.5, border: 2, '&:hover': { border: 2 }}}  type='submit' size='large' color='error' variant='outlined'>Exit</Button>
+                                    </Box>
+                </Box>
+                
             </CampaignLayout>
         </HomepageLayout>
     );

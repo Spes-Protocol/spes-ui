@@ -1,18 +1,103 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Link, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import * as _ from 'lodash';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
+import ProfilePageCard from '../../../components/ProfilePageCard';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
-import { profileList } from '../../../utils/mockData';
-import { ProfileCard } from '../../../types';
+import { profileList, samplePosts } from '../../../utils/mockData';
 import { shortenString } from '../../../utils/sharedUtils';
+import { useState } from 'react';
+import Post from '../../../components/Post';
 
-interface ProfileCardProps {
-    profile: ProfileCard;
+interface ProfilePageProps {
+    profile: ProfilePage;
     errors?: string;
 }
 
-const Profile = ({ profile, errors }: ProfileCardProps) => {
+type MenuItem = 'TIMELINE' | 'PROFILE' | 'ANALYTICS' | 'CAMPAIGNS' | 'SUPPORTING';
+
+
+interface ProfilePageMenuSchema {
+  name: string;
+  menuItem: MenuItem;
+}
+
+const profilePageMenuItems: ProfilePageMenuSchema[] = [
+  {
+    name: 'Timeline',
+    menuItem: 'TIMELINE',
+  },
+  {
+    name: 'Profile',
+    menuItem: 'PROFILE',
+  },
+  {
+    name: 'Analytics',
+    menuItem: 'ANALYTICS',
+  },
+  {
+    name: 'Campaigns',
+    menuItem: 'CAMPAIGNS',
+  },
+  {
+    name: 'Supporting',
+    menuItem: 'SUPPORTING',
+  }
+];
+
+const ProfilePageMenu: React.FC<{ selected: MenuItem; setSelected: (e: React.ChangeEvent<HTMLInputElement>) => void }> = ({ selected, setSelected }) => {
+  return (
+    <Box display='flex' flexDirection='column'>
+      <Box display='flex' flexDirection='row' columnGap={2} alignItems='center' justifyContent='space-between'>
+        {_.map(profilePageMenuItems, (menuOption, index) => {
+          const current = selected === menuOption.menuItem;
+          return (
+            <Link key={index} component="button" value={menuOption.menuItem} variant='h4' underline='none' sx={{ py: 0.5, color: current ? 'black' : '#aaa', borderBottom: current ? 3 : 0 }} onClick={(e) => {
+              setSelected(e);
+              console.log(e);
+            }}>
+              {menuOption.name}
+            </Link>
+          )
+        })}
+      </Box>
+      <Divider sx={{ borderBottomWidth: 2 }} />
+    </Box>
+  )
+}
+
+const Timeline = ({ posts }) => { 
+  return (
+    <Box display='flex' flexDirection='column' rowGap={2}>
+      {_.map(posts, (post, idx) => {
+        return <Post key={idx} {...post} />
+      })}
+    </Box>
+  ); 
+};
+const ProfileDescription = () => {  return null;};
+const Analytics = () => {  return null;};
+const Campaigns = () => {  return null;};
+const Supporting = () => {  return null;};
+
+const Profile = ({ profile, errors }: ProfilePageProps) => {
+  const [ selectedMenuItem, setSelectedMenuItem ] = useState<MenuItem>('TIMELINE');
+
+  const handleMenuItemChange = (event) => {
+    setSelectedMenuItem(event.target.value);
+  }
+
+  const ProfilePageContent = () => {
+    switch (selectedMenuItem) {
+      case 'TIMELINE': return <Timeline posts={samplePosts} />;
+      case 'PROFILE': return <ProfileDescription />;
+      case 'ANALYTICS': return <Analytics />;
+      case 'CAMPAIGNS': return <Campaigns />;
+      case 'SUPPORTING': return <Supporting />;
+    }
+  }
+
     const router = useRouter();
     const { profileId } = router.query;
     const routes: RouteNode[] = [
@@ -27,13 +112,14 @@ const Profile = ({ profile, errors }: ProfileCardProps) => {
     ]
     return (
         <HomepageLayout currentPageIndex={0}>
-        <Box display='flex' flexDirection={'column'} rowGap={2}>
-            <Typography variant='h3'>
+        <Box display='flex' flexDirection={'column'} rowGap={2} maxWidth={1000}>
+            {/* <Typography variant='h3'>
                 Profile
-            </Typography>
+            </Typography> */}
             <RouteTree routes={routes} />
-            <p>Profile Id: {JSON.stringify(profile)}</p>
-            
+            <ProfilePageCard {...profile} />
+            <ProfilePageMenu selected={selectedMenuItem} setSelected={handleMenuItemChange} />
+            <ProfilePageContent />
         </Box>
     </HomepageLayout>
     )

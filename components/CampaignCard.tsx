@@ -9,12 +9,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from "next/image";
 import { dollarFormatter, round } from '../utils/sharedUtils';
 import Link from 'next/link';
-import { CampaignCardSchema } from '../types';
 import { BorderLinearProgress } from '../styles/progressBar.styles';
 import palette from '../themes/palette';
 import { Variant } from '@mui/material/styles/createTypography';
 
-export type CampaignCardProps = CampaignCardSchema;
+type CampaignCardProps = CampaignCardSchema;
 
 export const DatePosted: React.FC<{ date: string, variant: Variant }> = ({ date, variant }) => {
     return (

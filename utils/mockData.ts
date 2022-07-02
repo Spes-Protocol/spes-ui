@@ -1,7 +1,4 @@
 import moment from "moment"
-import { CampaignCardProps } from "../components/CampaignCard"
-import { ProfileCardProps } from "../components/ProfileCard"
-import { CampaignPage, ProfileCard, Transaction } from "../types"
 
 export const donations: Transaction[] = [
     {
@@ -41,7 +38,7 @@ export const donations: Transaction[] = [
     }
 ];
 
-export const campaignList: CampaignCardProps[] = [
+export const campaignList: CampaignCardSchema[] = [
     {
         campaignId: '0',
         name: 'YesWelder Firstess CT2050: Powerful 7-in-1 Welder & Cutter',
@@ -100,7 +97,7 @@ export const campaignList: CampaignCardProps[] = [
 
 ]
 
-export const profileList: ProfileCardProps[] = [
+export const profileList: ProfileCardSchema[] = [
     {
         id: 0,
         name: 'Charity Water',
@@ -163,7 +160,7 @@ export const profileList: ProfileCardProps[] = [
     }
 ]
 
-export const profileList2: ProfileCard[] = [
+export const profileList2: ProfileCardSchema[] = [
     {
         id: 0,
         name: 'Charity Water',
@@ -262,3 +259,51 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
         pledgers: [],
     },
 }
+
+export const samplePosts: BasePost[] = [
+    {
+        postId: '0',
+        campaignId: '0',
+        type: 'TEXT',
+        date: moment().format('LL'),
+        likes: 354,
+        caption: 'A heartfelt thank you to all our pledgers who supported us on our campaign to close the poverty gap in Peru. ❤️🎉'
+    },
+    {
+        postId: '1',
+        campaignId: '1',
+        type: 'MEDIA',
+        date: moment().format('LL'),
+        likes: 122,
+        caption: 'An update from our recent campaign in Cabarete, DR',
+        media: {
+            link: '/mariposa.jpg',
+            title: 'A fun time outside learning with our teachers',
+        }
+    },
+    {
+        postId: '2',
+        campaignId: '2',
+        type: 'POLL',
+        date: moment().format('LL'),
+        likes: 840,
+        caption: '',
+        poll: {
+            title: 'What motivates you to support causes in Climate change?',
+            options: [
+                {
+                    name: 'Our planet is in danger and it needs urgent reversal of air pollution.',
+                    votes: 90,
+                },
+                {
+                    name: 'To save animals and our nature',
+                    votes: 120,
+                },
+                {
+                    name: 'The use of fossil fuels is damaging the environment',
+                    votes: 150,
+                }
+            ]
+        }
+    },
+]

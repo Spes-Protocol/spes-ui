@@ -4,10 +4,9 @@ import { dollarFormatter, getRandomInt, round } from "../../utils/sharedUtils";
 import { DatePosted } from "../CampaignCard";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import ShareIcon from '@mui/icons-material/Share';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import { BorderLinearProgress } from "../../styles/progressBar.styles";
-import { CampaignPage } from "../../types";
 import React, { useState } from 'react';
 
 interface CampaignDescriptionProps {
@@ -17,14 +16,7 @@ interface CampaignDescriptionProps {
 
 const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ setPledgeOnClick }) => {
     // these are coming from an API post supabase
-    const [ following, setFollowing ] = useState(false);
     const [ isFavorite, setIsFavorite ] = useState(false);
-
-    const hadleFollowing = (event: React.MouseEvent<HTMLElement>) => {
-        setFollowing(!following);
-        // send API to add to favorites
-        console.log('following')
-    }
 
     const handleFavorite = (event: React.MouseEvent<HTMLElement>) => {
         setIsFavorite(!isFavorite);
@@ -36,20 +28,17 @@ const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ set
 
     return (
         <Box display='flex' flexDirection={'column'} rowGap={1}>
-            <Button sx={{ letterSpacing: 1.5 }} fullWidth startIcon={following ? <CheckOutlinedIcon /> : null} variant={following ? "contained" : "outlined"} color='error' size='medium' onClick={hadleFollowing}>
-                {following ? 'Following' : 'Follow'}
-            </Button>
-            <Button sx={{ letterSpacing: 1.5 }} fullWidth variant="contained" color={'error'} size='medium' onClick={() => setPledgeOnClick('PLEDGE')}>
-                Pledge
-            </Button>
             <Box display='flex' flexDirection={'row'} columnGap={3} justifyContent='center' alignItems={'center'}>
                 <IconButton onClick={handleFavorite}>
                     {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                 </IconButton>
                 <IconButton>
-                    <IosShareIcon />
+                    <ShareIcon />
                 </IconButton>
             </Box>
+            <Button sx={{ letterSpacing: 1.5 }} fullWidth variant="contained" color={'error'} size='medium' onClick={() => setPledgeOnClick('PLEDGE')}>
+                Pledge
+            </Button>
         </Box>
     )
 }
@@ -58,7 +47,7 @@ const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ page, setPled
     const { name, postedDate, moneyRaised, moneyToRaise, active, tags, description } = page;
     return (<>
         <Paper
-                elevation={8}
+                elevation={4}
                  sx={{
                     display: 'flex',
                     flexDirection: 'column',

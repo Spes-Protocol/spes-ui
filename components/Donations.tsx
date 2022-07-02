@@ -4,7 +4,6 @@ import { round, stringAvatar } from '../utils/sharedUtils';
 import { donations } from '../utils/mockData';
 import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
-import { Transaction } from '../types';
 import palette from '../themes/palette';
 
 const DonationFullCard = () => {
@@ -59,7 +58,7 @@ const DonationListCard = (donation) => {
 const Donations = () => {
     return (
         <Paper
-            elevation={8}
+            elevation={1}
             sx={{
                 display:'flex',
                 flexDirection:'column',
@@ -70,9 +69,9 @@ const Donations = () => {
         >
             {_.map(donations, (d, idx) => {
                 return (
-                    <Fade in timeout={700 + idx * 200} key={idx}>
-                        {DonationListCard(d)}
-                    </Fade>
+                    <Box key={idx}>
+                    {DonationListCard(d)}
+                    </Box>
                 )
             })}
         </Paper>
