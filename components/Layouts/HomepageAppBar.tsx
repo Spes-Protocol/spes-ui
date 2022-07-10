@@ -18,11 +18,10 @@ import PublicIcon from '@mui/icons-material/Public';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { supabase } from '../../utils/supabaseClient';
-import { DashboardPageSchema } from '../../types';
 
 const dashboardPages: DashboardPageSchema[] = [
     {
-        name: 'Campaigns',
+        name: ' Campaigns',
         path: '/home/campaigns/',
         icon: <PublicIcon />,
     },

@@ -5,10 +5,12 @@ import * as _ from 'lodash';
 import HomepageLayout from '../../../components/Layouts/HomepageLayout';
 import ProfilePageCard from '../../../components/ProfilePageCard';
 import RouteTree, { RouteNode } from '../../../components/RouteTree';
-import { profileList, samplePosts } from '../../../utils/mockData';
+import { campaignsCreated, campaignsSupported, profileList, samplePosts } from '../../../utils/mockData';
 import { shortenString } from '../../../utils/sharedUtils';
 import { useState } from 'react';
 import Post from '../../../components/Post';
+import ProfilePageCampaignsCreated from '../../../components/ProfilePageCampaignsCreated';
+import ProfilePageCampaignsSupported from '../../../components/ProfilePageCampaignsSupported';
 
 interface ProfilePageProps {
     profile: ProfilePage;
@@ -78,7 +80,6 @@ const Timeline = ({ posts }) => {
 };
 const ProfileDescription = () => {  return null;};
 const Analytics = () => {  return null;};
-const Campaigns = () => {  return null;};
 const Supporting = () => {  return null;};
 
 const Profile = ({ profile, errors }: ProfilePageProps) => {
@@ -88,13 +89,13 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
     setSelectedMenuItem(event.target.value);
   }
 
-  const ProfilePageContent = () => {
+  const ProfilePageContent = ({ profile: { profile: ProfilePage } }) => {
     switch (selectedMenuItem) {
       case 'TIMELINE': return <Timeline posts={samplePosts} />;
       case 'PROFILE': return <ProfileDescription />;
       case 'ANALYTICS': return <Analytics />;
-      case 'CAMPAIGNS': return <Campaigns />;
-      case 'SUPPORTING': return <Supporting />;
+      case 'CAMPAIGNS': return <ProfilePageCampaignsCreated campaignsCreated={campaignsCreated} name={profile.name} />;
+      case 'SUPPORTING': return <ProfilePageCampaignsSupported campaignsSupported={campaignsSupported} name={profile.name} />;
     }
   }
 
@@ -119,7 +120,7 @@ const Profile = ({ profile, errors }: ProfilePageProps) => {
             <RouteTree routes={routes} />
             <ProfilePageCard {...profile} />
             <ProfilePageMenu selected={selectedMenuItem} setSelected={handleMenuItemChange} />
-            <ProfilePageContent />
+            <ProfilePageContent profile={profile} />
         </Box>
     </HomepageLayout>
     )

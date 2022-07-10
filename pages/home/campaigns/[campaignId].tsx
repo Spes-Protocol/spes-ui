@@ -131,17 +131,15 @@ const CampaignPageProfile = () => {
                           </Box>
                           <Box>
                           <IconButton onClick={(event: React.MouseEvent<HTMLElement>) => handleFollowAction(event)}>
-                    {
-                        userFollows ? <HowToRegIcon /> :  
-                        <PersonAddAltIcon />
-                    }
-                </IconButton>
+                            {
+                                userFollows ? <HowToRegIcon /> :  
+                                <PersonAddAltIcon />
+                            }
+                          </IconButton>
                           </Box>
                         </CardContent>
                     </CardActionArea>
-        </Card>
-            // </Paper>
-    
+        </Card>    
   )
 }
 

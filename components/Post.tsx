@@ -8,8 +8,14 @@ type PollContentProps = Poll.Content;
 
 const MediaContent: React.FC<MediaContentProps> = ({ link, title }) => {
     return (
-        <Box>
-            <Image src={link} width={300} height={300} />
+        <Box width={650} height={400}>
+            <div style={{width: '100%', height: '100%', position: 'relative'}}>
+                <Image
+                    src={link}
+                    layout='fill'
+                    objectFit='contain'
+                />
+            </div>
         </Box>
     )
 } 

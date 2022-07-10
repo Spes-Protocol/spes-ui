@@ -10,32 +10,7 @@ import DirectionsIcon from '@mui/icons-material/Directions';
 import SortIcon from '@mui/icons-material/Sort';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddIcon from '@mui/icons-material/Add';
-
-const SearchOptions = () => {
-  return (
-    <Box display='flex' flexDirection='row' justifyContent={'flex-start'} columnGap={1}>
-        <Paper
-        component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-        >
-        <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Search campaigns"
-            inputProps={{ 'aria-label': 'search google maps' }}
-        />
-        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
-        </IconButton>
-        </Paper>
-        <IconButton sx={{ml: 1}} aria-label="sort">
-            <SortIcon />
-        </IconButton>
-        <IconButton aria-label="filter">
-            <FilterAltIcon />
-        </IconButton>
-    </Box>
-  );
-}
+import SearchOptions from "./SearchOptions";
 
 const CampaignMenuBar: React.FC<{ toggleActive: boolean; toggleState: any; }> = ({ toggleActive, toggleState }) => {
     // const [isActive, setIsActive] = React.useState(true);

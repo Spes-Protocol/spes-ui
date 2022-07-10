@@ -11,7 +11,17 @@ interface ProfileCardSchema {
     imgSrc?: string;
 }
 
-interface ProfilePage extends ProfileCardSchema {}
+interface ProfileBio {};
+interface ProfileAnalytics {};
+
+interface ProfilePage extends ProfileCardSchema {
+    timeline: Post[];
+    profile: ProfileBio;
+    analytics: ProfileAnalytics;
+    campaignsCreated: string[];
+    campaignsSupporting: string[];
+
+}
 
 interface CampaignPage extends CampaignCardSchema {
     organizerId: string;

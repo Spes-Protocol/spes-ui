@@ -73,7 +73,7 @@ export const campaignList: CampaignCardSchema[] = [
         active: true,
     },
     {
-        campaignId: '4',
+        campaignId: '3',
         name: 'Charity event raising money for Mars',
         postedDate: moment().format('LL'),
         moneyRaised: 70000,
@@ -307,3 +307,6 @@ export const samplePosts: BasePost[] = [
         }
     },
 ]
+
+export const campaignsCreated: string[] = ["2", "3", "4"];
+export const campaignsSupported: string[] = ["0", "1"];
