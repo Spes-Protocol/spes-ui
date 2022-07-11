@@ -50,7 +50,7 @@ const Menu: React.FC<{ currentCampaignPageIndex: number }> = ({ currentCampaignP
                     const selected = menuOption === index;
                     return (
                         <Link key={index} href={menuItem.path} passHref>
-                        <MuiLink display='flex' flexDirection={'row'} alignItems='center' columnGap={1} onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
+                        <MuiLink display='flex' flexDirection={'row'} alignItems='center' columnGap={1} onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: 3, borderColor: selected ? 'black' : 'transparent' }}>
                             {menuItem.icon} {menuItem.name}
                         </MuiLink>
                     </Link>

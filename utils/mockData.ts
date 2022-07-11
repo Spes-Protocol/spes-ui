@@ -35,6 +35,13 @@ export const donations: Transaction[] = [
         amount: -42,
         heading: 'Monthly withdrawal by Org',
         message: 'Funds used for food'
+    },
+    {
+        transactionId: '5',
+        ownerId: '4',
+        amount: -42,
+        heading: 'Monthly withdrawal by Org',
+        message: 'Funds used for food'
     }
 ];
 
@@ -220,7 +227,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
         donations: [],
         timeline: [],
         usage: {},
-        pledgers: [],
+        pledgers: profileList,
     },
     '2': {
         ...campaignList[2],
@@ -232,7 +239,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
         donations: [],
         timeline: [],
         usage: {},
-        pledgers: [],
+        pledgers: profileList,
     },
     '3': {
         ...campaignList[3],
@@ -244,7 +251,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
         donations: [],
         timeline: [],
         usage: {},
-        pledgers: [],
+        pledgers: profileList2,
     },
     '4': {
         ...campaignList[4],
@@ -256,7 +263,7 @@ export const campaignMainPage: { [index: string]: CampaignPage } = {
         donations: [],
         timeline: [],
         usage: {},
-        pledgers: [],
+        pledgers: profileList2,
     },
 }
 

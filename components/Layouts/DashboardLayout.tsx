@@ -12,7 +12,7 @@ import palette from '../../themes/palette';
 import Link from 'next/link';
 import { Link as MuiLink } from '@mui/material';
 import PaidIcon from '@mui/icons-material/Paid';
-import { DashboardPageSchema } from '../../types';
+// import { DashboardPageSchema } from '../../types';
 
 const dashboardMenuList: DashboardPageSchema[] = [
     {
@@ -70,7 +70,7 @@ const Menu: React.FC<{ currentDashboardPageIndex: number }> = ({ currentDashboar
                     const selected = menuOption === index;
                     return (
                         <Link key={index} href={menuItem.path} passHref>
-                            <MuiLink display='flex' flexDirection={'row'} alignItems='center' columnGap={1} onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>
+                            <MuiLink display='flex' flexDirection={'row'} alignItems='center' columnGap={1} onClick={() => {handleMenuClick(index)}} component="button" variant='h4' underline='none' sx={{ py: 0.5, borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: 3, borderColor: selected ? 'black' : 'transparent' }}>
                                 {menuItem.icon} {menuItem.name}
                             </MuiLink>
                             {/* <Button size='large' startIcon={menuItem.icon} onClick={() => {handleMenuClick(index)}} variant='text' sx={{ borderRadius: 0, color: selected ? 'black' : '#aaa', borderBottom: selected ? 3 : 0 }}>

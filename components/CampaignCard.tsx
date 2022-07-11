@@ -18,7 +18,7 @@ type CampaignCardProps = CampaignCardSchema;
 export const DatePosted: React.FC<{ date: string, variant: Variant }> = ({ date, variant }) => {
     return (
         <Box display='flex' flexDirection='row' alignItems='center'>
-            <ScheduleRounded fontSize="inherit" />
+            <ScheduleRounded fontSize='small' />
             <Typography
                 color="text.secondary"
                 variant={variant}

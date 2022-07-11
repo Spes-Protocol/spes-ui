@@ -2,8 +2,8 @@ import * as _ from 'lodash';
 import { Box, Button, Chip, IconButton, Fade, Paper, Typography } from "@mui/material";
 import { dollarFormatter, getRandomInt, round } from "../../utils/sharedUtils";
 import { DatePosted } from "../CampaignCard";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import ShareIcon from '@mui/icons-material/Share';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import { BorderLinearProgress } from "../../styles/progressBar.styles";
@@ -30,7 +30,7 @@ const CampaignActions: React.FC<Omit<CampaignDescriptionProps, 'page'>> = ({ set
         <Box display='flex' flexDirection={'column'} rowGap={1}>
             <Box display='flex' flexDirection={'row'} columnGap={3} justifyContent='center' alignItems={'center'}>
                 <IconButton onClick={handleFavorite}>
-                    {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    {isFavorite ? <FavoriteRoundedIcon /> : <FavoriteBorderRoundedIcon />}
                 </IconButton>
                 <IconButton>
                     <ShareIcon />
@@ -55,8 +55,8 @@ const CampaignDescription: React.FC<CampaignDescriptionProps> = ({ page, setPled
                     // alignItems: 'center',
                     p: 3,
                     
-                    minWidth: 300,
-                    maxWidth: 350,
+                    // minWidth: 300,
+                    // maxWidth: 350,
                     rowGap: 2,
                 }}
             >
