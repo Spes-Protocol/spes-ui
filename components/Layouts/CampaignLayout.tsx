@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import { Box, Button, Divider, ListItem, ListItemIcon, Typography } from "@mui/material";
 import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
 // import AddchartOutlinedIcon from '@mui/icons-material/AddchartOutlined';
-import AddIcon from '@mui/icons-material/Add';
-import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
+import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import ExploreRoundedIcon from '@mui/icons-material/ExploreRounded';
 import palette from '../../themes/palette';
 import Link from 'next/link';
 import { Link as MuiLink } from '@mui/material';
@@ -13,12 +13,12 @@ import PaidIcon from '@mui/icons-material/Paid';
 const campaignMenuList: DashboardPageSchema[] = [
     {
         name: 'Explore',
-        icon: <ExploreOutlinedIcon />,
+        icon: <ExploreRoundedIcon />,
         path: '/home/campaigns',
     },
     {
         name: 'Create Campaign',
-        icon: <AddIcon />,
+        icon: <AddBoxRoundedIcon />,
         path: '/home/campaigns/create',
     },
     // {

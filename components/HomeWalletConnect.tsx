@@ -1,36 +1,35 @@
 import { ContractKitProvider, useContractKit } from "@celo-tools/use-contractkit";
-import { Card, Box, Typography, Button } from "@mui/material";
+import { Card, Box, Typography, Button, IconButton } from "@mui/material";
+import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import '@celo-tools/use-contractkit/lib/styles.css';
 
-const DappWallet: React.FC = () => {
+const DappWallet: React.FC<{ isMobile: boolean; }> = ({ isMobile }) => {
     const { address, connect } = useContractKit();
+    if (isMobile) {
+        return (
+            <Box borderRadius={3} border={1} borderColor='black'>
+              <IconButton onClick={() => connect().catch(e => console.log(e))}>
+              <AccountBalanceWalletRoundedIcon sx={{color:'black'}} />
+              </IconButton>
+            </Box>
+        )
+    }
     return (
         <main>
-            <Card
-            sx={{
-                // height: 500,
-                width: 500,
-                p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: 3,
-                boxShadow: 4,
-                rowGap: 2,
-            }}
-            >
-                <Box display='flex' flexDirection='row' justifyContent='flex-start'>
-                    <Typography variant='h3'>Wallet Swap</Typography>
-                </Box>
-                <Typography variant='body2'>Your wallet details will appear here after you connect to your Celo wallet.</Typography>
-                <Button onClick={() => connect().catch(e => console.log(e))} variant='contained' size='large' color='warning' sx={{ letterSpacing: 1.5 }}>Connect Wallet</Button>
-            </Card>
+            <Button onClick={() => connect().catch(e => console.log(e))} sx={{ textTransform: 'none' }}>
+                    <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' paddingX={2} border={1} columnGap={1} borderRadius={3} color='black' width='244px'>
+                      <AccountBalanceWalletRoundedIcon />
+                          <Typography variant='h4'>
+                              Connect wallet
+                          </Typography>
+                      </Box>
+                </Button>
+
         </main>
     )
 }
 
-const HomeWalletConnect: React.FC = () => {
+const HomeWalletConnect: React.FC<{ isMobile: boolean; }> = ({ isMobile }) => {
 
     return (
         <ContractKitProvider
@@ -41,7 +40,7 @@ const HomeWalletConnect: React.FC = () => {
           url: "https://example.com",
         }}
     >
-            <DappWallet />
+            <DappWallet isMobile={isMobile} />
         </ContractKitProvider>
     )
 };

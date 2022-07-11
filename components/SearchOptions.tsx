@@ -1,7 +1,7 @@
 import { Box, IconButton, InputBase, Paper } from "@mui/material";
-import SortIcon from '@mui/icons-material/Sort';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import SearchIcon from '@mui/icons-material/Search';
+import SortRoundedIcon from '@mui/icons-material/SortRounded';
+import FilterAltRoundedIcon from '@mui/icons-material/FilterAltRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 const SearchOptions = () => {
     return (
@@ -16,14 +16,14 @@ const SearchOptions = () => {
               inputProps={{ 'aria-label': 'search google maps' }}
           />
           <IconButton type="submit" aria-label="search">
-              <SearchIcon />
+              <SearchRoundedIcon />
           </IconButton>
           </Paper>
           <IconButton aria-label="sort">
-              <SortIcon />
+              <SortRoundedIcon />
           </IconButton>
           <IconButton aria-label="filter">
-              <FilterAltIcon />
+              <FilterAltRoundedIcon />
           </IconButton>
       </Box>
     );

@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Avatar, AvatarGroup, Box, Divider, Link as MuiLink, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField, Snackbar, Alert, AlertTitle, Slide, SlideProps, createTheme, IconButton, Drawer, Button } from '@mui/material';
+import { Avatar, AvatarGroup, Box, Divider, Link as MuiLink, Typography,  Card, CardActionArea, CardContent, CardMedia, Paper, Fade, TextField, Snackbar, Alert, AlertTitle, Slide, SlideProps, createTheme, IconButton, Drawer, Button, AppBar } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -138,8 +138,8 @@ const CampaignPageProfile = ({ profile, showFollowButton }: { profile: ProfileCa
                           <Box>
                           {showFollowButton ? <IconButton onClick={(event: React.MouseEvent<HTMLElement>) => handleFollowAction(event)}>
                             {
-                                userFollows ? <HowToRegRoundedIcon fontSize='large' /> :  
-                                <PersonAddAlt1RoundedIcon fontSize='large' />
+                                userFollows ? <HowToRegRoundedIcon /> :  
+                                <PersonAddAlt1RoundedIcon/>
                             }
                           </IconButton> : null}
                           </Box>
@@ -213,16 +213,20 @@ const Campaign = ({ campaign, errors }: CampaignPageProps) => {
           }}
         >
           <Box
-          sx={{ width: 400, p:2, display:'flex', flexDirection: 'column', rowGap: 2 }}
+          sx={{ width: 400, display:'flex', flexDirection: 'column'}}
           // role="presentation"
           // onClick={toggleDrawer(anchor, false)}
           // onKeyDown={toggleDrawer(anchor, false)}
         >
-          <Box flex={1} display='flex' flexDirection='row' justifyContent='space-between' alignItems={'center'} >
-            <Typography variant='h4' color={'gray'}>Spes Pledgers</Typography>
-            <IconButton onClick={() => setRightDrawerOpen(false)}><LastPageRoundedIcon fontSize='large' /></IconButton>
+          <AppBar position="sticky" sx={{backgroundColor: '#736ced'}}>
+          <Box flex={1} paddingLeft={2} display='flex' flexDirection='row' justifyContent='space-between' alignItems={'center'}>
+            <Typography variant='h4' color={'white'}>Spes Pledgers</Typography>
+            <IconButton onClick={() => setRightDrawerOpen(false)}><LastPageRoundedIcon fontSize='large' sx={{color: 'white'}} /></IconButton>
           </Box>
-          <Box display='flex' flexDirection='column' rowGap={1} marginX={2}>
+
+            </AppBar>
+          
+          <Box display='flex' flexDirection='column' rowGap={1} padding={4}>
 {_.map([...profileList, ...profileList2], (profile, index) => {
               return (
                 <CampaignPageProfile key={index} profile={profile} showFollowButton={false}/>

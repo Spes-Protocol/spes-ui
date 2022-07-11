@@ -3,9 +3,9 @@ import { ScheduleRounded } from "@mui/icons-material";
 import { styled } from '@mui/material/styles';
 import { Box, Button, ButtonBase, Card, CardActionArea, Fade, IconButton, LinearProgress, linearProgressClasses, Typography } from "@mui/material";
 // import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import Image from "next/image";
 import { dollarFormatter, round } from '../utils/sharedUtils';
 import Link from 'next/link';
@@ -60,12 +60,12 @@ const CampaignActionBar: React.FC<{ date: string; organizer: string; }> = ({ dat
             <Box display={'flex'} flexDirection='row' columnGap={1} alignItems='center'>
                 <IconButton onClick={(event: React.MouseEvent<HTMLElement>) => handleFavorite(event)}>
                     {
-                        isFavorite ? <FavoriteIcon sx={{ width: 30, height: 30, color: '#ef233c', borderColor: 'black' }} /> :  
-                        <FavoriteBorderIcon sx={{ width: 30, height: 30, color: palette.secondary.darker }} />
+                        isFavorite ? <FavoriteRoundedIcon sx={{ width: 30, height: 30, color: '#ef233c', borderColor: 'black' }} /> :  
+                        <FavoriteBorderRoundedIcon sx={{ width: 30, height: 30, color: palette.secondary.darker }} />
                     }
                 </IconButton>
                 <IconButton onClick={(event: React.MouseEvent<HTMLElement>) => handleShare(event)}>
-                    <ShareIcon sx={{ width: 30, height: 30, color: palette.secondary.darker }} />
+                    <ShareRoundedIcon sx={{ width: 30, height: 30, color: palette.secondary.darker }} />
                 </IconButton>
             </Box>
       </Box>
@@ -102,7 +102,7 @@ const CampaignCard: React.FC<CampaignCardProps> = (props: CampaignCardProps) => 
                                 <Box display='flex' flexDirection='column' justifyContent='flex-start' flex={3} sx={{ p: 2, borderLeft: 2, borderColor: '#aaa' }}>
                                     <CampaignActionBar date={postedDate} organizer={organizerName} />
                                     <Typography variant="h4">{name}</Typography>
-                                    <Typography variant="body1">{description}</Typography>
+                                    <Typography variant="body1" color='#555'>{description}</Typography>
                                     <BorderLinearProgress sx={{ mt: 2, }} variant="determinate" value={(moneyRaised * 100) / moneyToRaise} />
                                     <Box display='flex' justifyContent={'flex-end'}>
                                         <Typography variant='body2'>Raised {dollarFormatter.format(moneyRaised)} of {dollarFormatter.format(moneyToRaise)} ({round(moneyRaised*100/moneyToRaise, 1)}%)</Typography>

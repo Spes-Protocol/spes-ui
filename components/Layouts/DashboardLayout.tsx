@@ -4,10 +4,10 @@ import { Box, Button, Divider, ListItem, ListItemIcon, Typography } from "@mui/m
 // import AddchartOutlinedIcon from '@mui/icons-material/AddchartOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
-import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
-import FestivalOutlinedIcon from '@mui/icons-material/FestivalOutlined';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismRounded';
+import AssessmentRoundedIcon from '@mui/icons-material/AssessmentRounded';
+import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import palette from '../../themes/palette';
 import Link from 'next/link';
 import { Link as MuiLink } from '@mui/material';
@@ -17,22 +17,22 @@ import PaidIcon from '@mui/icons-material/Paid';
 const dashboardMenuList: DashboardPageSchema[] = [
     {
         name: 'Your Profile',
-        icon: <PermIdentityOutlinedIcon />,
+        icon: <PersonRoundedIcon />,
         path: '/home/dashboard',
     },
     {
         name: 'Spes Portfolio',
-        icon: <AutoGraphOutlinedIcon />,
+        icon: <AssessmentRoundedIcon />,
         path: '/home/dashboard/portfolio',
     },
     {
         name: 'Your Pledges',
-        icon: <VolunteerActivismOutlinedIcon />,
+        icon: <VolunteerActivismRoundedIcon />,
         path: '/home/dashboard/pledges',
     },
     {
         name: 'Manage Campaigns',
-        icon: <FestivalOutlinedIcon />,
+        icon: <StorefrontRoundedIcon />,
         path: '/home/dashboard/manage',
     },
 ]

@@ -14,27 +14,23 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import palette from '../../themes/palette';
 import Link from 'next/link';
-import PublicIcon from '@mui/icons-material/Public';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import { supabase } from '../../utils/supabaseClient';
+import HomeWalletConnect from '../HomeWalletConnect';
 
 const dashboardPages: DashboardPageSchema[] = [
     {
         name: ' Campaigns',
         path: '/home/campaigns/',
-        icon: <PublicIcon />,
+        icon: <PublicRoundedIcon />,
     },
     {
         name: 'Dashboard',
         path: '/home/dashboard',
-        icon: <DashboardIcon />,
+        icon: <DashboardRoundedIcon />,
     },
-    {
-        name: 'Wallet',
-        path: '/home/wallet',
-        icon: <AccountBalanceWalletIcon />,
-    }
 ]
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -183,10 +179,16 @@ const HomepageAppBar: React.FC<{ currentPageIndex: number }> = ({ currentPageInd
                 <WebMenuItems />
             </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display:'flex', flexDirection: 'row', columnGap: 2 }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <HomeWalletConnect isMobile={false}/>
+            </Box>
+            <Box  sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <HomeWalletConnect isMobile={true}/>
+            </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, border: '2px solid lightgray' }}>
-                <Avatar alt="S" src="/joe.jpg" />
+                <Avatar alt="SA" src="/altman.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
