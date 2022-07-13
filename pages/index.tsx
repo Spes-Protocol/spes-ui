@@ -49,35 +49,14 @@ const LoginCopy = () => {
 }
 
 const App = () => {
-  const [session, setSession] = useState<AuthSession | null>(null)
-  const router = useRouter();
-
-  useEffect(() => {
-
-    setSession(supabase.auth.session())
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-
-    // if (session) {
-    //   router.push('/home')
-    // }
-  }, [])
-
   return (
-    <>
-    {!session ?
     <Layout title="Spes - A decentralized protocol to power initiatives that matter">
         <Box display='flex' flexDirection='row' alignItems='center' justifyContent='center' columnGap={8}>
           <LoginCopy />
           <Divider sx={{ borderRightWidth: 5 }} orientation="vertical" variant="middle" flexItem />
           <LoginCard />
         </Box>
-      </Layout> : 
-      <Campaigns />
-  }
-    </>
+      </Layout> 
   );
 }
 

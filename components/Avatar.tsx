@@ -3,8 +3,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../utils/supabaseClient'
 import InputWrapper from './InputWrapper'
-import UploadIcon from '@mui/icons-material/Upload';
-
+import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 
 export default function Avatar({ url, size, onUpload }: { url: string, size: number, onUpload: (a: string) => void }) {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
@@ -73,7 +72,7 @@ export default function Avatar({ url, size, onUpload }: { url: string, size: num
         
       ) : null}
               <Button
-                  startIcon={<UploadIcon />}
+                  startIcon={<FileUploadRoundedIcon />}
                   variant="contained"
                   color='secondary'
                   component="label"

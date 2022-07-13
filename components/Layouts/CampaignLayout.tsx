@@ -44,7 +44,7 @@ const Menu: React.FC<{ currentCampaignPageIndex: number }> = ({ currentCampaignP
             display='flex'
             justifyContent={'flex-start'}
             flexDirection={'row'}
-            columnGap={4}
+            columnGap={6}
             >
                 {_.map(campaignMenuList, (menuItem, index) => {
                     const selected = menuOption === index;

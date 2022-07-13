@@ -3,13 +3,15 @@ import { Card, Box, Typography, Button, IconButton } from "@mui/material";
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import '@celo-tools/use-contractkit/lib/styles.css';
 
+const ButtonColor = '#fdc5f5';
+
 const DappWallet: React.FC<{ isMobile: boolean; }> = ({ isMobile }) => {
     const { address, connect } = useContractKit();
     if (isMobile) {
         return (
-            <Box borderRadius={3} border={1} borderColor='black'>
+            <Box borderRadius={3} border={1} borderColor={ButtonColor}>
               <IconButton onClick={() => connect().catch(e => console.log(e))}>
-              <AccountBalanceWalletRoundedIcon sx={{color:'black'}} />
+              <AccountBalanceWalletRoundedIcon sx={{color:ButtonColor}} />
               </IconButton>
             </Box>
         )
@@ -17,8 +19,8 @@ const DappWallet: React.FC<{ isMobile: boolean; }> = ({ isMobile }) => {
     return (
         <main>
             <Button onClick={() => connect().catch(e => console.log(e))} sx={{ textTransform: 'none' }}>
-                    <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' paddingX={2} border={1} columnGap={1} borderRadius={3} color='black' width='244px'>
-                      <AccountBalanceWalletRoundedIcon />
+                    <Box display={'flex'} flexDirection='row' alignItems={'center'} justifyContent='center' paddingX={2} border={1} columnGap={1} borderRadius={3} color={ButtonColor} width='244px'>
+                      <AccountBalanceWalletRoundedIcon sx={{color:ButtonColor}} />
                           <Typography variant='h4'>
                               Connect wallet
                           </Typography>

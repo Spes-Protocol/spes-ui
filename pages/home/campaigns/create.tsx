@@ -21,7 +21,7 @@ import { useState } from 'react';
 import { supabase } from '../../../utils/supabaseClient'
 import AntSwitch from '../../../components/AntSwitch';
 import Avatar from '../../../components/Avatar';
-import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 
 const CreateCampaign = () => {
     const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
@@ -171,7 +171,7 @@ const CreateCampaign = () => {
                                         onChange={handleChange}
                                         error={touched.moneyToRaise && Boolean(errors.moneyToRaise)}
                                         placeholder=" dollar amount"
-                                        startAdornment={<AttachMoneyOutlinedIcon sx={{ color:'gray'}} />}
+                                        startAdornment={<AttachMoneyRoundedIcon sx={{ color:'gray'}} />}
                                         required
                                         />
                                     </InputWrapper> 
